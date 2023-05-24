@@ -1,0 +1,207 @@
+body {
+    width: 8.5in;
+}
+
+.wrapper {
+    //margin-left: .5in;
+    //margin-right: .5in;
+    //padding: .5in;
+    width: 7.5in;
+    background-color: white;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto 300px auto auto 50px;
+    grid-template-areas:
+        "header"
+        "parcel"
+        "veg"
+        "content"
+        "content2"
+        "fuel"
+        "prior"
+        "report";
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: none;
+}
+
+.footer {
+    grid-area: footer;
+    display: none;
+}
+
+.header {
+    background-image: url("../img/ucce_header.png");
+    height: 1.41in;
+    width: 8.5in;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-top: 0in;
+}
+
+.noBreak {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+@page {
+    size: 8.5in 11in;
+    page-break-before: auto;
+    orphans: 4;
+    widows: 2;
+    margin: .5in;
+}
+
+@media print {
+    main {
+        margin-left: 0in;
+        margin-right: 0in;
+    }
+
+    .report {
+        grid-area: report;
+        display: none;
+    }
+}
+
+@supports (-ms-ime-align:auto) {
+    .tableANR tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    .tableANR.blue_th th {
+        border: 1px solid black;
+        background-color: white;
+    }
+
+    .tableANR.gold_th th {
+        border: 1px solid black;
+        background-color: white;
+    }
+
+    .tableANR th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        color: black;
+    }
+
+    .tableANR td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 20pt;
+        color: black;
+    }
+
+    .h1_sub {
+        font-size: 15pt;
+        color: black;
+        font-style: italic;
+    }
+
+    h2 {
+        font-size: 16pt;
+        color: black;
+    }
+
+    h3 {
+        font-size: 13pt;
+        color: black;
+    }
+
+    h4 {
+        font-size: 10.5pt;
+        color: black;
+        font-style: italic;
+        margin-block-end: 0px;
+        font-weight: normal;
+    }
+
+    /*.header {
+        display: none;
+        background-image: url("../img/ucce_header.png");
+        height: 1.41in;
+        width: 8.5in;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin-top: 0in;
+    }*/
+}
+
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+    .tableANR tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    .tableANR.blue_th th {
+        border: 1px solid black;
+        background-color: white;
+    }
+
+    .tableANR.gold_th th {
+        border: 1px solid black;
+        background-color: white;
+    }
+
+    .tableANR th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        color: black;
+    }
+
+    .tableANR td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 20pt;
+        color: black;
+    }
+
+    .h1_sub {
+        font-size: 15pt;
+        color: black;
+        font-style: italic;
+    }
+
+    h2 {
+        font-size: 16pt;
+        color: black;
+    }
+
+    h3 {
+        font-size: 13pt;
+        color: black;
+    }
+
+    h4 {
+        font-size: 10.5pt;
+        color: black;
+        font-style: italic;
+        //margin-block-end: 0px;
+        font-weight: normal;
+    }
+
+    /*.header {
+        display: none;
+        background-image: url("../img/ucce_header.png");
+        height: 1.41in;
+        width: 8.5in;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin-top: 0in;
+    }*/
+}

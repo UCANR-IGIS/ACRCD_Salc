@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+        <title>Alameda Sustainable Agricultural Lands Conservation (SALC) Mapper</title>
+
+        <!-- using online links -->
+        <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/sidebar-main.css">
+        <link rel="stylesheet" href="css/sidebar-themes.css">
+        <link rel="shortcut icon" href="https://acrcd.org/wp-content/uploads/2019/04/acrcd-favicon-32.png" type="image/x-icon">
+    </head>
+
+    <body>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Hex Weighting</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Data Reference</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Documentation</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="feedback-tab" data-bs-toggle="tab" href="#feedback" role="tab" aria-controls="profile" aria-selected="false">Feedback</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="page-wrapper default-theme toggled tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exportModalLabel">Export Data/Report</h5>
+                            </div>
+                            <div id="exportBody" class="modal-body">
+                            </div>
+                            <div id="exportFoot" class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="CSVBtn" data-bs-dismiss="modal">Export to CSV</button>
+                                <button type="button" class="btn btn-secondary" id="reportBtn" data-bs-dismiss="modal">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="loadModal" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loadModalLabel"></h5>
+                            </div>
+                            <div id="loadBody" class="modal-body">
+                                Loading Data...
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div id="loadFoot" class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="loadClose" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="saveModalLabel">Save Current Weights</h5>
+                            </div>
+                            <div class="modal-body">
+                                <label for="scenarioName">Scenario Name:</label>
+                                <input type="text" id="scenarioName" name="scenario">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveState" data-bs-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Delete Saved Weights</h5>
+                            </div>
+                            <div class="modal-body">
+                                Confirm Delete
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="deleteState" data-bs-dismiss="modal">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav id="sidebar" class="sidebar-wrapper">
+                    <div class="sidebar-content">
+                        <!-- sidebar-brand  -->
+                        <!-- <div class="sidebar-item sidebar-brand">
+                                <a href="#">pro sidebar</a>
+                                </div>-->
+                        <!-- sidebar-header  -->
+                        <!-- <div class="sidebar-item sidebar-header d-flex flex-nowrap" id="search">
+                            <ul>
+                                <h6>Study Area</h6>
+                                <li>
+                                    <input type="radio" id="sa1" name="sa" value="SA_80_20 IS NOT NULL">
+                                    <label for="sa1">20</label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="sa2" name="sa" value="SA_80_20 IS NULL">
+                                    <label for="sa2">80</label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="sa3" name="sa" value="" checked>
+                                    <label for="sa3">All</label>
+                                </li>
+                                <h6>Areas Of Interest</h6>
+                                <li>
+                                    <input type="checkbox" id="fm1" name="fm" value="APN = '99A-2130-1-2' OR APN = '99A-2150-1-2' OR APN = '99A-2150-2-1' OR APN = '99A-2150-2-2' OR APN = '99A-2160-1-3' OR APN = '99A-2160-1-4' OR APN = '99A-2170-1-5' OR APN = '99A-2170-2-9' OR APN = '99A-2170-2-10' OR APN = '99A-2170-2-11' OR APN = '99A-2200-1-36' OR APN = '99A-2200-4' OR APN = '99A-2200-5' OR APN = '99A-2220-1-19' OR APN = '99A-2220-2' OR APN = '99A-2540-3'">
+                                    <label for="fm1">Carnegie Park</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fm2" name="fm" value="APN = '99A-2600-1-2' OR APN = '99A-2600-12-4' OR APN = '99A-2630-1' OR APN = '99A-2630-3' OR APN = '99A-2630-4' OR APN = '99A-2630-5' OR APN = '99A-2630-6-1' OR APN = '99A-2630-6-2' OR APN = '99A-2630-7' OR APN = '99A-2630-8' OR APN = '99A-2630-10'">
+                                    <label for="fm2">Cedar Mountain</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fm3" name="fm" value="APN = '99A-2610-27' OR APN = '99A-2610-28' OR APN = '99A-2610-36' OR APN = '99A-2610-37' OR APN = '99A-2610-40' OR APN = '99A-2610-44' OR APN = '99A-2610-45' OR APN = '99A-2680-2' OR APN = '99A-2680-3' OR APN = '99A-2680-10' OR APN = '99A-2680-11' OR APN = '99A-2680-18' OR APN = '99A-2680-20' OR APN = '99A-2720-10' OR APN = '99A-2720-11' OR APN = '99A-2720-12' OR APN = '99A-2720-13' OR APN = '99A-2720-15' OR APN = '99A-2720-17' OR APN = '99A-2720-18' OR APN = '99A-2730-9' OR APN = '99A-2800-2' OR APN = '99A-2800-3' OR APN = '99A-2800-4' OR APN = '99A-2800-5-1' OR APN = '99A-2800-6' OR APN = '99A-2800-7' OR APN = '99A-2800-8-1' OR APN = '99A-2800-9-1' OR APN = '99A-2800-11' OR APN = '99A-2800-13' OR APN = '99A-2810-1' OR APN = '99A-2810-3' OR APN = '99A-2810-4' OR APN = '99A-2810-5' OR APN = '99A-2810-6' OR APN = '99A-2810-7' OR APN = '99A-2810-8' OR APN = '99A-2810-9' OR APN = '99A-2810-12' OR APN = '99A-2810-13' OR APN = '99A-2810-14' OR APN = '99A-2810-15' OR APN = '99A-2810-16' OR APN = '99A-2810-18' OR APN = '99A-2850-5' OR APN = '99A-2850-6' OR APN = '99A-2850-8' OR APN = '99A-2850-9' OR APN = '99A-2850-10' OR APN = '99A-2850-11'">
+                                    <label for="fm3">N3 Ranch</label>
+                                </li>
+                                <h6>Parcel Acreage Filter</h6>
+                                <li>
+                                    <span>
+                                        <label class="acreLabel" for="minSize">Min:</label>
+                                        <input type="text" id="minSize" name="size" value="1" style="width: 50px !important">
+
+                                        <label class="acreLabel" for="maxSize">Max:</label>
+                                        <input type="text" id="maxSize" name="size" value="2000" style="width: 50px !important">
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <br>
+                                        <label class="topNLabel" for="topN">Show Top </label>
+                                        <input type="text" id="topN" name="top" value="10" style="width: 50px !important"> Parcels
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="top1" name="top">
+                                    <label for="top1">Show all parcel ranks on map</label>
+                                </li>
+                            </ul>
+
+                        </div>-->
+                        <!-- sidebar-menu  -->
+                        <div id="widget">
+                        </div>
+                        <div class=" sidebar-item sidebar-menu">
+                            <ul>
+
+                                <li id="scenDiv" class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fas fa-save"></i>
+                                        <span class="menu-text">Saved Weights</span>
+                                        <!--<span class="badge badge-pill badge-warning">New</span>-->
+                                    </a>
+                                    <div class="sidebar-submenu">
+                                        <ul id="scenarios" class="scenarioLink">
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fas fa-tree"></i>
+                                        <span class="menu-text">Group 1</span>
+
+                                    </a>
+
+                                    <div class="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <p class="sliderLabel">Overall (Category Multiplier)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="HB"><span class="sliderLabel" id="HBVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">ABAG PDAS </p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="AB"><span class="sliderLabel" id="ABVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Basin Priority</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="BP"><span class="sliderLabel" id="BPVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Buffer Zones</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="BZ"><span class="sliderLabel" id="BZVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">California Conservation Easement Database (CCED)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CC"><span class="sliderLabel" id="CCVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">California Protected Areas Database (CPAD)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CP"><span class="sliderLabel" id="CPVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">City Limits</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CL"><span class="sliderLabel" id="CLVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Critical Habitat</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CH"><span class="sliderLabel" id="CHVal"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fas fa-link"></i>
+                                        <span class="menu-text">Group 2</span>
+                                    </a>
+                                    <div class="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <p class="sliderLabel">Overall (Category Multiplier)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CN"><span class="sliderLabel" id="CNVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Crop Grazing</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="CG"><span class="sliderLabel" id="CGVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Farmers Markets</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="FM"><span class="sliderLabel" id="FMVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Low Income</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="LI"><span class="sliderLabel" id="LIVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">PBA Growth</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="PG"><span class="sliderLabel" id="PGVal"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fas fa-umbrella-beach"></i>
+                                        <span class="menu-text">Group 3</span>
+                                    </a>
+                                    <div class="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <p class="sliderLabel">Overall (Category Multiplier)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="RN"><span class="sliderLabel" id="RNVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Protected Parkland</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="PP"><span class="sliderLabel" id="PPVal"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="sidebar-dropdown">
+                                    <a href="#">
+                                        <i class="fas fa-mountain"></i>
+                                        <span class="menu-text">Group 4</span>
+                                    </a>
+                                    <div class="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <p class="sliderLabel">Overall (Category Multiplier)</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="SV"><span class="sliderLabel" id="SVVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Rangeland Conservation</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="RC"><span class="sliderLabel" id="RCVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Sphere of Influence</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="SOI"><span class="sliderLabel" id="SOIVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Soil Carbon</p>
+                                                <input type="range" min="0" max="5" value="0" class="slider" id="SC"><span class="sliderLabel" id="SCVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Soil Quality</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="SQ"><span class="sliderLabel" id="SQVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Species Richness</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="SR"><span class="sliderLabel" id="SRVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Terrestrial Climate Change</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="TC"><span class="sliderLabel" id="TCVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Urban Areas 2050</p>
+                                                <input type="range" min="0" max="5" value="0" class="slider" id="U2"><span class="sliderLabel" id="U2Val"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Urban Agriculture</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="UA"><span class="sliderLabel" id="UAVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Urban Change</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="UC"><span class="sliderLabel" id="UCVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Water Storage</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="WS"><span class="sliderLabel" id="WSVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Wetlands</p>
+                                                <input type="range" min="0" max="5" value="0" class="slider" id="WL"><span class="sliderLabel" id="WLVal"></span>
+                                            </li>
+                                            <li>
+                                                <p class="sliderLabel">Williamson Act Lands</p>
+                                                <input type="range" min="0" max="5" value="1" class="slider" id="WA"><span class="sliderLabel" id="WAVal"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- sidebar-menu  -->
+
+                    </div>
+                    <div class="sidebar-footer">
+                        <a href="#" id="launchSave" data-toggle="modal" data-target="#saveModal" style="padding-left: 20px; padding-top: 8px; padding-bottom: 8px">
+                            <i class="fa fa-save"></i>
+                            <span id="saveBtn" class="menu-text">Save Current Weights</span>
+                        </a>
+                        <!--<a href="#" id="exportData" style="padding-left: 20px; padding-top: 8px; padding-bottom: 8px">
+                            <i class="fas fa-file-export"></i>
+                            <span id="exportBtn" class="menu-text">Export</span>
+                        </a>-->
+                    </div>
+                </nav>
+                <!-- page-content  -->
+                <div class="page-content pt-2">
+                    <div id="viewDiv"></div>
+                </div>
+                <!-- page-content" -->
+            </div>
+            <!-- page-wrapper -->
+            <div class="page-wrapper default-theme tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div id="viewDiv2"></div>
+            </div>
+            <!--<div class="page-wrapper default-theme tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab">
+                <div id="viewDiv3"></div>
+                <div id="viewDiv4"></div>
+            </div>-->
+            <div class="page-wrapper default-theme tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            </div>
+            <div class="page-wrapper default-theme tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+            </div>
+        </div>
+
+        <!-- using online scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+        <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/alasql@0.5"></script>
+        <script src="https://js.arcgis.com/4.18/"></script>
+        <script src="js/script.js"></script>
+    </body>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+        window.html2canvas = html2canvas;
+
+        function demoFromHTML() {
+            var doc = new jsPDF();
+
+            doc.html(document.getElementById("sidebar"), {
+                callback: function(doc) {
+                    doc.save();
+                },
+                x: 10,
+                y: 10
+            });
+        }
+
+    </script>
+
+</html>

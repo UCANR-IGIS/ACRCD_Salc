@@ -1,0 +1,341 @@
+:root {
+    --lightGreen: #78A179;
+    --darkGreen: #444815;
+    --darkForest: #0D5643;
+    --midOrange: #EF8A1E;
+    --darkOrange: #B66611;
+    --brown: #7A6D4A;
+    --black: #000000;
+}
+
+body{
+    color: black !important;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.esri-widget {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14.4px;
+    margin: 0 0 0 0;
+}
+
+.esri-legend__layer-table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.esri-widget__heading {
+    font-weight: 400;
+    margin: 0 0 0 0;
+    //margin: 0 0 .5rem 0;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.content {
+    grid-area: content;
+}
+
+.header {
+    grid-area: header;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.veg {
+    grid-area: veg;
+}
+
+.fuel {
+    grid-area: fuel;
+}
+
+.parcel {
+    grid-area: parcel;
+}
+
+.prior {
+    grid-area: prior;
+}
+
+.report {
+    grid-area: report;
+}
+
+/*.wrapper {
+background-color: #fff;
+color: #444;
+}*/
+
+.wrapper {
+    display: grid;
+    grid-gap: 0em;
+    grid-template-areas:
+        "header"
+        "sidebar"
+        "parcel"
+        "content"
+        "veg"
+        "content"
+        "fuel"
+        "prior"
+        "report"
+        "footer";
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper {
+    //display: grid;
+    //grid-gap: 0em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header  header  header header"
+        "sidebar content content content"
+        "footer  footer  footer footer";
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 50px;
+    grid-gap: 1em;
+    grid-template-areas:
+        "parcel"
+        "veg"
+        "fuel"
+        "prior"
+        "report";
+}
+
+.box {
+    //background-color: #444;
+    color: #444;
+
+    padding: 0px;
+    font-size: 100%;
+}
+
+.header,
+.footer {
+    background-color: #003c61;
+    height: 25px;
+}
+
+.sidebar2 {
+    background-color: #ccc;
+    color: #444;
+}
+
+.slidecontainer {
+    width: 100%;
+    padding: 10px;
+    /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 88%;
+    /* Full-width */
+    height: 25px;
+    /* Specified height */
+    margin-right: 10px;
+    /* Specified height */
+    background: #dcd4bd;
+    /* Grey background */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1;
+    /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 25px;
+    /* Set a specific slider handle width */
+    height: 25px;
+    /* Slider handle height */
+    background: #60563a;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    /* Set a specific slider handle width */
+    height: 25px;
+    /* Slider handle height */
+    background: #4CAF50;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+html {
+    --scrollbarBG: lightgray;
+    --thumbBG: #003c61;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 11px;
+}
+
+.sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 1px;
+    border: 1px solid var(--scrollbarBG);
+}
+
+.divButton {
+    padding: 2px 10px;
+    border: solid #707070 1px;
+    //font-family: caption;
+    font-size: 14px;
+    background: grey;
+    display: inline;
+    border-radius: 2px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F2F2F2), color-stop(1, #CFCFCF));
+    background-image: -o-linear-gradient(bottom, #F2F2F2 0%, #CFCFCF 100%);
+    background-image: -moz-linear-gradient(bottom, #F2F2F2 0%, #CFCFCF 100%);
+    background-image: -webkit-linear-gradient(bottom, #F2F2F2 0%, #CFCFCF 100%);
+    background-image: -ms-linear-gradient(bottom, #F2F2F2 0%, #CFCFCF 100%);
+    background-image: linear-gradient(to bottom, #F2F2F2 0%, #CFCFCF 100%);
+    cursor: default;
+    text-align: center;
+}
+
+.divButton:hover {
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #EAF6FD), color-stop(1, #A7D8F5));
+    background-image: -o-linear-gradient(bottom, #EAF6FD 0%, #A7D8F5 100%);
+    background-image: -moz-linear-gradient(bottom, #EAF6FD 0%, #A7D8F5 100%);
+    background-image: -webkit-linear-gradient(bottom, #EAF6FD 0%, #A7D8F5 100%);
+    background-image: -ms-linear-gradient(bottom, #EAF6FD 0%, #A7D8F5 100%);
+    background-image: linear-gradient(to bottom, #EAF6FD 0%, #A7D8F5 100%);
+    border: #3c7fb1 solid 1px;
+}
+
+.divButton:active {
+    border: solid #2c628b 1px;
+    padding: 2px 9px 2px 11px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #E5F4FC), color-stop(0.5, #C4E5F6), color-stop(0.51, #98D0EF), color-stop(1, #68B3DB));
+    background-image: -o-linear-gradient(bottom, #E5F4FC 0%, #C4E5F6 50%, #98D0EF 51%, #68B3DB 100%);
+    background-image: -moz-linear-gradient(bottom, #E5F4FC 0%, #C4E5F6 50%, #98D0EF 51%, #68B3DB 100%);
+    background-image: -webkit-linear-gradient(bottom, #E5F4FC 0%, #C4E5F6 50%, #98D0EF 51%, #68B3DB 100%);
+    background-image: -ms-linear-gradient(bottom, #E5F4FC 0%, #C4E5F6 50%, #98D0EF 51%, #68B3DB 100%);
+    background-image: linear-gradient(to bottom, #E5F4FC 0%, #C4E5F6 50%, #98D0EF 51%, #68B3DB 100%);
+}
+
+.inActive {
+    color: lightgray;
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0.05) !important
+}
+
+#viewDiv {
+    height: 94.5vh;
+}
+
+#viewDiv2 {
+    height: 94.5vh;
+}
+
+#viewDiv3 {
+    height: 94.5vh;
+    width: 50vw;
+    float: left
+}
+
+#viewDiv4 {
+    height: 94.5vh;
+    width: 50vw;
+    border-left-style: solid;
+    border-left-color: white;
+    border-left-width: 5px
+}
+
+.sliderLabel {
+    color: black !important;
+    margin: 0px !important
+}
+
+.acreLabel {
+    color: #000000 !important
+}
+
+/*stfeirer added*/
+.main_flex {
+    display: flex;
+    /*flex: 1;*/
+    color: black;
+    padding-right: 10px;
+}
+
+.main_flex > nav {
+    flex: 1;
+}
+
+.main_flex > article,
+.main_flex > aside {
+    flex: 0px 0px 10px;
+    padding: 0px 10px 0px 0px;
+    /*background: beige;*/
+}
+
+.main_flex > nav {
+    /*order: -1;*/
+    font-family: "Open Sans Condensed";
+}
+
+.menu-text {
+    color: #08321D !important
+}
+
+.progress-bar {
+    background-color: #78a179 !important;
+}
+
+.btn-primary {
+    background-color: #78a179 !important;
+    border-color: #78a179 !important;
+}
+
+.nav-link {
+    color: black !important;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 17px;
+}

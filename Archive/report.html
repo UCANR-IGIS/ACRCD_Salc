@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Land Conservation Prioritization Report</title>
+        <meta name="description" content="The HTML5 Herald">
+        <meta name="author" content="SitePoint">
+        <style>
+            body {
+                margin: 0.5in;
+                width: 7.5in;
+                height: 10in;
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            .wrapper {
+                width: 7.5in
+            }
+
+            .mapPlaceholder {
+                height: 400px;
+                width: 100%;
+            }
+
+            .twoColumn {
+                display: flex;
+                background-color: #fcf4e1
+            }
+
+            .fakeColumn {
+                width: 33%;
+                padding: 0px 10px 10px 10px
+            }
+
+            .columnBreak {
+                padding-left: 10px;
+                border-left-width: 10px;
+                border-left-color: white;
+                border-left-style: solid
+            }
+
+            .overall {
+                font-weight: bold;
+                font-size: 80%;
+                color: #373A0B
+            }
+
+            .key {
+                font-weight: bold;
+                font-size: 80%;
+                color: rgba(0, 0, 0, 0.7);
+            }
+
+            .indent {
+                text-indent: 10%
+            }
+
+            h3 {
+                color: #B66611;
+                margin-bottom: 5px
+            }
+
+            @media print {
+                body {
+                    margin-left: 0.5in;
+                    margin-right: 0.5in;
+                    margin-top: 0;
+                    margin-bottom: 0
+                }
+
+                #printBtn {
+                    display: none;
+                }
+            }
+
+            .tableANR {
+                border-collapse: collapse;
+                width: 100%;
+                -webkit-column-break-inside: avoid;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .tableANR td {
+                text-align: center;
+                border: 1px solid #EF8A1E
+            }
+
+            .tableANR tr:nth-child(odd) {
+                background-color: #fcf4e1;
+            }
+
+            .tableANR th {
+                text-align: center;
+                color: white;
+            }
+
+            .tableANR.blue_th th {
+                background-color: #63643C;
+                border: 1px solid white;
+            }
+
+        </style>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/alasql@0.5"></script>
+        <script src="https://js.arcgis.com/4.18/"></script>
+        <script src="js/script_report.js"></script>
+    </head>
+
+    <body>
+        <div class='wrapper'>
+            <!--<button id="printBtn" onclick="javascript:demoFromHTML();">PDF</button>-->
+
+            <div class="content">
+                <h3>Prioritization Map</h3>
+                <div id="viewDiv" class="mapPlaceholder noBreak"></div>
+            </div>
+            <h3>Metric Weight</h3>
+            <div id="metrics" class="twoColumn"></div>
+            <h3>Top Ten Ranked Parcels</h3>
+            <div class="veg">
+
+                <table id="dataTable" class="tableANR blue_th">
+
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>APN</th>
+                            <th>Acres</th>
+                            <th>Score</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class='footer'>
+
+            </div>
+        </div>
+    </body>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+        window.html2canvas = html2canvas;
+
+        function demoFromHTML() {
+
+            var doc = new jsPDF('p', 'in', 'letter');
+
+            doc.html(document.body, {
+                callback: function(doc) {
+                    doc.save();
+                }
+            });
+        }
+
+    </script>
+
+</html>
