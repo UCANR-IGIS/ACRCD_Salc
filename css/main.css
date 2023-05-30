@@ -32,7 +32,7 @@ body{
     //margin: 0 0 .5rem 0;
 }
 
-.sidebar {
+/*.sidebar {
     grid-area: sidebar;
 }
 
@@ -67,11 +67,6 @@ body{
 .report {
     grid-area: report;
 }
-
-/*.wrapper {
-background-color: #fff;
-color: #444;
-}*/
 
 .wrapper {
     display: grid;
@@ -133,7 +128,7 @@ color: #444;
 .sidebar2 {
     background-color: #ccc;
     color: #444;
-}
+}*/
 
 .slidecontainer {
     width: 100%;

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>LayerList Widget Example</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.19/"></script>
+  <style>
+    #mapDiv {
+      height: 400px;
+    }
+    #widgetDiv {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 99;
+      background-color: white;
+      padding: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    #widgetContainer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="mapDiv"></div>
+  <div id="widgetContainer">
+    <div id="widgetDiv"></div>
+  </div>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/LayerList"
+    ], function(Map, MapView, FeatureLayer, LayerList) {
+      const map = new Map({
+        basemap: "streets"
+      });
+
+      const view = new MapView({
+        container: "mapDiv",
+        map: map,
+        center: [-122.275, 37.804],
+        zoom: 10
+      });
+
+      const countiesLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Counties/FeatureServer/0"
+      });
+
+      map.add(countiesLayer);
+
+      const widgetDiv = document.getElementById("widgetDiv");
+      const widget = new LayerList({
+        view: view
+      });
+
+      widgetDiv.appendChild(widget.container);
+
+      const widgetContainer = document.getElementById("widgetContainer");
+      view.ui.add(widgetContainer, { position: "top-right" });
+    });
+  </script>
+</body>
+</html>
