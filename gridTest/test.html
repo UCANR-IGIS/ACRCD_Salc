@@ -30,22 +30,29 @@
             </a>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                    <button class="nav-link active" id="hex-tab" data-bs-toggle="tab" data-bs-target="#hex-tab-pane"
+                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Hex Weights</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                        type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane"
+                        type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Data
+                        Refernce</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-                        type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+                    <button class="nav-link" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs-tab-pane"
+                        type="button" role="tab" aria-controls="contact-tab-pane"
+                        aria-selected="false">Documentation</button>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="feed-tab" data-bs-toggle="tab" data-bs-target="#feed-tab-pane"
+                        type="button" role="tab" aria-controls="contact-tab-pane"
+                        aria-selected="false">Feedback</button>
+                </li>
+                <!--<li class="nav-item" role="presentation">
                     <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
                         type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"
                         disabled>Disabled</button>
-                </li>
+                </li>-->
             </ul>
         </nav>
         <div class="sidebar">
@@ -64,8 +71,9 @@
                     </label>
                 </div>
             </div>
-            <div class="sidebar-row sidebar-mid" id="sidebar-mid">
-                <div class="row">
+            <div class="sidebar-mid" id="sidebar-mid">
+
+                <div class="row sidebar-row scrollable">
                     <div class="col-md-10">
                         <div class="form-group">
                             <label for="rangeInput">Range:</label>
@@ -78,48 +86,42 @@
                             <input type="text" class="form-control" id="textInput" readonly>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                         voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                         fugiat nulla pariatur.
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                         voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
                     </p>
                 </div>
+
             </div>
             <div class="sidebar-bottom sidebar-row">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
         <div class="main tab-content" id="myTabContent"">
-            <div class=" tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            <div class=" tab-pane fade show active" id="hex-tab-pane" role="tabpanel" aria-labelledby="hex-tab"
             tabindex="0" style="background-color: blue;">
             <div class="main-top" id="viewDiv"></div>
         </div>
-        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"
+        <div class="tab-pane fade" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="0"
             style="background-color: red;">
             ...</div>
-        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"
+        <div class="tab-pane fade" id="docs-tab-pane" role="tabpanel" aria-labelledby="docs-tab" tabindex="0"
             style="background-color: green;">
             ...</div>
-        <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+        <div class="tab-pane fade" id="feed-tab-pane" role="tabpanel" aria-labelledby="feed-tab" tabindex="0"
+            style="background-color: purple;">
             ...</div>
     </div>
     </div>
@@ -141,7 +143,7 @@
     </script>
     <script>
         $(function () {
-            var header = $('.navbar');
+            /*var header = $('.navbar');
             var firstRow = $('.sidebar > .row:first-child');
             var thirdRow = $('.sidebar > .row:last-child');
             var secondRow = $('#second-row');
@@ -158,9 +160,26 @@
 
             // Call the function initially and on window resize
             calculateSecondRowHeight();
-            $(window).resize(calculateSecondRowHeight);
+            $(window).resize(calculateSecondRowHeight);*/
+
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.nav-link').on('click', function (event) {
+                var selectedTabName = $(this).text();
+                if (selectedTabName != "Hex Weights") {
+                    $('.sidebar').hide()
+                    $('.wrapper').css('grid-template', '"navbar navbar" auto "main main" 1fr');
+                } else {
+                    $('.sidebar').show()
+                    $('.wrapper').css('grid-template', '"navbar navbar" auto "sidebar main" 1fr / 25% 75%');
+                }
+                console.log(selectedTabName);
+                // Do something with the selected tab name
+            });
+        });
     </script>
 
 </body>

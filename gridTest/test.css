@@ -59,10 +59,13 @@ span.email_font {
     //background-color: #ccc;
 }
 
+.scrollable {
+    overflow:auto;
+}
+
 .sidebar-mid {
     grid-row: 2 / 3;
     background-color: #ccc;
-    overflow-y:visible;
     color: black;
 }
 
