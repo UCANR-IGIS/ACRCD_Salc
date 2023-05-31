@@ -34,10 +34,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-
-});
-
 $("#scenDiv").hide();
 var svAB = 1,
     svBP = 1,
@@ -471,7 +467,7 @@ require([
         var template = {
             // autocasts as new PopupTemplate()
             expressionInfos: arcadeExpressionInfos,
-            title: "Hexagon ID: {GRID_ID}, Overall Weight: {expression/hex_info}",
+            title: "Appropriateness for agriculture: {expression/hex_info}",
             content: [
                 {
                     // It is also possible to set the fieldInfos outside of the content
@@ -1022,7 +1018,24 @@ require([
         switchSliders(grantArray)
         $('#sliders').show();
     });
-    $(document).on('change', 'input:radio[id^="grant"]', function (event) {
+
+    $('.dropdown-menu').on( 'click', 'a', function() {
+        var text = $(this).html();
+        var htmlText = text + ' <span class="caret"></span>';
+        $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
+
+        if (text == 'Basic Info'){
+            grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
+        } else if (text == 'SALC'){
+            grantArray = ['AB', 'BP', 'CC', 'CP', 'CH', 'CG', 'LI', 'PG', 'PP']
+        } else if (text == 'Other'){
+            grantArray = ['AB', 'BP', 'CC']
+        }
+        switchSliders(grantArray)
+        setRenderer()
+    });
+
+    /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
         if (event.target.id == 'grantSalc'){
             grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
         } else if (event.target.id == 'grantOther'){
@@ -1030,5 +1043,5 @@ require([
         }
         switchSliders(grantArray)
         setRenderer()
-    });
+    });*/
 })
