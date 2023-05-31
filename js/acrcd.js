@@ -1033,7 +1033,7 @@ require([
         var htmlText = text + ' <span class="caret"></span>';
         $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
 
-        if (text == 'Basic Info'){
+        if (text == 'Basic Information'){
             grantArray = ['AB','WA','CP','CC','PG']//['CL','UA','SOI','AB','WA','CP','CC','PG']
         } else if (text == 'SALC'){
             grantArray = ['LI','SQ','CG','WA','BP','RC','SC','WS']//['FM','BZ','LI','SQ','CG','WA','BP','RC','SC','WS']
