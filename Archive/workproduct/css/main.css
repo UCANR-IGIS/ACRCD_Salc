@@ -32,7 +32,7 @@ body{
     //margin: 0 0 .5rem 0;
 }
 
-/*.sidebar {
+.sidebar {
     grid-area: sidebar;
 }
 
@@ -128,7 +128,7 @@ body{
 .sidebar2 {
     background-color: #ccc;
     color: #444;
-}*/
+}
 
 .slidecontainer {
     width: 100%;

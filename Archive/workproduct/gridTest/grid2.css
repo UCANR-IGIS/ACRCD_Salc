@@ -1,0 +1,220 @@
+/* CSS Grid */
+body {
+    margin: 0;
+    padding: 0;
+    color: black !important;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#page {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-areas:
+        "head head"
+        "tabs tabs"
+        "top  main"
+        "nav  main"
+        "foot  main";
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-columns: 25% 75%;
+}
+
+#page>header {
+    grid-area: head;
+    padding-left: 15px;
+    padding-top: 15px;
+    color: var(--thumbBG);
+}
+
+#page>tabs {
+    grid-area: tabs;
+}
+
+#page>top {
+    grid-area: top;
+    background-color: #999999;
+    font-size: 75%;
+    color: white;
+}
+
+#page>side {
+    grid-area: nav;
+    background-color: white;
+    color: black;
+    overflow-y: scroll;
+}
+
+#page>main {
+    grid-area: main;
+    //background-color: #ffff64;
+}
+
+#page>footer {
+    grid-area: foot;
+    background-color: #4C7C97;
+    font-size: 75%;
+    color: white;
+}
+
+/* Other Styles */
+:root {
+    --bs-primary: #5D7C3D !important;
+    --bs-focus-ring-color: #5D7C3D !important;
+}
+
+.bg-light {
+     background-color: white !important;
+}
+
+#page>footer p {
+    padding-bottom: 10px;
+}
+
+p {
+    margin: 0;
+}
+
+.form-check {
+    margin-top: 10px;
+}
+
+.nav-link {
+    color: black !important;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.nav-link.active {
+    color: var(--thumbBG) !important;
+}
+
+.sidebar-row {
+    color: white;
+    padding: 15px;
+    width: 100%;
+    font-size: 75%
+}
+
+.row_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.navbar {
+    padding-bottom: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    padding-left: 0 !important;
+}
+
+/* Scrollbar Styles */
+html {
+    --scrollbarBG: lightgray;
+    --thumbBG: #5D7C3D;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 11px;
+}
+
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 1px;
+    border: 1px solid var(--scrollbarBG);
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 88%;
+    /* Full-width */
+    height: 15px;
+    /* Specified height */
+    margin-right: 10px;
+    /* Specified height */
+    background: #C6D5B7;
+    /* Grey background */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1;
+    /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 15px;
+    /* Set a specific slider handle width */
+    height: 15px;
+    /* Slider handle height */
+    background: #5D7C3D;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    /* Set a specific slider handle width */
+    height: 15px;
+    /* Slider handle height */
+    background: #4CAF50;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.sliderLabel {
+    color: black !important;
+    margin: 0px !important;
+    font-size: 13px;
+}
+
+side ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-control:focus {
+    border-color: rgba(93, 124, 61, 0.25) !important;
+    box-shadow: 0px 1px 1px rgba(93, 124, 61, 0.25) inset, 0px 0px 8px rgba(93, 124, 61, 0.25) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--thumbBG);
+    border-color: var(--thumbBG);
+}
+
+.form-check-input:checked[type=radio] {
+    --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff' fill-opacity="0.4"/%3e%3c/svg%3e");
+    --bs-focus-ring-color: rgba(93, 124, 61, 0.25);
+}
