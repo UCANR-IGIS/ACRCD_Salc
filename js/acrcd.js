@@ -344,11 +344,20 @@ require([
         var layerList = new LayerList({
             view: view,
             container: "widget",
+            listItemCreatedFunction: (event) => {
+                const item = event.item;
+                if (item.layer.title != "Place Names") {
+                  item.panel = {
+                    content: "legend",
+                    open: true
+                  };
+                }
+              }
         });
-        var legend = new Legend({
+        /* var legend = new Legend({
             view: view,
             container: "widget",
-        });
+        }); */
         view.ui.add(homeBtn, "top-left");
 
         setRenderer()
