@@ -42,7 +42,7 @@ body {
     grid-area: nav;
     background-color: white;
     color: black;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #page>main {
@@ -61,6 +61,23 @@ body {
 :root {
     --bs-primary: #5D7C3D !important;
     --bs-focus-ring-color: #5D7C3D !important;
+}
+
+.btn-secondary {
+    --bs-btn-bg: #4C7C97;
+    --bs-btn-border-color: #4C7C97;
+    --bs-btn-hover-bg: #4C7C97;
+    --bs-btn-hover-border-color: #4C7C97;
+    --bs-btn-active-bg: #4C7C97;
+    --bs-btn-active-border-color: #4C7C97;
+}
+
+.text-left {
+    text-align: center !important;
+  }
+
+.dropdown-menu {
+    width: 100%;
 }
 
 .bg-light {

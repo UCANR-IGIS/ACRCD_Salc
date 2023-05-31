@@ -34,10 +34,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-
-});
-
 $("#scenDiv").hide();
 var svAB = 1,
     svBP = 1,
@@ -480,7 +476,7 @@ require([
         var template = {
             // autocasts as new PopupTemplate()
             expressionInfos: arcadeExpressionInfos,
-            title: "Hexagon ID: {GRID_ID}, Overall Weight: {expression/hex_info}",
+            title: "Appropriateness for agriculture: {expression/hex_info}",
             content: [
                 {
                     // It is also possible to set the fieldInfos outside of the content
@@ -1027,11 +1023,37 @@ require([
     $(window).on("load", function () {
         $('#loadModal').modal('show');
         $('#loadClose').hide();
-        grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
+        grantArray = ['AB','WA','CP','CC','PG']//['CL','UA','SOI','AB','WA','CP','CC','PG']
         switchSliders(grantArray)
         $('#sliders').show();
     });
-    $(document).on('change', 'input:radio[id^="grant"]', function (event) {
+
+    $('.dropdown-menu').on( 'click', 'a', function() {
+        var text = $(this).html();
+        var htmlText = text + ' <span class="caret"></span>';
+        $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
+
+        if (text == 'Basic Info'){
+            grantArray = ['AB','WA','CP','CC','PG']//['CL','UA','SOI','AB','WA','CP','CC','PG']
+        } else if (text == 'SALC'){
+            grantArray = ['LI','SQ','CG','WA','BP','RC','SC','WS']//['FM','BZ','LI','SQ','CG','WA','BP','RC','SC','WS']
+        } else if (text == 'SALC, Agricultural Use'){
+            grantArray = ['SQ','CG','WA','BP','WS']
+        } else if (text == 'SALC, Equity'){
+            grantArray = ['LI']
+        } else if (text == 'SALC, Support for infill / risk for conversion'){
+            grantArray = ['RC']//['BZ','RC']
+        } else if (text == 'SALC, Other Program Goals'){
+            grantArray = ['SC']//['FM','SC']
+        } else if (text == 'WCB'){
+            grantArray = ['SR','CH','WS','WL']
+        } else if (text == 'CC'){
+            grantArray = ['RC','SR','CH','WL']
+        }
+        switchSliders(grantArray)
+        setRenderer()
+    });
+    /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
         if (event.target.id == 'grantSalc'){
             grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
         } else if (event.target.id == 'grantOther'){
@@ -1039,5 +1061,5 @@ require([
         }
         switchSliders(grantArray)
         setRenderer()
-    });
+    });*/
 })

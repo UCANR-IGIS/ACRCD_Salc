@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/acrcd.css">
     <!--<link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">-->
     <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css" />
-    <link rel="shortcut icon" href="https://acrcd.org/wp-content/uploads/2019/04/acrcd-favicon-32.png"
+    <link rel="shortcut icon" href="img/acrcd-favicon-32.png"
         type="image/x-icon" />
 </head>
 
@@ -29,8 +29,7 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="hex-tab" data-bs-toggle="tab" data-bs-target="#hex-tab-pane"
-                            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Hex
-                            Weights</button>
+                            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Interactive Web Map</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane"
@@ -50,9 +49,9 @@
                 </ul>
             </nav>
         </tabs>
-        <top class="row_spacing">
+        <top class="">
             <div id="widget"></div>
-            <div class="form-check">
+            <!--<div class="form-check">
                 <input class="form-check-input" type="radio" name="grant" id="grantSalc" checked />
                 <label class="form-check-label" for="flexRadioDefault1">
                     SALC
@@ -63,98 +62,113 @@
                 <label class="form-check-label" for="flexRadioDefault2">
                     Other
                 </label>
-            </div>
+            </div>-->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%">
+                    Basic Info
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Basic Info</a></li>
+                  <li><a class="dropdown-item" href="#">SALC</a></li>
+                  <li><a class="dropdown-item" href="#">SALC, Agricultural Use</a></li>
+                  <li><a class="dropdown-item" href="#">SALC, Equity</a></li>
+                  <li><a class="dropdown-item" href="#">SALC, Support for infill / risk for conversion</a></li>
+                  <li><a class="dropdown-item" href="#">SALC, Other Program Goals</a></li>
+                  <li><a class="dropdown-item" href="#">WCB</a></li>
+                  <li><a class="dropdown-item" href="#">CC</a></li>
+                </ul>
+              </div>
         </top>
         <side class="row_spacing scrollbar">
             <div class="row">
-                <ul id="sliders">
+                <ul id="sliders" style="display: none">
                     <!--</ul> style="display: none">-->
                     <li id="liAB">
-                        <p class="sliderLabel">ABAG PDAS</p>
+                        <p class="sliderLabel">Priority development areas </p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="AB" /><span class="sliderLabel"
                             id="ABVal"></span>
                     </li>
                     <li id="liBP">
-                        <p class="sliderLabel">Basin Priority</p>
+                        <p class="sliderLabel">Areas with sufficient water basins</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="BP" /><span class="sliderLabel"
                             id="BPVal"></span>
                     </li>
                     <li id="liBZ">
-                        <p class="sliderLabel">Buffer Zones</p>
+                        <p class="sliderLabel">Projected city spread</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="BZ" /><span class="sliderLabel"
                             id="BZVal"></span>
                     </li>
                     <li id="liCC">
                         <p class="sliderLabel">
-                            California Conservation Easement Database (CCED)
+                            Areas near conservation easements
                         </p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CC" /><span class="sliderLabel"
                             id="CCVal"></span>
                     </li>
                     <li id="liCP">
                         <p class="sliderLabel">
-                            California Protected Areas Database (CPAD)
+                            Areas near parks and other protected areas
                         </p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CP" /><span class="sliderLabel"
                             id="CPVal"></span>
                     </li>
                     <li id="liCL">
-                        <p class="sliderLabel">City Limits</p>
+                        <p class="sliderLabel">City limits</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CL" /><span class="sliderLabel"
                             id="CLVal"></span>
                     </li>
                     <li id="liCH">
-                        <p class="sliderLabel">Critical Habitat</p>
+                        <p class="sliderLabel">Critical wildlife habitat</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CH" /><span class="sliderLabel"
                             id="CHVal"></span>
                     </li>
                     <li id="liCG">
-                        <p class="sliderLabel">Crop Grazing</p>
+                        <p class="sliderLabel">Areas with active farming / Areas with active grazing</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CG" /><span class="sliderLabel"
                             id="CGVal"></span>
                     </li>
                     <li id="liFM">
-                        <p class="sliderLabel">Farmers Markets</p>
+                        <p class="sliderLabel">Areas within x of farmers markets</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="FM" /><span class="sliderLabel"
                             id="FMVal"></span>
                     </li>
                     <li id="liLI">
-                        <p class="sliderLabel">Low Income</p>
+                        <p class="sliderLabel">Low income</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="LI" /><span class="sliderLabel"
                             id="LIVal"></span>
                     </li>
                     <li id="liPG">
-                        <p class="sliderLabel">PBA Growth</p>
+                        <p class="sliderLabel">PBA growth</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="PG" /><span class="sliderLabel"
                             id="PGVal"></span>
                     </li>
                     <li id="liPP">
-                        <p class="sliderLabel">Protected Parkland</p>
+                        <p class="sliderLabel">Protected parkland</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="PP" /><span class="sliderLabel"
                             id="PPVal"></span>
                     </li>
                     <li id="liRC">
-                        <p class="sliderLabel">Rangeland Conservation</p>
+                        <p class="sliderLabel">Rangeland priority conservation areas</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="RC" /><span class="sliderLabel"
                             id="RCVal"></span>
                     </li>
                     <li id="liSOI">
-                        <p class="sliderLabel">Sphere of Influence</p>
+                        <p class="sliderLabel">Sphere of influence</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="SOI" /><span
                             class="sliderLabel" id="SOIVal"></span>
                     </li>
                     <li id="liSC">
-                        <p class="sliderLabel">Soil Carbon</p>
+                        <p class="sliderLabel">Predicted soil carbon stocks in rangelands</p>
                         <input type="range" min="0" max="5" value="0" class="slider" id="SC" /><span class="sliderLabel"
                             id="SCVal"></span>
                     </li>
                     <li id="liSQ">
-                        <p class="sliderLabel">Soil Quality</p>
+                        <p class="sliderLabel">Prime soil for agriculture</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="SQ" /><span class="sliderLabel"
                             id="SQVal"></span>
                     </li>
                     <li id="liSR">
-                        <p class="sliderLabel">Species Richness</p>
+                        <p class="sliderLabel">Terrestrial native wildlife species richness</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="SR" /><span class="sliderLabel"
                             id="SRVal"></span>
                     </li>
@@ -169,7 +183,7 @@
                             id="U2Val"></span>
                     </li>
                     <li id="liUA">
-                        <p class="sliderLabel">Urban Agriculture</p>
+                        <p class="sliderLabel">Known urban ag sites</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="UA" /><span class="sliderLabel"
                             id="UAVal"></span>
                     </li>
@@ -179,7 +193,7 @@
                             id="UCVal"></span>
                     </li>
                     <li id="liWS">
-                        <p class="sliderLabel">Water Storage</p>
+                        <p class="sliderLabel">Water storage capacity of soil</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="WS" /><span class="sliderLabel"
                             id="WSVal"></span>
                     </li>
