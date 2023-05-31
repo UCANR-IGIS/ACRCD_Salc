@@ -42,7 +42,7 @@ body {
     grid-area: nav;
     background-color: white;
     color: black;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #page>main {
