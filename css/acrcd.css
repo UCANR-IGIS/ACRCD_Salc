@@ -64,20 +64,20 @@ body {
 }
 
 .btn-secondary {
-    --bs-btn-color: #fff;
     --bs-btn-bg: #4C7C97;
     --bs-btn-border-color: #4C7C97;
-    --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #4C7C97;
     --bs-btn-hover-border-color: #4C7C97;
-    --bs-btn-focus-shadow-rgb: 130,138,145;
-    --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #4C7C97;
     --bs-btn-active-border-color: #4C7C97;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #4C7C97;
-    --bs-btn-disabled-border-color: #4C7C97;
+}
+
+.text-left {
+    text-align: center !important;
+  }
+
+.dropdown-menu {
+    width: 100%;
 }
 
 .bg-light {
