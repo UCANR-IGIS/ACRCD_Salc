@@ -35,8 +35,7 @@ $(document).ready(function () {
 });
 
 $("#scenDiv").hide();
-var svAB = 1,
-    svBP = 1,
+var svBP = 1,
     svBZ = 1,
     svCC = 1,
     svCP = 1,
@@ -44,25 +43,20 @@ var svAB = 1,
     svCH = 1,
     svCG = 1,
     svFM = 1,
+    svGL = 1,
     svLI = 1,
     svPG = 1,
-    svPP = 1,
+    svPS = 1,
     svRC = 1,
     svSOI = 1,
     svSC = 1,
-    svSQ = 1,
     svSR = 1,
     svTC = 1,
     svU2 = 1,
     svUA = 1,
-    svUC = 1,
     svWS = 1,
     svWL = 1,
     svWA = 1,
-    svHB = 1,
-    svCN = 1,
-    svRN = 1,
-    svSV = 1,
     sliderTotal = 24,
     expression,
     winnerArcade,
@@ -133,7 +127,7 @@ require([
         db = request.result;
     };
     // Setup the database tables if this has not already been done
-    request.onupgradeneeded = function (e) {
+    /*request.onupgradeneeded = function (e) {
         // Grab a reference to the opened database
         let db = e.target.result;
         // Create an objectStore to store our notes in (basically like a single table)
@@ -207,6 +201,7 @@ require([
         });
         console.log('Database setup complete');
     };
+    */
 
     $.ajaxSetup({
         async: false
@@ -215,31 +210,25 @@ require([
     $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_Data/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
         $.each(data.features, function (i, val) {
             parcelArr.push({
-                AB: val.attributes.ABAGPDAS,
                 BP: val.attributes.BasinPriority,
-                BZ: 0, //val.attributes.BufferZones,
+                BZ: val.attributes.BufferZone,
                 CC: val.attributes.CCED,
                 CP: val.attributes.CPAD,
-                CL: 0, //val.attributes.CityLimits,
+                CL: val.attributes.CityLimits,
                 CH: val.attributes.CriticalHabitat,
-                CG: val.attributes.CropGrazing,
-                FM: 0, //val.attributes.FarmMarket,
-                HID: val.attributes.GRID_ID,
+                CG: val.attributes.CropLand,
+                FM: val.attributes.FarmMarkets,
+                GL: val.attributes.GrazingLand,
                 LI: val.attributes.LowIncome,
-                FID: val.attributes.OBJECTID,
                 PG: val.attributes.PBAGrowth,
-                PP: val.attributes.ProtectedParkland,
+                PS: val.attributes.PrimeSoil,
                 RC: val.attributes.RangelandConservation,
-                SOI: 0, //val.attributes.SOI,
-                SA: val.attributes.Shape__Area,
-                SL: val.attributes.Shape__Length,
+                SOI: val.attributes.SOI,
                 SC: val.attributes.SoilCarbon,
-                SQ: val.attributes.SoilQuality,
                 SR: val.attributes.SpeciesRichness,
                 TC: val.attributes.TerrestrialClimChange,
                 U2: val.attributes.Urban2050,
-                UA: 0, //val.attributes.UrbanAg,
-                UC: val.attributes.UrbanChange,
+                UA: val.attributes.UrbanAg,
                 WS: val.attributes.WaterStorage,
                 WL: val.attributes.Wetlands,
                 WA: val.attributes.WilliamsonAct,
@@ -249,7 +238,7 @@ require([
     })
 
     Parcels = new FeatureLayer({
-        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_NoData/FeatureServer",
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_Data/FeatureServer/",
         layerId: 0,
         blendMode: "multiply",
         title: "Hexagons",
@@ -381,7 +370,7 @@ require([
         }
     }
 
-    function popDropdown() {
+    /*function popDropdown() {
         $("#scenarios").empty();
         results = db.transaction('default').objectStore('default').getAll();
         results.onsuccess = function () {
@@ -393,9 +382,9 @@ require([
                 $("#scenDiv").show();
             }
         }
-    }
+    }*/
     // Define the addData() function
-    function addData() {
+    /*function addData() {
         // grab the values entered into the form fields and store them in an object ready for being inserted into the DB
         let newItem = {
             scenario: $("#scenarioName").val(),
@@ -442,9 +431,9 @@ require([
             };
         }
         popDropdown();
-    }
+    }*/
 
-    function deleteData() {
+    /*function deleteData() {
         let transaction = db.transaction(['default'], 'readwrite');
         let objectStore = transaction.objectStore('default');
         let objectStoreRequest = objectStore.delete(parseInt(deleteVal));
@@ -452,11 +441,11 @@ require([
             console.log('Item Deleted');
         }
         popDropdown();
-    }
+    }*/
 
     
     function setRenderer() {
-        //grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
+        //grantArray = ["BP","BZ","CC","CP","CL","CH","CG","FM","GL","LI","PG","PS","RC","SOI","SC","SR","TC","U2","UA","WS","WL","WA"]
         //[fileList, string, stringRound, sql]
         parcelSlider(grantArray);
         
@@ -559,18 +548,6 @@ require([
         var factors = "[" + grantArray.toString() + "]"
         sql = "SELECT 1 as grp, "
 
-        if (grantArray.includes('AB')) {
-            string += "var AB = ($feature.ABAGPDAS * " + svAB + ");"
-            sql += "(AB * " + svAB + ") + "
-            fileList.push({
-                fieldName: "ABAGPDAS",
-                label: "ABAG PDAS",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
         if (grantArray.includes('BP')) {
             string += "var BP = ($feature.BasinPriority * " + svBP + ");"
             sql += "(BP * " + svBP + ") + "
@@ -584,10 +561,10 @@ require([
             })
         }
         if (grantArray.includes('BZ')) {
-            string += "var BZ = ($feature.BufferZones * " + svBZ + ");"
+            string += "var BZ = ($feature.BufferZone * " + svBZ + ");"
             sql += "(BZ * " + svBZ + ") + "
             fileList.push({
-                fieldName: "BufferZones",
+                fieldName: "BufferZone",
                 label: "Buffer Zones",
                 format: {
                     places: 2,
@@ -607,18 +584,6 @@ require([
                 }
             })
         }
-        if (grantArray.includes('CL')) {
-            string += "var CL = ($feature.CityLimits * " + svCL + ");"
-            sql += "(CL * " + svCL + ") + "
-            fileList.push({
-                fieldName: "CityLimits",
-                label: "City Limits",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
         if (grantArray.includes('CP')) {
             string += "var CP = ($feature.CPAD * " + svCP + ");"
             sql += "(CP * " + svCP + ") + "
@@ -631,12 +596,12 @@ require([
                 }
             })
         }
-        if (grantArray.includes('CG')) {
-            string += "var CG = ($feature.CropGrazing * " + svCG + ");"
-            sql += "(CG * " + svCG + ") + "
+        if (grantArray.includes('CL')) {
+            string += "var CL = ($feature.CityLimits * " + svCL + ");"
+            sql += "(CL * " + svCL + ") + "
             fileList.push({
-                fieldName: "CropGrazing",
-                label: "Crop Grazing",
+                fieldName: "CityLimits",
+                label: "City Limits",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -655,12 +620,36 @@ require([
                 }
             })
         }
+        if (grantArray.includes('CG')) {
+            string += "var CG = ($feature.CropLand * " + svCG + ");"
+            sql += "(CG * " + svCG + ") + "
+            fileList.push({
+                fieldName: "CropLand",
+                label: "Crop Lands",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
         if (grantArray.includes('FM')) {
-            string += "var FM = ($feature.FarmMarket * " + svFM + ");"
+            string += "var FM = ($feature.FarmMarkets * " + svFM + ");"
             sql += "(FM * " + svFM + ") + "
             fileList.push({
-                fieldName: "FarmMarket",
+                fieldName: "FarmMarkets",
                 label: "Farmers Markets",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
+        if (grantArray.includes('GL')) {
+            string += "var GL = ($feature.GrazingLand * " + svGL + ");"
+            sql += "(GL * " + svGL + ") + "
+            fileList.push({
+                fieldName: "GrazingLand",
+                label: "Grazing Lands",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -669,7 +658,7 @@ require([
         }
         if (grantArray.includes('LI')) {
             string += "var LI = ($feature.LowIncome * " + svLI + ");"
-            sql += "(LI * " + svAB + ") + "
+            sql += "(LI * " + svLI + ") + "
             fileList.push({
                 fieldName: "LowIncome",
                 label: "Low Income",
@@ -691,12 +680,12 @@ require([
                 }
             })
         }
-        if (grantArray.includes('PP')) {
-            string += "var PP = ($feature.ProtectedParkland * " + svPP + ");"
-            sql += "(PP * " + svPP + ") + "
+        if (grantArray.includes('PS')) {
+            string += "var PS = ($feature.PrimeSoil * " + svPS + ");"
+            sql += "(PS * " + svPS + ") + "
             fileList.push({
-                fieldName: "ProtectedParkland",
-                label: "Protected Parkland",
+                fieldName: "PrimeSoil",
+                label: "Prime Soils",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -715,36 +704,24 @@ require([
                 }
             })
         }
-        if (grantArray.includes('SC')) {
-            string += "var SC = ($feature.SoilCarbon * " + svSC + ");"
-            sql += "(SC * " + svSC + ") + "
-            fileList.push({
-                fieldName: "SoilCarbon",
-                label: "Soil Carbon",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
-        if (grantArray.includes('SQ')) {
-            string += "var SQ = ($feature.SoilQuality * " + svSQ + ");"
-            sql += "(SQ * " + svSQ + ") + "
-            fileList.push({
-                fieldName: "SoilQuality",
-                label: "Soil Quality",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
         if (grantArray.includes('SOI')) {
             string += "var SOI = ($feature.SOI * " + svSOI + ");"
             sql += "(SOI * " + svSOI + ") + "
             fileList.push({
                 fieldName: "SOI",
                 label: "Sphere of Infuence",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
+        if (grantArray.includes('SC')) {
+            string += "var SC = ($feature.SoilCarbon * " + svSC + ");"
+            sql += "(SC * " + svSC + ") + "
+            fileList.push({
+                fieldName: "SoilCarbon",
+                label: "Soil Carbon",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -788,35 +765,11 @@ require([
             })
         }
         if (grantArray.includes('UA')) {
-            string += "var UA = ($feature.UrbanChange * " + svUA + ");"
+            string += "var UA = ($feature.UrbanAg * " + svUA + ");"
             sql += "(UA * " + svUA + ") + "
             fileList.push({
                 fieldName: "UrbanAg",
                 label: "Urban Agriculture",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
-        if (grantArray.includes('UC')) {
-            string += "var UC = ($feature.UrbanChange * " + svUC + ");"
-            sql += "(UC * " + svUC + ") + "
-            fileList.push({
-                fieldName: "UrbanChange",
-                label: "Urban Change",
-                format: {
-                    places: 2,
-                    digitSeparator: true
-                }
-            })
-        }
-        if (grantArray.includes('WL')) {
-            string += "var WL = ($feature.Wetlands * " + svWL + ");"
-            sql += "(WL * " + svWL + ") + "
-            fileList.push({
-                fieldName: "Wetlands",
-                label: "Wetlands",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -829,6 +782,18 @@ require([
             fileList.push({
                 fieldName: "WaterStorage",
                 label: "Water Storage",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
+        if (grantArray.includes('WL')) {
+            string += "var WL = ($feature.Wetlands * " + svWL + ");"
+            sql += "(WL * " + svWL + ") + "
+            fileList.push({
+                fieldName: "Wetlands",
+                label: "Wetlands",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -888,7 +853,7 @@ require([
     }
 
     // Assuming you have an array of slider names
-    var sliderArr = ['AB', 'BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'LI', 'PG', 'PP', 'RC', 'SOI', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UA', 'UC', 'WS', 'WL', 'WA']
+    var sliderArr = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
     $.each(sliderArr, function (index, sliderName) {
         slider = $("#" + sliderName).val(eval('sv' + sliderName))
         $("#" + sliderName + "Val").html(slider[0].value)
@@ -900,7 +865,7 @@ require([
         });
     });
 
-    $('#loadClose').click(function () {
+    /*$('#loadClose').click(function () {
         popDropdown();
     })
     $('#saveState').click(function () {
@@ -933,11 +898,6 @@ require([
             if (cursor) {
                 if (cursor.value.scenario === $(this).data("id")) {
                     console.log(cursor.value.scenario)
-                    svHB = cursor.value.svHB;
-                    svCN = cursor.value.svCN;
-                    svRN = cursor.value.svRN;
-                    svSV = cursor.value.svSV;
-                    svAB = cursor.value.svAB;
                     svBP = cursor.value.svBP;
                     svBZ = cursor.value.svBZ;
                     svCC = cursor.value.svCC;
@@ -946,12 +906,20 @@ require([
                     svCH = cursor.value.svCH;
                     svCG = cursor.value.svCG;
                     svFM = cursor.value.svFM;
+                    svGL = cursor.value.svGL;
                     svLI = cursor.value.svLI;
                     svPG = cursor.value.svPG;
-                    svPP = cursor.value.svPP;
+                    svPS = cursor.value.svPS;
                     svRC = cursor.value.svRC;
-                    svSOI = cursor.value.svSOI;
                     svSC = cursor.value.svSC;
+                    svSOI = cursor.value.svSOI;
+                    svSR = cursor.value.svSR;
+                    svTC = cursor.value.svTC;
+                    svU2 = cursor.value.svU2;
+                    svUA = cursor.value.svUA;
+                    svWS = cursor.value.svWS;
+                    svWL = cursor.value.svWL;
+                    svWA = cursor.value.svWA;
                     /*svHB = cursor.value.svHB;
                     svCN = cursor.value.svCN;
                     svRN = cursor.value.svRN;
@@ -964,9 +932,9 @@ require([
                     $('#RNVal').text(cursor.value.svRN);
                     $('#SV').val(cursor.value.svSV);
                     $('#SVVal').text(cursor.value.svSV);*/
-                    $('#AB').val(cursor.value.svAB);
-                    $('#ABVal').text(cursor.value.svAB);
-                    $('#BP').val(cursor.value.svBP);
+                    //$('#AB').val(cursor.value.svAB);
+                    //$('#ABVal').text(cursor.value.svAB);
+                    /*$('#BP').val(cursor.value.svBP);
                     $('#BPVal').text(cursor.value.svBP);
                     $('#BZ').val(cursor.value.svBZ);
                     $('#BZVal').text(cursor.value.svBZ);
@@ -982,20 +950,22 @@ require([
                     $('#CGVal').text(cursor.value.svCG);
                     $('#FM').val(cursor.value.svFM);
                     $('#FMVal').text(cursor.value.svFM);
+                    $('#GL').val(cursor.value.svGL);
+                    $('#GLVal').text(cursor.value.svGL);
                     $('#LI').val(cursor.value.svLI);
                     $('#LIVal').text(cursor.value.svLI);
                     $('#PG').val(cursor.value.svPG);
                     $('#PGVal').text(cursor.value.svPG);
-                    $('#PP').val(cursor.value.svPP);
-                    $('#PPVal').text(cursor.value.svPP);
+                    $('#PS').val(cursor.value.svPS);
+                    $('#PSVal').text(cursor.value.svPS);
                     $('#RC').val(cursor.value.svRC);
                     $('#RCVal').text(cursor.value.svRC);
                     $('#SOI').val(cursor.value.svSOI);
                     $('#SOIVal').text(cursor.value.svSOI);
                     $('#SC').val(cursor.value.svSC);
                     $('#SCVal').text(cursor.value.svSC);
-                    $('#SQ').val(cursor.value.svSQ);
-                    $('#SQVal').text(cursor.value.svSQ)
+                    //$('#SQ').val(cursor.value.svSQ);
+                    //$('#SQVal').text(cursor.value.svSQ)
                     $('#SR').val(cursor.value.svSR);
                     $('#SRVal').text(cursor.value.svSR)
                     $('#TC').val(cursor.value.svTC);
@@ -1004,8 +974,8 @@ require([
                     $('#U2Val').text(cursor.value.svU2)
                     $('#UA').val(cursor.value.svUA);
                     $('#UAVal').text(cursor.value.svUA)
-                    $('#UC').val(cursor.value.svUC);
-                    $('#UCVal').text(cursor.value.svUC)
+                    //$('#UC').val(cursor.value.svUC);
+                    //$('#UCVal').text(cursor.value.svUC)
                     $('#WS').val(cursor.value.svWS);
                     $('#WSVal').text(cursor.value.svWS)
                     $('#WL').val(cursor.value.svWL);
@@ -1018,12 +988,13 @@ require([
             }
         }
         console.log("Success!")
-    })
+    })*/
 
     $(window).on("load", function () {
         $('#loadModal').modal('show');
         $('#loadClose').hide();
-        grantArray = ['AB','WA','CP','CC','PG']//['CL','UA','SOI','AB','WA','CP','CC','PG']
+        grantArray = ['CL','UA','SOI','WA','CP','CC','PG'] // 
+        //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         switchSliders(grantArray)
         $('#sliders').show();
     });
@@ -1034,17 +1005,17 @@ require([
         $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
 
         if (text == 'Basic Information'){
-            grantArray = ['AB','WA','CP','CC','PG']//['CL','UA','SOI','AB','WA','CP','CC','PG']
+            grantArray = ['CL','UA','SOI','WA','CP','CC','PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         } else if (text == 'SALC'){
-            grantArray = ['LI','SQ','CG','WA','BP','RC','SC','WS']//['FM','BZ','LI','SQ','CG','WA','BP','RC','SC','WS']
+            grantArray = ['FM','BZ','LI','PS','CG','GL','WA','BP','RC','SC','WS']
         } else if (text == 'SALC, Agricultural Use'){
-            grantArray = ['SQ','CG','WA','BP','WS']
+            grantArray = ['PS','CG','GL','WA','BP','WS']
         } else if (text == 'SALC, Equity'){
             grantArray = ['LI']
         } else if (text == 'SALC, Support for infill / risk for conversion'){
-            grantArray = ['RC']//['BZ','RC']
+            grantArray = ['BZ','RC']
         } else if (text == 'SALC, Other Program Goals'){
-            grantArray = ['SC']//['FM','SC']
+            grantArray = ['FM','SC']
         } else if (text == 'WCB'){
             grantArray = ['SR','CH','WS','WL']
         } else if (text == 'CC'){
