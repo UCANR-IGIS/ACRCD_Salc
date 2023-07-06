@@ -1,71 +1,109 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>LayerList Widget Example</title>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
-  <script src="https://js.arcgis.com/4.19/"></script>
-  <style>
-    #mapDiv {
-      height: 400px;
-    }
-    #widgetDiv {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 99;
-      background-color: white;
-      padding: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-    #widgetContainer {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div id="mapDiv"></div>
-  <div id="widgetContainer">
-    <div id="widgetDiv"></div>
-  </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>LayerList Widget Example</title>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.19/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.19/"></script>
+    <style>
+      #mapDiv {
+        height: 800px;
+      }
+      #widgetDiv {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 99;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      #widgetContainer {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mapDiv"></div>
+    <script>
+      require([
+        "esri/Map",
+        "esri/WebMap",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/LayerList",
+        "esri/layers/Layer",
+      ], function (Map, WebMap, MapView, FeatureLayer, LayerList, Layer) {
+        StudyArea = new FeatureLayer({
+          url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/AlamedaCounty/FeatureServer/",
+          layerId: 1,
+          title: "Alameda County",
+          listMode: "hide",
+        });
 
-  <script>
-    require([
-      "esri/Map",
-      "esri/views/MapView",
-      "esri/layers/FeatureLayer",
-      "esri/widgets/LayerList"
-    ], function(Map, MapView, FeatureLayer, LayerList) {
-      const map = new Map({
-        basemap: "streets"
+        StudyArea.renderer = {
+          type: "simple",
+          symbol: {
+            type: "simple-fill", // autocasts as new SimpleFillSymbol()
+            color: [0, 0, 0, 0],
+            outline: {
+              width: 2,
+              color: "#49722D",
+            },
+          },
+        };
+
+        const map = new Map({
+          basemap: "streets",
+        });
+
+        const view = new MapView({
+          container: "mapDiv",
+          map: map,
+          center: [-122.275, 37.804],
+          zoom: 10,
+        });
+
+        map.add(StudyArea);
+        Layer.fromPortalItem({
+          portalItem: {
+            id: "dc3d137547a24c3b80a12ca59921078f",
+          },
+        }).then((layer) => {
+          // Adds layer to the map
+          layer.title = "Wind Speed (Km/Hr)"
+          layer.visible = false
+          map.add(layer);
+        });
+        Layer.fromPortalItem({
+          portalItem: {
+            id: "6b51b7bad3044bebabb55b5847259dad",
+          },
+        }).then((layer) => {
+          // Adds layer to the map
+          layer.title = "Visibility (Km)"
+          layer.visible = false
+          map.add(layer);
+        });
+
+        view.when(() => {
+          const layerList = new LayerList({
+            view: view,
+          });
+
+          // Add widget to the top right corner of the view
+          view.ui.add(layerList, "top-right");
+        });
       });
-
-      const view = new MapView({
-        container: "mapDiv",
-        map: map,
-        center: [-122.275, 37.804],
-        zoom: 10
-      });
-
-      const countiesLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Counties/FeatureServer/0"
-      });
-
-      map.add(countiesLayer);
-
-      const widgetDiv = document.getElementById("widgetDiv");
-      const widget = new LayerList({
-        view: view
-      });
-
-      widgetDiv.appendChild(widget.container);
-
-      const widgetContainer = document.getElementById("widgetContainer");
-      view.ui.add(widgetContainer, { position: "top-right" });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

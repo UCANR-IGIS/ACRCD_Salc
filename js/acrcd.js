@@ -90,7 +90,13 @@ var svBP = 1,
     view
 let db;
 require([
-    "esri/Map"
+    "esri/config"
+    , "esri/Map"
+    , "esri/views/MapView"
+    , "esri/widgets/Expand"
+    , "esri/request"
+    , "esri/layers/support/Field"
+    , "esri/Map"
     , "esri/Graphic"
     , "esri/views/MapView"
     , "esri/WebMap"
@@ -112,11 +118,28 @@ require([
     , "esri/core/Error"
     , "esri/smartMapping/renderers/color"
     , "dojo/domReady!"
-], function (Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
+], function (esriConfig, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
+    //Shapefile
+    var portalUrl = "https://www.arcgis.com";
+
+    document
+        .getElementById("uploadForm")
+        .addEventListener("change", function (event) {
+            var fileName = event.target.value.toLowerCase();
+
+            if (fileName.indexOf(".zip") !== -1) {
+                //is file a zip - if not notify user
+                generateFeatureCollection(fileName);
+            } else {
+                document.getElementById("upload-status").innerHTML =
+                    '<p style="color:red">Add shapefile as .zip file</p>';
+            }
+        });
+    // shapefile end
 
     var identifyTask = new IdentifyTask(),
         params = new IdentifyParameters()
-    let request = window.indexedDB.open('saveState', 1);
+    /*let request = window.indexedDB.open('saveState', 1);
     request.onerror = function () {
         console.log('Database failed to open');
     };
@@ -125,89 +148,13 @@ require([
         console.log('Database opened successfully');
         // Store the opened database object in the db variable. This is used a lot below
         db = request.result;
-    };
-    // Setup the database tables if this has not already been done
-    /*request.onupgradeneeded = function (e) {
-        // Grab a reference to the opened database
-        let db = e.target.result;
-        // Create an objectStore to store our notes in (basically like a single table)
-        // including a auto-incrementing key
-        let objectStore = db.createObjectStore('default', {
-            keyPath: 'id',
-            autoIncrement: true
-        });
-        // Define what data items the objectStore will contain
-        //objectStore.createIndex('variable', 'variable', { unique: false });
-        //objectStore.createIndex('value', 'value', { unique: false });
-        objectStore.createIndex('scenario', 'scenario', {
-            unique: false
-        });
-        objectStore.createIndex('svAB', 'svAB', {
-            unique: false
-        });
-        objectStore.createIndex('svBP', 'svBP', {
-            unique: false
-        });
-        objectStore.createIndex('svBZ', 'svBZ', {
-            unique: false
-        });
-        objectStore.createIndex('svCC', 'svCC', {
-            unique: false
-        });
-        objectStore.createIndex('svCP', 'svCP', {
-            unique: false
-        });
-        objectStore.createIndex('svCL', 'svCL', {
-            unique: false
-        });
-        objectStore.createIndex('svCH', 'svCH', {
-            unique: false
-        });
-        objectStore.createIndex('svCG', 'svCG', {
-            unique: false
-        });
-        objectStore.createIndex('svFM', 'svFM', {
-            unique: false
-        });
-        objectStore.createIndex('svLI', 'svLI', {
-            unique: false
-        });
-        objectStore.createIndex('svPG', 'svPG', {
-            unique: false
-        });
-        objectStore.createIndex('svPP', 'svPP', {
-            unique: false
-        });
-        objectStore.createIndex('svRC', 'svRC', {
-            unique: false
-        });
-        objectStore.createIndex('svSOI', 'svSOI', {
-            unique: false
-        });
-        objectStore.createIndex('svSC', 'svSC', {
-            unique: false
-        });
-        objectStore.createIndex('svHB', 'svHB', {
-            unique: false
-        });
-        objectStore.createIndex('svCN', 'svCN', {
-            unique: false
-        });
-        objectStore.createIndex('svRN', 'svRN', {
-            unique: false
-        });
-        objectStore.createIndex('svSV', 'svSV', {
-            unique: false
-        });
-        console.log('Database setup complete');
-    };
-    */
+    };*/
 
     $.ajaxSetup({
         async: false
     });
 
-    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_Data/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
+    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_06142023/FeatureServer/2/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
         $.each(data.features, function (i, val) {
             parcelArr.push({
                 BP: val.attributes.BasinPriority,
@@ -238,10 +185,11 @@ require([
     })
 
     Parcels = new FeatureLayer({
-        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_Data/FeatureServer/",
-        layerId: 0,
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_06142023/FeatureServer/",
+        layerId: 2,
         blendMode: "multiply",
         title: "Hexagons",
+        definitionExpression: "water = 0"
     });
 
     StudyArea = new FeatureLayer({
@@ -316,6 +264,107 @@ require([
         view: view
     });
 
+    // Shapefile
+    var fileForm = document.getElementById("mainWindow");
+
+    var expand = new Expand({
+        expandIconClass: "esri-icon-upload",
+        view: view,
+        content: fileForm,
+        expandTooltip: "Upload Shapefile",
+        autoCollapse: true
+    });
+
+    view.ui.add(expand, "top-left");
+
+    function generateFeatureCollection(fileName) {
+        var name = fileName.split(".");
+        // Chrome and IE add c:\fakepath to the value - we need to remove it
+        // see this link for more info: http://davidwalsh.name/fakepath
+        name = name[0].replace("c:\\fakepath\\", "");
+
+        document.getElementById("upload-status").innerHTML =
+            "<b>Loading </b>" + name;
+
+        // define the input params for generate see the rest doc for details
+        // https://developers.arcgis.com/rest/users-groups-and-items/generate.htm
+        var params = {
+            name: name,
+            targetSR: view.spatialReference,
+            maxRecordCount: 1000,
+            enforceInputFileSizeLimit: true,
+            enforceOutputJsonSizeLimit: true,
+        };
+
+        // generalize features to 10 meters for better performance
+        params.generalize = true;
+        params.maxAllowableOffset = 10;
+        params.reducePrecision = true;
+        params.numberOfDigitsAfterDecimal = 0;
+
+        var myContent = {
+            filetype: "shapefile",
+            publishParameters: JSON.stringify(params),
+            f: "json",
+        };
+
+        // use the REST generate operation to generate a feature collection from the zipped shapefile
+        request(portalUrl + "/sharing/rest/content/features/generate", {
+            query: myContent,
+            body: document.getElementById("uploadForm"),
+            responseType: "json",
+        })
+            .then(function (response) {
+                var layerName =
+                    response.data.featureCollection.layers[0].layerDefinition.name;
+                document.getElementById("upload-status").innerHTML =
+                    "<b>Loaded: </b>" + layerName;
+                addShapefileToMap(response.data.featureCollection);
+            })
+            .catch(errorHandler);
+    }
+
+    function errorHandler(error) {
+        document.getElementById("upload-status").innerHTML =
+            "<p style='color:red;max-width: 500px;'>" + error.message + "</p>";
+    }
+
+    function addShapefileToMap(featureCollection) {
+        // add the shapefile to the map and zoom to the feature collection extent
+        // if you want to persist the feature collection when you reload browser, you could store the
+        // collection in local storage by serializing the layer using featureLayer.toJson()
+        // see the 'Feature Collection in Local Storage' sample for an example of how to work with local storage
+        var sourceGraphics = [];
+
+        var layers = featureCollection.layers.map(function (layer) {
+            var graphics = layer.featureSet.features.map(function (feature) {
+                return Graphic.fromJSON(feature);
+            });
+            sourceGraphics = sourceGraphics.concat(graphics);
+            var featureLayer = new FeatureLayer({
+                title: "Uploaded Shapefile",
+                objectIdField: "FID",
+                source: graphics,
+                fields: layer.layerDefinition.fields.map(function (field) {
+                    return Field.fromJSON(field);
+                }),
+            });
+            return featureLayer;
+            // associate the feature with the popup on click to enable highlight and zoom to
+        });
+        map.addMany(layers);
+        view.goTo(sourceGraphics).then(function () {
+            view.zoom = view.zoom - 2;
+        }).catch(function (error) {
+            if (error.name != "AbortError") {
+                console.error(error);
+            }
+        });
+
+        document.getElementById("upload-status").innerHTML = "";
+    }
+    // End Shapefile
+
     view2 = new MapView({
         container: "viewDiv2",
         map: allData,
@@ -332,12 +381,12 @@ require([
             listItemCreatedFunction: (event) => {
                 const item = event.item;
                 if (item.layer.title != "Place Names") {
-                  item.panel = {
-                    content: "legend",
-                    open: true
-                  };
+                    item.panel = {
+                        content: "legend",
+                        open: true
+                    };
                 }
-              }
+            }
         });
         /* var legend = new Legend({
             view: view,
@@ -356,101 +405,27 @@ require([
         view2.ui.add(layerList, "top-right");
     });
 
-    function parcelSlider(grantArray=[]) {
+    function parcelSlider(grantArray = []) {
         $("#loadBody").empty();
         $("#loadBody").append("Data ready");
         $("#loadClose").show();
         if (grantArray.length != 0) {
-            expression = createExpressions(grantArray,2)
+            expression = createExpressions(grantArray, 2)
             sql - expression[3]
-            
+
             parcelSQL = alasql(sql, [parcelArr])
             parselMax1 = alasql("SELECT grp, MAX(test) as maxVal from ? GROUP BY grp", [parcelSQL])
             parcelMax = parselMax1[0].maxVal
         }
     }
 
-    /*function popDropdown() {
-        $("#scenarios").empty();
-        results = db.transaction('default').objectStore('default').getAll();
-        results.onsuccess = function () {
-            if (results.result.length > 0) {
-                $.each(results.result, function () {
-                    var appendText = "<li class='main_flex'><nav>" + this.scenario + "</nav><article><i data-id='" + this.scenario + "' class='fa fa-upload'></i></article><aside><i data-id='" + this.id + "' class='fa fa-trash-alt' data-toggle='modal' data-target='#deleteModal'></i></aside></li>"
-                    $("#scenarios").append(appendText);
-                });
-                $("#scenDiv").show();
-            }
-        }
-    }*/
-    // Define the addData() function
-    /*function addData() {
-        // grab the values entered into the form fields and store them in an object ready for being inserted into the DB
-        let newItem = {
-            scenario: $("#scenarioName").val(),
-            svAB: svAB,
-            svBP: svBP,
-            svBZ: svBZ,
-            svCC: svCC,
-            svCP: svCP,
-            svCL: svCL,
-            svCH: svCH,
-            svCG: svCG,
-            svFM: svFM,
-            svLI: svLI,
-            svPG: svPG,
-            svPP: svPP,
-            svRC: svRC,
-            svSOI: svSOI,
-            svSC: svSC,
-            svSQ: svSQ,
-            svSR: svSR,
-            svTC: svTC,
-            svU2: svU2,
-            svUA: svUA,
-            svUC: svUC,
-            svWS: svWS,
-            svWL: svWL,
-            svWA: svWA,
-            svHB: svHB,
-            svCN: svCN,
-            svRN: svRN,
-            svSV: svSV,
-        };
-        // open a read/write db transaction, ready for adding the data
-        let transaction = db.transaction(['default'], 'readwrite');
-        // call an object store that's already been added to the database
-        let objectStore = transaction.objectStore('default');
-        // Make a request to add our newItem object to the object store
-        let request = objectStore.add(newItem);
-        // Report on the success of the transaction completing, when everything is done
-        transaction.oncomplete = function () {
-            console.log('Transaction completed: database modification finished.');
-            transaction.onerror = function () {
-                console.log('Transaction not opened due to error');
-            };
-        }
-        popDropdown();
-    }*/
-
-    /*function deleteData() {
-        let transaction = db.transaction(['default'], 'readwrite');
-        let objectStore = transaction.objectStore('default');
-        let objectStoreRequest = objectStore.delete(parseInt(deleteVal));
-        transaction.oncomplete = function () {
-            console.log('Item Deleted');
-        }
-        popDropdown();
-    }*/
-
-    
     function setRenderer() {
         //grantArray = ["BP","BZ","CC","CP","CL","CH","CG","FM","GL","LI","PG","PS","RC","SOI","SC","SR","TC","U2","UA","WS","WL","WA"]
         //[fileList, string, stringRound, sql]
         parcelSlider(grantArray);
-        
-        expression = createExpressions(grantArray,2)
-        
+
+        expression = createExpressions(grantArray, 2)
+
         let arcadeExpressionInfos = [
             // Get Arcade expression returning the predominant demographic in the county:
             // Whether the majority of people are in the labor force or not
@@ -465,7 +440,7 @@ require([
         var template = {
             // autocasts as new PopupTemplate()
             expressionInfos: arcadeExpressionInfos,
-            title: "Appropriateness for agriculture: {expression/hex_info}",
+            title: "Agriculture Value: {expression/hex_info}",
             content: [
                 {
                     // It is also possible to set the fieldInfos outside of the content
@@ -513,12 +488,12 @@ require([
                     type: "color",
                     //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
                     valueExpression: expression[1],
-                    valueExpressionTitle: "Overall Score",
+                    valueExpressionTitle: "Agricultural Value",
                     stops: [
                         {
                             value: 0.2,
                             color: "#eae3d0",
-                            label: "< 0.2"
+                            label: "< 0.2 (Low)"
                         }
                         , {
                             value: 0.4,
@@ -533,7 +508,7 @@ require([
                         , {
                             value: 0.8,
                             color: "#63643C",
-                            label: "> 0.8"
+                            label: "> 0.8 (High)"
                         }
                     ]
                 }
@@ -542,7 +517,7 @@ require([
         Parcels.renderer = renderer2;
         Parcels.labelingInfo = [labelClass]
     }
-    function createExpressions(grantArray=[], rnd='') {
+    function createExpressions(grantArray = [], rnd = '') {
         fileList = []
         string = ""
         var factors = "[" + grantArray.toString() + "]"
@@ -815,13 +790,13 @@ require([
 
         sql = sql.substring(0, sql.length - 2);
 
-        sql +=  "as test FROM ?"
+        sql += "as test FROM ?"
 
         string += "var factors = " + factors + "; var total = Sum(factors); var max1 = " + parcelMax + ";"
         //if (rnd != '') {
-            stringRound = string + "return round((total/max1),2);"
+        stringRound = string + "return round((total/max1),2);"
         //} else {
-            string += "return (total/max1);"
+        string += "return (total/max1);"
         //}
 
         //return string;
@@ -829,7 +804,7 @@ require([
         return [fileList, string, stringRound, sql]
     }
 
-    function switchSliders(grantArray=[]) {
+    function switchSliders(grantArray = []) {
         $("#sliders > li").hide()
 
         $.each(grantArray, function (index, sliderName) {
@@ -853,7 +828,7 @@ require([
     }
 
     // Assuming you have an array of slider names
-    var sliderArr = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
+    var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
     $.each(sliderArr, function (index, sliderName) {
         slider = $("#" + sliderName).val(eval('sv' + sliderName))
         $("#" + sliderName + "Val").html(slider[0].value)
@@ -865,161 +840,44 @@ require([
         });
     });
 
-    /*$('#loadClose').click(function () {
-        popDropdown();
-    })
-    $('#saveState').click(function () {
-        addData();
-    })
-    $('#CSVBtn').click(function () {
-        exportCSV();
-    })
-    $('li').on("click", "i.fa.fa-trash-alt", function (event) {
-        deleteVal = $(this).data("id");
-        $('#deleteModal').modal('show');
-    })
-    $('a').on("click", "i.fa.fa-save", function (event) {
-        $('#saveModal').modal('show');
-    })
-
-    $('#saveBtn').on("click", function (event) {
-        $('#saveModal').modal('show');
-    })
-
-    $('#deleteState').click(function () {
-        deleteData();
-    })
-    $('li').on("click", "i.fa.fa-upload", function (event) {
-        let transaction = db.transaction(['default'], 'readonly');
-        let objectStore = transaction.objectStore('default');
-        let cursorRequest = objectStore.openCursor();
-        cursorRequest.onsuccess = e => {
-            const cursor = e.target.result;
-            if (cursor) {
-                if (cursor.value.scenario === $(this).data("id")) {
-                    console.log(cursor.value.scenario)
-                    svBP = cursor.value.svBP;
-                    svBZ = cursor.value.svBZ;
-                    svCC = cursor.value.svCC;
-                    svCP = cursor.value.svCP;
-                    svCL = cursor.value.svCL;
-                    svCH = cursor.value.svCH;
-                    svCG = cursor.value.svCG;
-                    svFM = cursor.value.svFM;
-                    svGL = cursor.value.svGL;
-                    svLI = cursor.value.svLI;
-                    svPG = cursor.value.svPG;
-                    svPS = cursor.value.svPS;
-                    svRC = cursor.value.svRC;
-                    svSC = cursor.value.svSC;
-                    svSOI = cursor.value.svSOI;
-                    svSR = cursor.value.svSR;
-                    svTC = cursor.value.svTC;
-                    svU2 = cursor.value.svU2;
-                    svUA = cursor.value.svUA;
-                    svWS = cursor.value.svWS;
-                    svWL = cursor.value.svWL;
-                    svWA = cursor.value.svWA;
-                    /*svHB = cursor.value.svHB;
-                    svCN = cursor.value.svCN;
-                    svRN = cursor.value.svRN;
-                    svSV = cursor.value.svSV;
-                    $('#HB').val(cursor.value.svHB);
-                    $('#HBVal').text(cursor.value.svHB);
-                    $('#CN').val(cursor.value.svCN);
-                    $('#CNVal').text(cursor.value.svCN);
-                    $('#RN').val(cursor.value.svRN);
-                    $('#RNVal').text(cursor.value.svRN);
-                    $('#SV').val(cursor.value.svSV);
-                    $('#SVVal').text(cursor.value.svSV);*/
-                    //$('#AB').val(cursor.value.svAB);
-                    //$('#ABVal').text(cursor.value.svAB);
-                    /*$('#BP').val(cursor.value.svBP);
-                    $('#BPVal').text(cursor.value.svBP);
-                    $('#BZ').val(cursor.value.svBZ);
-                    $('#BZVal').text(cursor.value.svBZ);
-                    $('#CC').val(cursor.value.svCC);
-                    $('#CCVal').text(cursor.value.svCC);
-                    $('#CP').val(cursor.value.svCP);
-                    $('#CPVal').text(cursor.value.svCP);
-                    $('#CL').val(cursor.value.svCL);
-                    $('#CLVal').text(cursor.value.svCL);
-                    $('#CH').val(cursor.value.svCH);
-                    $('#CHVal').text(cursor.value.svCH);
-                    $('#CG').val(cursor.value.svCG);
-                    $('#CGVal').text(cursor.value.svCG);
-                    $('#FM').val(cursor.value.svFM);
-                    $('#FMVal').text(cursor.value.svFM);
-                    $('#GL').val(cursor.value.svGL);
-                    $('#GLVal').text(cursor.value.svGL);
-                    $('#LI').val(cursor.value.svLI);
-                    $('#LIVal').text(cursor.value.svLI);
-                    $('#PG').val(cursor.value.svPG);
-                    $('#PGVal').text(cursor.value.svPG);
-                    $('#PS').val(cursor.value.svPS);
-                    $('#PSVal').text(cursor.value.svPS);
-                    $('#RC').val(cursor.value.svRC);
-                    $('#RCVal').text(cursor.value.svRC);
-                    $('#SOI').val(cursor.value.svSOI);
-                    $('#SOIVal').text(cursor.value.svSOI);
-                    $('#SC').val(cursor.value.svSC);
-                    $('#SCVal').text(cursor.value.svSC);
-                    //$('#SQ').val(cursor.value.svSQ);
-                    //$('#SQVal').text(cursor.value.svSQ)
-                    $('#SR').val(cursor.value.svSR);
-                    $('#SRVal').text(cursor.value.svSR)
-                    $('#TC').val(cursor.value.svTC);
-                    $('#TCVal').text(cursor.value.svTC)
-                    $('#U2').val(cursor.value.svU2);
-                    $('#U2Val').text(cursor.value.svU2)
-                    $('#UA').val(cursor.value.svUA);
-                    $('#UAVal').text(cursor.value.svUA)
-                    //$('#UC').val(cursor.value.svUC);
-                    //$('#UCVal').text(cursor.value.svUC)
-                    $('#WS').val(cursor.value.svWS);
-                    $('#WSVal').text(cursor.value.svWS)
-                    $('#WL').val(cursor.value.svWL);
-                    $('#WLVal').text(cursor.value.svWL)
-                    $('#WA').val(cursor.value.svWA);
-                    $('#WAVal').text(cursor.value.svWA)
-                    setRenderer();
-                }
-                cursor.continue();
-            }
-        }
-        console.log("Success!")
-    })*/
-
     $(window).on("load", function () {
         $('#loadModal').modal('show');
         $('#loadClose').hide();
-        grantArray = ['CL','UA','SOI','WA','CP','CC','PG'] // 
+        grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] // 
         //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         switchSliders(grantArray)
         $('#sliders').show();
+        $('#mainWindow').show();
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('.dropdown-tooltip'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
     });
 
-    $('.dropdown-menu').on( 'click', 'a', function() {
-        var text = $(this).html();
-        var htmlText = text + ' <span class="caret"></span>';
+    $('.dropdown-menu').on('click', 'a', function () {
+        //var text = $(this).html();
+        var text = $(this).data('grant');
+        var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
         $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
 
-        if (text == 'Basic Information'){
-            grantArray = ['CL','UA','SOI','WA','CP','CC','PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
-        } else if (text == 'SALC'){
-            grantArray = ['FM','BZ','LI','PS','CG','GL','WA','BP','RC','SC','WS']
-        } else if (text == 'SALC, Agricultural Use'){
-            grantArray = ['PS','CG','GL','WA','BP','WS']
-        } else if (text == 'SALC, Equity'){
+        if (text == 'Basic Information') {
+            grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
+        } else if (text == 'SALC') {
+            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS']
+        } else if (text == 'SALC, Agricultural Use') {
+            grantArray = ['PS', 'CG', 'GL', 'WA', 'BP', 'WS']
+        } else if (text == 'SALC, Equity') {
             grantArray = ['LI']
-        } else if (text == 'SALC, Support for infill / risk for conversion'){
-            grantArray = ['BZ','RC']
-        } else if (text == 'SALC, Other Program Goals'){
-            grantArray = ['FM','SC']
-        } else if (text == 'WCB'){
-            grantArray = ['SR','CH','WS','WL']
-        } else if (text == 'CC'){
-            grantArray = ['RC','SR','CH','WL']
+        } else if (text == 'SALC, Support for infill / risk for conversion') {
+            grantArray = ['BZ', 'RC']
+        } else if (text == 'SALC, Other Program Goals') {
+            grantArray = ['FM', 'SC']
+        } else if (text == 'WCB') {
+            grantArray = ['SR', 'CH', 'WS', 'WL']
+        } else if (text == 'CC') {
+            grantArray = ['RC', 'SR', 'CH', 'WL']
         }
         switchSliders(grantArray)
         setRenderer()

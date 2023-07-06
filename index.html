@@ -66,19 +66,34 @@
             </div>-->
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%">
-                    Basic Information
+                    <span class="dropdown-tooltip" data-bs-toggle="tooltip">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span>
+                    </span>Basic Information
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Basic Information</a></li>
-                  <li><a class="dropdown-item" href="#">SALC</a></li>
-                  <li><a class="dropdown-item" href="#">SALC, Agricultural Use</a></li>
-                  <li><a class="dropdown-item" href="#">SALC, Equity</a></li>
-                  <li><a class="dropdown-item" href="#">SALC, Support for infill / risk for conversion</a></li>
-                  <li><a class="dropdown-item" href="#">SALC, Other Program Goals</a></li>
-                  <li><a class="dropdown-item" href="#">WCB</a></li>
-                  <li><a class="dropdown-item" href="#">CC</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="Basic Information" title="Basic information for most grants">
+                    <i class="fas fa-info-circle me-2"></i>Basic Information</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC" title="All potential sliders for Sustainable Agricultural Lands Conservation (SALC)">
+                    <i class="fas fa-info-circle me-2"></i>SALC</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC, Agricultural Use" title="All potential sliders for Sustainable Agricultural Lands Conservation (SALC) - Agricultural Use">
+                    <i class="fas fa-info-circle me-2"></i>SALC, Agricultural Use</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC, Equity" title="All potential sliders for Sustainable Agricultural Lands Conservation (SALC) - Equity">
+                    <i class="fas fa-info-circle me-2"></i>SALC, Equity</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC, Support for infill / risk for conversion" title="All potential sliders for Sustainable Agricultural Lands Conservation (SALC) - Support for infill / risk for conversion">
+                    <i class="fas fa-info-circle me-2"></i>SALC, Support for infill / risk for conversion</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC, Other Program Goals" title="All potential sliders for Sustainable Agricultural Lands Conservation (SALC) - Other Program Goals">
+                    <i class="fas fa-info-circle me-2"></i>SALC, Other Program Goals</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="WCB" title="All potential sliders for ? (WCB) - Agricultural Use">
+                    <i class="fas fa-info-circle me-2"></i>WCB</a></li>
+                  <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="CC" title="All potential sliders for ? (CC)">
+                    <i class="fas fa-info-circle me-2"></i>CC</a></li>
                 </ul>
               </div>
+              <div class="fauxSlider">
+              <div class="center"><p>Slider Values [1 (low) to 5 (high), 0 removes from weighting on map]</p></div>
+                <div class="sliderLabels row_spacing" id="sliderLabels" style="margin-left: 3px;padding-right: 22px; padding-top: 3px; border-bottom: solid darkgoldenrod;"><span class="sliderLabel selected">0</span><span class="sliderLabel">1</span><span class="sliderLabel">2</span><span class="sliderLabel">3</span><span class="sliderLabel">4</span><span class="sliderLabel">5</span></div>
+            </div>  
         </top>
         <side class="row_spacing scrollbar">
             <div class="row">
@@ -92,81 +107,81 @@
                     <li id="liBP">
                         <p class="sliderLabel">Areas with sufficient water basins</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="BP" /><span class="sliderLabel"
-                            id="BPVal"></span>
+                            id="BPVal" style="display:none"></span>
                     </li>
                     <li id="liBZ">
                         <p class="sliderLabel">Projected city spread</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="BZ" /><span class="sliderLabel"
-                            id="BZVal"></span>
+                            id="BZVal" style="display:none"></span>
                     </li>
                     <li id="liCC">
                         <p class="sliderLabel">
                             Areas near conservation easements
                         </p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CC" /><span class="sliderLabel"
-                            id="CCVal"></span>
+                            id="CCVal" style="display:none"></span>
                     </li>
                     <li id="liCP">
                         <p class="sliderLabel">
                             Areas near parks and other protected areas
                         </p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CP" /><span class="sliderLabel"
-                            id="CPVal"></span>
+                            id="CPVal" style="display:none"></span>
                     </li>
                     <li id="liCL">
                         <p class="sliderLabel">City limits</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CL" /><span class="sliderLabel"
-                            id="CLVal"></span>
+                            id="CLVal" style="display:none"></span>
                     </li>
                     <li id="liCH">
                         <p class="sliderLabel">Critical wildlife habitat</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CH" /><span class="sliderLabel"
-                            id="CHVal"></span>
+                            id="CHVal" style="display:none"></span>
                     </li>
                     <li id="liCG">
                         <p class="sliderLabel">Areas with active farming</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="CG" /><span class="sliderLabel"
-                            id="CGVal"></span>
+                            id="CGVal" style="display:none"></span>
                     </li>
                     <li id="liFM">
-                        <p class="sliderLabel">Areas within x of farmers markets</p>
+                        <p class="sliderLabel">Areas within 2 miles of farmers markets</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="FM" /><span class="sliderLabel"
-                            id="FMVal"></span>
+                            id="FMVal" style="display:none"></span>
                     </li>
                     <li id="liGL">
                         <p class="sliderLabel">Areas with active grazing</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="GL" /><span class="sliderLabel"
-                            id="GLVal"></span>
+                            id="GLVal" style="display:none"></span>
                     </li>
                     <li id="liLI">
                         <p class="sliderLabel">Low income</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="LI" /><span class="sliderLabel"
-                            id="LIVal"></span>
+                            id="LIVal" style="display:none"></span>
                     </li>
                     <li id="liPG">
                         <p class="sliderLabel">PBA growth</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="PG" /><span class="sliderLabel"
-                            id="PGVal"></span>
+                            id="PGVal" style="display:none"></span>
                     </li>
                     <li id="liPS">
                         <p class="sliderLabel">Prime Soil</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="PS" /><span class="sliderLabel"
-                            id="PSVal"></span>
+                            id="PSVal" style="display:none"></span>
                     </li>
                     <li id="liRC">
                         <p class="sliderLabel">Rangeland priority conservation areas</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="RC" /><span class="sliderLabel"
-                            id="RCVal"></span>
+                            id="RCVal" style="display:none"></span>
                     </li>
                     <li id="liSOI">
                         <p class="sliderLabel">Sphere of influence</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="SOI" /><span
-                            class="sliderLabel" id="SOIVal"></span>
+                            class="sliderLabel" id="SOIVal" style="display:none"></span>
                     </li>
                     <li id="liSC">
                         <p class="sliderLabel">Predicted soil carbon stocks in rangelands</p>
                         <input type="range" min="0" max="5" value="0" class="slider" id="SC" /><span class="sliderLabel"
-                            id="SCVal"></span>
+                            id="SCVal" style="display:none"></span>
                     </li>
                     <!--<li id="liSQ">
                         <p class="sliderLabel">Prime soil for agriculture</p>
@@ -176,22 +191,22 @@
                     <li id="liSR">
                         <p class="sliderLabel">Terrestrial native wildlife species richness</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="SR" /><span class="sliderLabel"
-                            id="SRVal"></span>
+                            id="SRVal" style="display:none"></span>
                     </li>
                     <li id="liTC">
                         <p class="sliderLabel">Terrestrial Climate Change</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="TC" /><span class="sliderLabel"
-                            id="TCVal"></span>
+                            id="TCVal" style="display:none"></span>
                     </li>
                     <li id="liU2">
                         <p class="sliderLabel">Urban Areas 2050</p>
                         <input type="range" min="0" max="5" value="0" class="slider" id="U2" /><span class="sliderLabel"
-                            id="U2Val"></span>
+                            id="U2Val" style="display:none"></span>
                     </li>
                     <li id="liUA">
-                        <p class="sliderLabel">Known urban ag sites</p>
+                        <p class="sliderLabel">Known urban ag sites within 2 miles</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="UA" /><span class="sliderLabel"
-                            id="UAVal"></span>
+                            id="UAVal" style="display:none"></span>
                     </li>
                     <!--<li id="liUC">
                         <p class="sliderLabel">Urban Change</p>
@@ -201,17 +216,17 @@
                     <li id="liWS">
                         <p class="sliderLabel">Water storage capacity of soil</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="WS" /><span class="sliderLabel"
-                            id="WSVal"></span>
+                            id="WSVal" style="display:none"></span>
                     </li>
                     <li id="liWL">
                         <p class="sliderLabel">Wetlands</p>
                         <input type="range" min="0" max="5" value="0" class="slider" id="WL" /><span class="sliderLabel"
-                            id="WLVal"></span>
+                            id="WLVal" style="display:none"></span>
                     </li>
                     <li id="liWA">
                         <p class="sliderLabel">Williamson Act Lands</p>
                         <input type="range" min="0" max="5" value="1" class="slider" id="WA" /><span class="sliderLabel"
-                            id="WAVal"></span>
+                            id="WAVal" style="display:none"></span>
                     </li>
                 </ul>
             </div>
@@ -308,18 +323,52 @@
             <!--<div id="viewDiv" style="height: 100%"></div>-->
             <div class="tab-pane fade show active" id="hex-tab-pane" role="tabpanel" aria-labelledby="hex-tab"
                 tabindex="0" style="height: 100%;">
+                <!-- Shapefile Upload-->
+                <div id="mainWindow" style="display: none;">
+                    <div>
+                      <div style="padding-left: 4px">
+                        <p>Add a zipped shapefile to the map.</p>
+                        <p>
+                          Visit the
+                          <a
+                            target="_blank"
+                            href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm"
+                            >Shapefiles</a
+                          >
+                          help topic for information and limitations.
+                        </p>
+                        <form enctype="multipart/form-data" method="post" id="uploadForm">
+                          <div class="field">
+                            <label class="file-upload">
+                              <span><strong>Add File</strong></span>
+                              <input type="file" name="file" id="inFile" />
+                            </label>
+                          </div>
+                        </form>
+                        <span
+                          class="file-upload-status"
+                          style="opacity: 1"
+                          id="upload-status"
+                        ></span>
+                        <div id="fileInfo"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Shapefile Upload-->
                 <div id="viewDiv" style="height: 100%"></div>
             </div>
             <div class="tab-pane fade" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="0"
-                style="background-color: red; height: 100%;">
+                style="height: 100%;">
                 <div id="viewDiv2" style="height: 100%"></div>
             </div>
             <div class="tab-pane fade" id="docs-tab-pane" role="tabpanel" aria-labelledby="docs-tab" tabindex="0"
-                style="background-color: green;height: 100%;">
-                ...</div>
+                style="height: 100%;">
+                <iframe src="https://docs.google.com/document/d/10uMYOoZVdqKugZOQUbtcMzSnnv_nmWmEZvPI-0FGVhg/preview""></iframe>    
+            </div>
             <div class="tab-pane fade" id="feed-tab-pane" role="tabpanel" aria-labelledby="feed-tab" tabindex="0"
-                style="background-color: purple;height: 100%;">
-                ...</div>
+                style="height: 100%;">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdQ1XWGBKrb4PQ0sny790u7tPhmeUtOBO4xKSho4ZJZIo45nw/viewform"></iframe>    
+            </div>
         </main>
         <footer class="row_spacing">
             <!--<p> <a href="#" id="launchSave" data-toggle="modal" data-target="#saveModal" style="
