@@ -154,7 +154,7 @@ require([
         async: false
     });
 
-    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_06142023/FeatureServer/2/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
+    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_07052023/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
         $.each(data.features, function (i, val) {
             parcelArr.push({
                 BP: val.attributes.BasinPriority,
@@ -185,8 +185,8 @@ require([
     })
 
     Parcels = new FeatureLayer({
-        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_06142023/FeatureServer/",
-        layerId: 2,
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_07052023/FeatureServer/",
+        layerId: 0,
         blendMode: "multiply",
         title: "Hexagons",
         definitionExpression: "water = 0"
