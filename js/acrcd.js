@@ -528,7 +528,7 @@ require([
             sql += "(BP * " + svBP + ") + "
             fileList.push({
                 fieldName: "BasinPriority",
-                label: "Basin Priority",
+                label: "Areas with sufficient water basins",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -540,7 +540,7 @@ require([
             sql += "(BZ * " + svBZ + ") + "
             fileList.push({
                 fieldName: "BufferZone",
-                label: "Buffer Zones",
+                label: "Projected city spread",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -552,7 +552,7 @@ require([
             sql += "(CC * " + svCC + ") + "
             fileList.push({
                 fieldName: "CCED",
-                label: "CCED",
+                label: "Areas near conservation easements",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -564,7 +564,7 @@ require([
             sql += "(CP * " + svCP + ") + "
             fileList.push({
                 fieldName: "CPAD",
-                label: "CPAD",
+                label: "Areas near parks and other protected areas",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -588,7 +588,7 @@ require([
             sql += "(CH * " + svCH + ") + "
             fileList.push({
                 fieldName: "CriticalHabitat",
-                label: "Critical Habitat",
+                label: "Critical wildlife habitat",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -600,7 +600,7 @@ require([
             sql += "(CG * " + svCG + ") + "
             fileList.push({
                 fieldName: "CropLand",
-                label: "Crop Lands",
+                label: "Areas with active farming",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -612,7 +612,7 @@ require([
             sql += "(FM * " + svFM + ") + "
             fileList.push({
                 fieldName: "FarmMarkets",
-                label: "Farmers Markets",
+                label: "Areas within 2 miles of farmers markets",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -624,7 +624,7 @@ require([
             sql += "(GL * " + svGL + ") + "
             fileList.push({
                 fieldName: "GrazingLand",
-                label: "Grazing Lands",
+                label: "Areas with active grazing",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -648,7 +648,7 @@ require([
             sql += "(PG * " + svPG + ") + "
             fileList.push({
                 fieldName: "PBAGrowth",
-                label: "PBA Growth",
+                label: "Plan Bay Area growth geographies",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -672,7 +672,7 @@ require([
             sql += "(RC * " + svRC + ") + "
             fileList.push({
                 fieldName: "RangelandConservation",
-                label: "Rangeland Conservation",
+                label: "Rangeland priority conservation areas",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -684,7 +684,7 @@ require([
             sql += "(SOI * " + svSOI + ") + "
             fileList.push({
                 fieldName: "SOI",
-                label: "Sphere of Infuence",
+                label: "Buffer zone: outside city limits and within sphere of influence",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -696,7 +696,7 @@ require([
             sql += "(SC * " + svSC + ") + "
             fileList.push({
                 fieldName: "SoilCarbon",
-                label: "Soil Carbon",
+                label: "Predicted soil carbon stocks",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -708,7 +708,7 @@ require([
             sql += "(SR * " + svSR + ") + "
             fileList.push({
                 fieldName: "SpeciesRichness",
-                label: "Species Richness",
+                label: "Terrestrial native wildlife species richness",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -732,7 +732,7 @@ require([
             sql += "(U2 * " + svU2 + ") + "
             fileList.push({
                 fieldName: "Urban2050",
-                label: "Urban 2050",
+                label: "Urban areas 2050",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -744,7 +744,7 @@ require([
             sql += "(UA * " + svUA + ") + "
             fileList.push({
                 fieldName: "UrbanAg",
-                label: "Urban Agriculture",
+                label: "Known urban ag sites within 2 miles",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -756,7 +756,7 @@ require([
             sql += "(WS * " + svWS + ") + "
             fileList.push({
                 fieldName: "WaterStorage",
-                label: "Water Storage",
+                label: "Water storage capacity of soil",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -780,7 +780,7 @@ require([
             sql += "(WA * " + svWA + ") + "
             fileList.push({
                 fieldName: "WilliamsonAct",
-                label: "Williamson Act Lands",
+                label: "Williamson Act",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -866,11 +866,11 @@ require([
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         } else if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS','UA', 'SOI','CH', 'SR','TC','PG','U2']
-        /*} else if (text == 'SALC, Agricultural Use') {
-            grantArray = ['PS', 'CG', 'GL', 'WA', 'BP', 'WS']
-        } else if (text == 'SALC, Equity') {
-            grantArray = ['LI']
-        } else if (text == 'SALC, Support for infill / risk for conversion') {
+        } else if (text == 'NRCS ACEP-ALE') {
+            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+        } else if (text == 'Kitchen Sink') {
+            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+        /*} else if (text == 'SALC, Support for infill / risk for conversion') {
             grantArray = ['BZ', 'RC']
         } else if (text == 'SALC, Other Program Goals') {
             grantArray = ['FM', 'SC']*/
