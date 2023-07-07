@@ -80,6 +80,10 @@ body {
     width: 100%;
 }
 
+.dropdown-item {
+    white-space: normal;
+  }
+
 .bg-light {
      background-color: white !important;
 }
