@@ -188,7 +188,7 @@ require([
         url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_07052023/FeatureServer/",
         layerId: 0,
         blendMode: "multiply",
-        title: "Hexagons",
+        title: "Planning Units",
         definitionExpression: "water = 0"
     });
 
@@ -383,7 +383,7 @@ require([
                 if (item.layer.title != "Place Names") {
                     item.panel = {
                         content: "legend",
-                        open: true
+                        open: false
                     };
                 }
             }
@@ -440,7 +440,7 @@ require([
         var template = {
             // autocasts as new PopupTemplate()
             expressionInfos: arcadeExpressionInfos,
-            title: "Agriculture Value: {expression/hex_info}",
+            title: "Grant Priority: {expression/hex_info}",
             content: [
                 {
                     // It is also possible to set the fieldInfos outside of the content
@@ -488,7 +488,7 @@ require([
                     type: "color",
                     //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
                     valueExpression: expression[1],
-                    valueExpressionTitle: "Agricultural Value",
+                    valueExpressionTitle: "Grant Priority",
                     stops: [
                         {
                             value: 0.2,
@@ -864,20 +864,20 @@ require([
 
         if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
-        } else if (text == 'SALC') {
-            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS']
-        } else if (text == 'SALC, Agricultural Use') {
+        } else if (text == 'SALC Acquisition Grants') {
+            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS','UA', 'SOI','CH', 'SR','TC','PG','U2']
+        /*} else if (text == 'SALC, Agricultural Use') {
             grantArray = ['PS', 'CG', 'GL', 'WA', 'BP', 'WS']
         } else if (text == 'SALC, Equity') {
             grantArray = ['LI']
         } else if (text == 'SALC, Support for infill / risk for conversion') {
             grantArray = ['BZ', 'RC']
         } else if (text == 'SALC, Other Program Goals') {
-            grantArray = ['FM', 'SC']
-        } else if (text == 'WCB') {
-            grantArray = ['SR', 'CH', 'WS', 'WL']
-        } else if (text == 'CC') {
-            grantArray = ['RC', 'SR', 'CH', 'WL']
+            grantArray = ['FM', 'SC']*/
+        } else if (text == 'Wildlife Conservation Board Grants') {
+            grantArray = ['SR', 'CH', 'WS', 'WL','CG', 'GL']
+        } else if (text == 'California Coastal Conservancy') {
+            grantArray = ['RC', 'SR', 'CH', 'WL','CG', 'GL']
         }
         switchSliders(grantArray)
         setRenderer()
