@@ -867,7 +867,7 @@ require([
         } else if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS','UA', 'SOI','CH', 'SR','TC','PG','U2']
         } else if (text == 'NRCS ACEP-ALE') {
-            grantArray = ['BZ','PS','GL','RC','SR','CH','SC','CL','FM','U2']
+            grantArray = ['BZ','CH','CL','FM','GL','PS','RC','SC','SR','U2']
         } else if (text == 'Kitchen Sink') {
             grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
         /*} else if (text == 'SALC, Support for infill / risk for conversion') {
