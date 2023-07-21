@@ -154,7 +154,7 @@ require([
         async: false
     });
 
-    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_07052023/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
+    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_07212023/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
         $.each(data.features, function (i, val) {
             parcelArr.push({
                 BP: val.attributes.BasinPriority,
@@ -165,6 +165,7 @@ require([
                 CH: val.attributes.CriticalHabitat,
                 CG: val.attributes.CropLand,
                 FM: val.attributes.FarmMarkets,
+                FI: val.attributes.FoodInsecurity,
                 GL: val.attributes.GrazingLand,
                 LI: val.attributes.LowIncome,
                 PG: val.attributes.PBAGrowth,
@@ -185,7 +186,7 @@ require([
     })
 
     Parcels = new FeatureLayer({
-        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_07052023/FeatureServer/",
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_07212023/FeatureServer/",
         layerId: 0,
         blendMode: "multiply",
         title: "Planning Units",
