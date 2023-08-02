@@ -878,6 +878,7 @@ require([
     })
 
     $('#loadClose').on('click', function () {
+        $('#hex-tab').tab('show');
         introJs().setOptions({
             steps: [{
                     element: document.querySelector('#hex-tab'),
