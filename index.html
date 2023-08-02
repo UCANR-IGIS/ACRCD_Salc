@@ -39,7 +39,7 @@
             </a></span>
             <span class="fs-4">Beta of Alameda Sustainable Agricultural <br> Lands Conservation (SALC) Mapper</span>
         </header>
-        <tabs data-title="Tabs" data-intro="Tab info">
+        <tabs>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -65,7 +65,7 @@
             </nav>
         </tabs>
         <top class="">
-            <div id="widget" data-title="Layer List" data-intro="Turn layers on the map on or off"></div>
+            <div id="widget"></div>
             <!--<div class="form-check">
                 <input class="form-check-input" type="radio" name="grant" id="grantSalc" checked />
                 <label class="form-check-label" for="flexRadioDefault1">
@@ -78,7 +78,7 @@
                     Other
                 </label>
             </div>-->
-            <div class="dropdown" data-title="Variable Selection" data-intro="Choose variables for analysis">
+            <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-display="static" style="width: 100%; white-space: normal;">
                     <span class="dropdown-tooltip" data-bs-toggle="tooltip">
                         <i class="fas fa-info-circle me-2"></i>
@@ -110,10 +110,10 @@
               </div>
               <div class="fauxSlider">
               <div class="center">
-                <button type="button" class="btn btn-secondary" id="zeroBtn">
-                    Set all to 0
+                <button type="button" class="btn valBtn" id="zeroBtn">
+                    Set all values to 0
                 </button>
-                <button type="button" class="btn btn-secondary" id="defaultBtn">
+                <button type="button" class="btn valBtn" id="defaultBtn">
                     Restore Defaults
                 </button>
               </div>
@@ -121,7 +121,7 @@
                 <div class="sliderLabels row_spacing" id="sliderLabels" style="margin-left: 3px;padding-right: 22px; padding-top: 3px; border-bottom: solid darkgoldenrod;"><span class="sliderLabel selected">0</span><span class="sliderLabel">1</span><span class="sliderLabel">2</span><span class="sliderLabel">3</span><span class="sliderLabel">4</span><span class="sliderLabel">5</span></div>
             </div>  
         </top>
-        <side class="row_spacing scrollbar" data-title="Variable Weighting" data-intro="Use the sliders to adjust the weighting of individual variables (0 removes the variable from the map)">
+        <side class="row_spacing scrollbar">
             <div class="row">
                 <ul id="sliders" style="display: none">
                     <!--</ul> style="display: none">-->

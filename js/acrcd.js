@@ -90,34 +90,7 @@ var svBP = 1,
     view
 let db;
 require([
-    "esri/config"
-    , "esri/Map"
-    , "esri/views/MapView"
-    , "esri/widgets/Expand"
-    , "esri/request"
-    , "esri/layers/support/Field"
-    , "esri/Map"
-    , "esri/Graphic"
-    , "esri/views/MapView"
-    , "esri/WebMap"
-    , "esri/geometry/Extent"
-    , "esri/layers/FeatureLayer"
-    , "esri/layers/GraphicsLayer"
-    , "esri/layers/VectorTileLayer"
-    , "esri/layers/TileLayer"
-    , "esri/tasks/QueryTask"
-    , "esri/tasks/support/Query"
-    , "esri/tasks/IdentifyTask"
-    , "esri/tasks/support/IdentifyParameters"
-    , "esri/widgets/Legend"
-    , "esri/widgets/Search"
-    , "esri/widgets/LayerList"
-    , "esri/widgets/Home"
-    , "esri/layers/Layer"
-    , "esri/geometry/SpatialReference"
-    , "esri/core/Error"
-    , "esri/smartMapping/renderers/color"
-    , "dojo/domReady!"
+    "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
 ], function (esriConfig, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
     //Shapefile
     var portalUrl = "https://www.arcgis.com";
@@ -219,7 +192,9 @@ require([
     });
 
     var startExtent = new Extent(-122.5177, 37.4323, -121.4326, 37.9301,
-        new SpatialReference({ wkid: 4326 }));
+        new SpatialReference({
+            wkid: 4326
+        }));
 
     map = new Map({
         basemap: {
@@ -311,10 +286,10 @@ require([
 
         // use the REST generate operation to generate a feature collection from the zipped shapefile
         request(portalUrl + "/sharing/rest/content/features/generate", {
-            query: myContent,
-            body: document.getElementById("uploadForm"),
-            responseType: "json",
-        })
+                query: myContent,
+                body: document.getElementById("uploadForm"),
+                responseType: "json",
+            })
             .then(function (response) {
                 var layerName =
                     response.data.featureCollection.layers[0].layerDefinition.name;
@@ -442,15 +417,13 @@ require([
             // autocasts as new PopupTemplate()
             expressionInfos: arcadeExpressionInfos,
             title: "Grant Priority: {expression/hex_info}",
-            content: [
-                {
-                    // It is also possible to set the fieldInfos outside of the content
-                    // directly in the popupTemplate. If no fieldInfos is specifically set
-                    // in the content, it defaults to whatever may be set within the popupTemplate.
-                    type: "fields",
-                    fieldInfos: expression[0]
-                }
-            ]
+            content: [{
+                // It is also possible to set the fieldInfos outside of the content
+                // directly in the popupTemplate. If no fieldInfos is specifically set
+                // in the content, it defaults to whatever may be set within the popupTemplate.
+                type: "fields",
+                fieldInfos: expression[0]
+            }]
         };
 
         Parcels.popupTemplate = template;
@@ -484,40 +457,34 @@ require([
                     color: "#eae3d0"
                 }
             }, // autocasts as new SimpleFillSymbol()
-            visualVariables: [
-                {
-                    type: "color",
-                    //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
-                    valueExpression: expression[1],
-                    valueExpressionTitle: "Grant Priority",
-                    stops: [
-                        {
-                            value: 0.2,
-                            color: "#eae3d0",
-                            label: "< 0.2 (Low)"
-                        }
-                        , {
-                            value: 0.4,
-                            color: "#BDB89E",
-                            label: "0.4"
-                        }
-                        , {
-                            value: 0.6,
-                            color: "#908E6D",
-                            label: "0.6"
-                        }
-                        , {
-                            value: 0.8,
-                            color: "#63643C",
-                            label: "> 0.8 (High)"
-                        }
-                    ]
-                }
-            ]
+            visualVariables: [{
+                type: "color",
+                //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
+                valueExpression: expression[1],
+                valueExpressionTitle: "Grant Priority",
+                stops: [{
+                    value: 0.2,
+                    color: "#eae3d0",
+                    label: "< 0.2 (Low)"
+                }, {
+                    value: 0.4,
+                    color: "#BDB89E",
+                    label: "0.4"
+                }, {
+                    value: 0.6,
+                    color: "#908E6D",
+                    label: "0.6"
+                }, {
+                    value: 0.8,
+                    color: "#63643C",
+                    label: "> 0.8 (High)"
+                }]
+            }]
         };
         Parcels.renderer = renderer2;
         Parcels.labelingInfo = [labelClass]
     }
+
     function createExpressions(grantArray = [], rnd = '') {
         fileList = []
         string = ""
@@ -828,6 +795,16 @@ require([
         return (n < 10) ? ("0" + n) : n;
     }
 
+    function sldReset(n) {
+        $.each(sliderArr, function (index, sliderName) {
+            $("#" + sliderName).val(n);
+            $("#" + sliderName + "Val").html(n)
+            eval("sv" + sliderName + " = " + n + ";")
+            localStorage.setItem('slider' + sliderName, n);
+            setRenderer();
+        })
+    }
+
     // Assuming you have an array of slider names
     var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
     $.each(sliderArr, function (index, sliderName) {
@@ -857,28 +834,62 @@ require([
 
     });
 
-    $('#loadClose').on('click', function() {
-        introJs().start();
+    $('#loadClose').on('click', function () {
+        introJs().setOptions({
+            steps: [{
+                    element: document.querySelector('#hex-tab'),
+                    intro: 'Web map'
+                }, 
+                {
+                    element: document.querySelector('#data-tab'),
+                    intro: 'Reference data'
+                }, 
+                {
+                    element: document.querySelector('#docs-tab'),
+                    intro: 'Documentation'
+                }, 
+                {
+                    element: document.querySelector('#feed-tab'),
+                    intro: 'Feedback'
+                },
+                {
+                    element: document.querySelector('#widget'),
+                    intro: 'Layer list'
+                },
+                {
+                    element: document.querySelector('.dropdown'),
+                    intro: 'Variable selection'
+                },
+                {
+                    element: document.querySelector('#zeroBtn'),
+                    intro: 'Set sliders to zero'
+                },
+                {
+                    element: document.querySelector('#defaultBtn'),
+                    intro: 'Reset to default values'
+                },
+                {
+                    element: document.querySelector('.scrollbar'),
+                    intro: 'Silders'
+                },
+                {
+                    element: document.querySelector('.esri-icon-upload'),
+                    intro: 'Shapefile upload'
+                },
+                {
+                    element: document.querySelector('.esri-icon-home'),
+                    intro: 'Home extent'
+                }
+            ]
+        }).start();
     })
 
-    $('#zeroBtn').on('click', function() {
-        $.each(sliderArr, function (index, sliderName) {
-            $("#" + sliderName).val(0);
-            $("#" + sliderName + "Val").html(0)
-            eval("sv" + sliderName + " = " + 0 + ";")
-            localStorage.setItem('slider' + sliderName, 0);
-            setRenderer();
-        }) 
+    $('#zeroBtn').on('click', function () {
+        sldReset(0);
     })
 
-    $('#defaultBtn').on('click', function() {
-        $.each(sliderArr, function (index, sliderName) {
-            $("#" + sliderName).val(1);
-            $("#" + sliderName + "Val").html(1)
-            eval("sv" + sliderName + " = " + 1 + ";")
-            localStorage.setItem('slider' + sliderName, 1);
-            setRenderer();
-        })
+    $('#defaultBtn').on('click', function () {
+        sldReset(1);
     })
 
     $('.dropdown-menu').on('click', 'a', function () {
@@ -890,19 +901,19 @@ require([
         if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         } else if (text == 'SALC Acquisition Grants') {
-            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS','UA', 'SOI','CH', 'SR','TC','PG','U2']
+            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
         } else if (text == 'NRCS ACEP-ALE') {
-            grantArray = ['BZ','CH','CL','FM','GL','PS','RC','SC','SR','U2']
+            grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
         } else if (text == 'Kitchen Sink') {
             grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
-        /*} else if (text == 'SALC, Support for infill / risk for conversion') {
-            grantArray = ['BZ', 'RC']
-        } else if (text == 'SALC, Other Program Goals') {
-            grantArray = ['FM', 'SC']*/
+            /*} else if (text == 'SALC, Support for infill / risk for conversion') {
+                grantArray = ['BZ', 'RC']
+            } else if (text == 'SALC, Other Program Goals') {
+                grantArray = ['FM', 'SC']*/
         } else if (text == 'Wildlife Conservation Board Grants') {
-            grantArray = ['SR', 'CH', 'WS', 'WL','CG', 'GL']
+            grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
         } else if (text == 'California Coastal Conservancy') {
-            grantArray = ['RC', 'SR', 'CH', 'WL','CG', 'GL']
+            grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
         }
         switchSliders(grantArray)
         setRenderer()

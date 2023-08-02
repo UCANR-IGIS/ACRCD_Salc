@@ -47,7 +47,6 @@ body {
 
 #page>main {
     grid-area: main;
-    //background-color: #ffff64;
 }
 
 #page>footer {
@@ -227,7 +226,6 @@ html {
 
 .fauxSlider{
   background-color: white;
-  //font-size: 75%;
   color: black;
 }
 side ul {
@@ -284,8 +282,6 @@ iframe {
     transition: opacity 0.3s, visibility 0.3s;
     z-index: 1;
     white-space: normal;
-      //word-wrap: break-word;
-      //max-width: 500px;
   }
   
   .tooltip-text::after {
@@ -318,4 +314,16 @@ iframe {
   #uploadForm {
     display: block;
     padding: 0.1em;
+  }
+
+  .valBtn {
+    margin-top: 3px;
+    --bs-btn-bg: #4C7C97;
+    --bs-btn-border-color: #4C7C97;
+    --bs-btn-hover-bg: #4C7C97;
+    --bs-btn-hover-border-color: #4C7C97;
+    --bs-btn-active-bg: #4C7C97;
+    --bs-btn-active-border-color: #4C7C97;
+    --bs-btn-color: #ffffff;
+    --bs-btn-font-size: 0.75rem;
   }
