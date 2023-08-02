@@ -459,7 +459,7 @@ require([
             // autocasts as new LabelClass()
             symbol: {
                 type: "text", // autocasts as new TextSymbol()
-                color: "#eae3d0",
+                color: "#ffffff",
                 yoffset: -2.5,
                 font: {
                     size: 10,
@@ -478,10 +478,10 @@ require([
             type: "simple", // autocasts as new SimpleRenderer()
             symbol: {
                 type: "simple-fill",
-                color: [255, 255, 255, 0],
+                color: [0, 0, 0, 0],
                 outline: { // autocasts as new SimpleLineSymbol()
-                    width: 0.01,
-                    color: "#eae3d0"
+                    width: 0.25,
+                    color: "#ffffff"
                 }
             }, // autocasts as new SimpleFillSymbol()
             visualVariables: [
@@ -493,23 +493,28 @@ require([
                     stops: [
                         {
                             value: 0.2,
-                            color: "#eae3d0",
-                            label: "< 0.2 (Low)"
+                            color: "#664015",
+                            label: "0.2 (Low)"
                         }
                         , {
                             value: 0.4,
-                            color: "#BDB89E",
+                            color: "#AC9A58",
                             label: "0.4"
                         }
                         , {
                             value: 0.6,
-                            color: "#908E6D",
-                            label: "0.6"
+                            color: "#F0F2C6",
+                            label: ""
                         }
                         , {
                             value: 0.8,
-                            color: "#63643C",
-                            label: "> 0.8 (High)"
+                            color: "#BDCB76",
+                            label: "0.6"
+                        }
+                        , {
+                            value: 1.0,
+                            color: "#85A439",
+                            label: "1.0 (High)"
                         }
                     ]
                 }
