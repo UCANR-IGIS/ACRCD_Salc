@@ -215,7 +215,7 @@ require([
         layers: [Parcels, StudyArea]
     });
 
-    // Creates a layer from a Portal layer item id
+    /* Creates a layer from a Portal layer item id
     Layer.fromPortalItem({
         portalItem: {
             id: "1768e8369a214dfab4e2167d5c5f2454",
@@ -226,7 +226,17 @@ require([
         layer.title = 'Place Names'
         map.add(layer);
     });
-
+    Creates a layer from a Portal layer item id*/
+    Layer.fromPortalItem({
+        portalItem: {
+            id: "30d6b8271e1849cd9c3042060001f425",
+            name: "Places, Roads, and Highways"
+        }
+    }).then((layer) => {
+        // Adds layer to the map
+        layer.title = 'Places, Roads, and Highways'
+        map.add(layer);
+    });
     view = new MapView({
         container: "viewDiv",
         map: map,
@@ -432,7 +442,7 @@ require([
             // autocasts as new LabelClass()
             symbol: {
                 type: "text", // autocasts as new TextSymbol()
-                color: "#eae3d0",
+                color: "#ffffff",
                 yoffset: -2.5,
                 font: {
                     size: 10,
@@ -451,35 +461,42 @@ require([
             type: "simple", // autocasts as new SimpleRenderer()
             symbol: {
                 type: "simple-fill",
-                color: [255, 255, 255, 0],
+                color: [0, 0, 0, 0],
                 outline: { // autocasts as new SimpleLineSymbol()
-                    width: 0.01,
-                    color: "#eae3d0"
+                    width: 0.25,
+                    color: "#ffffff"
                 }
             }, // autocasts as new SimpleFillSymbol()
-            visualVariables: [{
-                type: "color",
-                //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
-                valueExpression: expression[1],
-                valueExpressionTitle: "Grant Priority",
-                stops: [{
-                    value: 0.2,
-                    color: "#eae3d0",
-                    label: "< 0.2 (Low)"
-                }, {
-                    value: 0.4,
-                    color: "#BDB89E",
-                    label: "0.4"
-                }, {
-                    value: 0.6,
-                    color: "#908E6D",
-                    label: "0.6"
-                }, {
-                    value: 0.8,
-                    color: "#63643C",
-                    label: "> 0.8 (High)"
-                }]
-            }]
+            visualVariables: [
+                {
+                    type: "color",
+                    //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
+                    valueExpression: expression[1],
+                    valueExpressionTitle: "Grant Priority",
+                    stops: [
+                        {
+                            value: 0.2,
+                            color: "#eae3d0",
+                            label: "< 0.2 (Low)"
+                        }
+                        , {
+                            value: 0.4,
+                            color: "#BDB89E",
+                            label: "0.4"
+                        }
+                        , {
+                            value: 0.6,
+                            color: "#908E6D",
+                            label: "0.6"
+                        }
+                        , {
+                            value: 0.8,
+                            color: "#63643C",
+                            label: "> 0.8 (High)"
+                        }
+                    ]
+                }
+            ]
         };
         Parcels.renderer = renderer2;
         Parcels.labelingInfo = [labelClass]
