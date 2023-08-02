@@ -240,7 +240,7 @@ require([
         layers: [Parcels, StudyArea]
     });
 
-    // Creates a layer from a Portal layer item id
+    /* Creates a layer from a Portal layer item id
     Layer.fromPortalItem({
         portalItem: {
             id: "1768e8369a214dfab4e2167d5c5f2454",
@@ -251,7 +251,17 @@ require([
         layer.title = 'Place Names'
         map.add(layer);
     });
-
+    Creates a layer from a Portal layer item id*/
+    Layer.fromPortalItem({
+        portalItem: {
+            id: "30d6b8271e1849cd9c3042060001f425",
+            name: "Places, Roads, and Highways"
+        }
+    }).then((layer) => {
+        // Adds layer to the map
+        layer.title = 'Places, Roads, and Highways'
+        map.add(layer);
+    });
     view = new MapView({
         container: "viewDiv",
         map: map,
