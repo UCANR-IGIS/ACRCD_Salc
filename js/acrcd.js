@@ -923,6 +923,64 @@ require([
                 {
                     element: document.querySelector('.esri-icon-home'),
                     intro: 'Home extent'
+                },
+                {
+                    element: document.querySelector('#tutorialToggle'),
+                    intro: 'Launch this tutorial'
+                }
+            ]
+        }).start();
+    })
+
+    $('#tutorialToggle').on('click', function () {
+        introJs().setOptions({
+            steps: [{
+                    element: document.querySelector('#hex-tab'),
+                    intro: 'Web map'
+                }, 
+                {
+                    element: document.querySelector('#data-tab'),
+                    intro: 'Reference data'
+                }, 
+                {
+                    element: document.querySelector('#docs-tab'),
+                    intro: 'Documentation'
+                }, 
+                {
+                    element: document.querySelector('#feed-tab'),
+                    intro: 'Feedback'
+                },
+                {
+                    element: document.querySelector('#widget'),
+                    intro: 'Layer list'
+                },
+                {
+                    element: document.querySelector('.dropdown'),
+                    intro: 'Variable selection'
+                },
+                {
+                    element: document.querySelector('#zeroBtn'),
+                    intro: 'Set sliders to zero'
+                },
+                {
+                    element: document.querySelector('#defaultBtn'),
+                    intro: 'Reset to default values'
+                },
+                {
+                    element: document.querySelector('.scrollbar'),
+                    intro: 'Silders'
+                },
+                {
+                    element: document.querySelector('.esri-icon-upload'),
+                    intro: 'Shapefile upload'
+                },
+                {
+                    element: document.querySelector('.esri-icon-home'),
+                    intro: 'Home extent'
+                },
+                {
+                    element: document.querySelector('#tutorialToggle'),
+                    intro: 'Launch this tutorial'
                 }
             ]
         }).start();
