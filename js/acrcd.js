@@ -851,6 +851,10 @@ require([
 
     });
 
+    $('.esri-icon-visible').on('click', function () {
+        alert('Click')
+    })
+
     $('#loadClose').on('click', function () {
         introJs().setOptions({
             steps: [{
