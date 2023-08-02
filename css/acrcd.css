@@ -318,12 +318,14 @@ iframe {
 
   .valBtn {
     margin-top: 3px;
-    --bs-btn-bg: #4C7C97;
-    --bs-btn-border-color: #4C7C97;
-    --bs-btn-hover-bg: #4C7C97;
-    --bs-btn-hover-border-color: #4C7C97;
-    --bs-btn-active-bg: #4C7C97;
-    --bs-btn-active-border-color: #4C7C97;
-    --bs-btn-color: #ffffff;
+    margin-bottom: 3px;
+    --bs-btn-bg: #4C7C9790;
+    --bs-btn-border-color: #4C7C9790;
+    --bs-btn-hover-bg: #4C7C9790;
+    --bs-btn-hover-border-color: #4C7C9790;
+    --bs-btn-active-bg: #4C7C9790;
+    --bs-btn-active-border-color: #4C7C9790;
+    --bs-btn-color: #000000;
     --bs-btn-font-size: 0.75rem;
+    --bs-btn-border-radius: 0;
   }
