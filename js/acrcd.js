@@ -852,7 +852,8 @@ require([
     $(window).on("load", function () {
         $('#loadModal').modal('show');
         $('#loadClose').hide();
-        grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] // 
+        grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG']
+        // 
         //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         switchSliders(grantArray)
         $('#sliders').show();
@@ -925,6 +926,12 @@ require([
                 }
             ]
         }).start();
+        view2.layerViews.items[0].layer.visible = false
+        view2.layerViews.items[1].layer.visible = false
+        view2.layerViews.items[2].layer.visible = false
+        view2.layerViews.items[3].layer.visible = false
+        view2.layerViews.items[4].layer.visible = true
+        view2.layerViews.items[5].layer.visible = false
         $('#hex-tab').tab('show');
     })
 
@@ -944,20 +951,56 @@ require([
 
         if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = true
+            view2.layerViews.items[5].layer.visible = false
         } else if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = true
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = false
         } else if (text == 'NRCS ACEP-ALE') {
             grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
+            view2.layerViews.items[0].layer.visible = true
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = false
         } else if (text == 'All Layers') {
             grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
             /*} else if (text == 'SALC, Support for infill / risk for conversion') {
                 grantArray = ['BZ', 'RC']
             } else if (text == 'SALC, Other Program Goals') {
                 grantArray = ['FM', 'SC']*/
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = true
         } else if (text == 'Wildlife Conservation Board Grants') {
             grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = true
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = false
         } else if (text == 'California Coastal Conservancy') {
             grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = true
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = false
         }
         switchSliders(grantArray)
         setRenderer()
