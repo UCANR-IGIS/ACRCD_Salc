@@ -862,6 +862,30 @@ require([
 
     });
 
+    $('#loadClose').on('click', function() {
+        introJs().start();
+    })
+
+    $('#zeroBtn').on('click', function() {
+        $.each(sliderArr, function (index, sliderName) {
+            $("#" + sliderName).val(0);
+            $("#" + sliderName + "Val").html(0)
+            eval("sv" + sliderName + " = " + 0 + ";")
+            localStorage.setItem('slider' + sliderName, 0);
+            setRenderer();
+        }) 
+    })
+
+    $('#defaultBtn').on('click', function() {
+        $.each(sliderArr, function (index, sliderName) {
+            $("#" + sliderName).val(1);
+            $("#" + sliderName + "Val").html(1)
+            eval("sv" + sliderName + " = " + 1 + ";")
+            localStorage.setItem('slider' + sliderName, 1);
+            setRenderer();
+        })
+    })
+
     $('.dropdown-menu').on('click', 'a', function () {
         //var text = $(this).html();
         var text = $(this).data('grant');
