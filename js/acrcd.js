@@ -32,6 +32,7 @@ $(document).ready(function () {
         console.log(selectedTabName);
         // Do something with the selected tab name
     });
+
 });
 
 $("#scenDiv").hide();
@@ -250,6 +251,38 @@ require([
         view: view
     });
 
+    view.when(function () {
+        var layerList = new LayerList({
+            view: view,
+            container: "widget",
+            listItemCreatedFunction: (event) => {
+                const item = event.item;
+                if (item.layer.title != "Place Names") {
+                    item.panel = {
+                        content: "legend",
+                        open: false
+                    };
+                }
+            }
+        });
+
+        /*setTimeout(function() {
+            view.layerViews.map(function(item){
+              item.watch('visible', function(visible){
+                console.info(visible, item.layer.title);
+              }, item.layer.title);
+            });
+          }, 500);
+
+        var legend = new Legend({
+            view: view,
+            container: "widget",
+        }); */
+        view.ui.add(homeBtn, "top-left");
+
+        setRenderer()
+    });
+
     // Shapefile
     var fileForm = document.getElementById("mainWindow");
 
@@ -358,29 +391,6 @@ require([
         constraints: {
             snapToZoom: false
         }
-    });
-
-    view.when(function () {
-        var layerList = new LayerList({
-            view: view,
-            container: "widget",
-            listItemCreatedFunction: (event) => {
-                const item = event.item;
-                if (item.layer.title != "Place Names") {
-                    item.panel = {
-                        content: "legend",
-                        open: false
-                    };
-                }
-            }
-        });
-        /* var legend = new Legend({
-            view: view,
-            container: "widget",
-        }); */
-        view.ui.add(homeBtn, "top-left");
-
-        setRenderer()
     });
 
     view2.when(function () {
@@ -852,11 +862,19 @@ require([
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-
+        $('#data-tab').tab('show');
+        /*setTimeout(function(){
+            console.log("Executed after 1 second");
+        }, 10000);*/
+        //$('#hex-tab').tab('show');
     });
 
-    $('.esri-icon-visible').on('click', function () {
-        alert('Click')
+    /*$(document).on("click", function(event){
+        alert(event.target.className);
+    })*/
+
+    $('esri-layer-list__item-container').on("click", function(event){
+        alert(event.target.className);
     })
 
     $('#loadClose').on('click', function () {
@@ -965,6 +983,7 @@ require([
                 }
             ]
         }).start();
+        $('#hex-tab').tab('show');
     })
 
     $('#zeroBtn').on('click', function () {
@@ -1001,6 +1020,8 @@ require([
         switchSliders(grantArray)
         setRenderer()
     });
+
+
     /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
         if (event.target.id == 'grantSalc'){
             grantArray = ['PP', 'RC', 'SC', 'SQ', 'SR', 'TC', 'U2', 'UC', 'WS', 'WL', 'WA']
