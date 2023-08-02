@@ -329,3 +329,9 @@ iframe {
     --bs-btn-font-size: 0.75rem;
     --bs-btn-border-radius: 0;
   }
+
+  #tutorialToggle {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 20px
+  }
