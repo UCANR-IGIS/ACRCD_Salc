@@ -803,12 +803,23 @@ require([
         return [fileList, string, stringRound, sql]
     }
 
-    function switchSliders(grantArray = []) {
+    function switchSliders(grantArray = [], name) {
         $("#sliders > li").hide()
 
         $.each(grantArray, function (index, sliderName) {
             slider = $("#li" + sliderName).show()
         });
+
+        view2.layerViews.items[0].layer.visible = false
+        view2.layerViews.items[1].layer.visible = false
+        view2.layerViews.items[2].layer.visible = false
+        view2.layerViews.items[3].layer.visible = false
+        view2.layerViews.items[4].layer.visible = false
+        view2.layerViews.items[5].layer.visible = false
+
+        view2.layerViews.items[name].layer.visible = true
+
+
     }
 
     function createSymbol(color) {
@@ -850,12 +861,13 @@ require([
     });
 
     $(window).on("load", function () {
+        $('#data-tab').tab('show');
         $('#loadModal').modal('show');
         $('#loadClose').hide();
         grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG']
         // 
         //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
-        switchSliders(grantArray)
+        //switchSliders(grantArray, 4)
         $('#sliders').show();
         $('#mainWindow').show();
 
@@ -863,7 +875,7 @@ require([
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-        $('#data-tab').tab('show');
+        
         /*setTimeout(function(){
             console.log("Executed after 1 second");
         }, 10000);*/
@@ -930,9 +942,12 @@ require([
                 }
             ]
         }).start();
+        $('#hex-tab').tab('show');
+        switchSliders(grantArray, 4)
     })
 
     $('#tutorialToggle').on('click', function () {
+
         introJs().setOptions({
             steps: [{
                     element: document.querySelector('#hex-tab'),
@@ -984,13 +999,8 @@ require([
                 }
             ]
         }).start();
-        view2.layerViews.items[0].layer.visible = false
-        view2.layerViews.items[1].layer.visible = false
-        view2.layerViews.items[2].layer.visible = false
-        view2.layerViews.items[3].layer.visible = false
-        view2.layerViews.items[4].layer.visible = true
-        view2.layerViews.items[5].layer.visible = false
-        $('#hex-tab').tab('show');
+
+        //$('#hex-tab').tab('show');
     })
 
     $('#zeroBtn').on('click', function () {
@@ -1009,58 +1019,28 @@ require([
 
         if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
-            view2.layerViews.items[0].layer.visible = false
-            view2.layerViews.items[1].layer.visible = false
-            view2.layerViews.items[2].layer.visible = false
-            view2.layerViews.items[3].layer.visible = false
-            view2.layerViews.items[4].layer.visible = true
-            view2.layerViews.items[5].layer.visible = false
+            name = 4
         } else if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
-            view2.layerViews.items[0].layer.visible = false
-            view2.layerViews.items[1].layer.visible = false
-            view2.layerViews.items[2].layer.visible = false
-            view2.layerViews.items[3].layer.visible = true
-            view2.layerViews.items[4].layer.visible = false
-            view2.layerViews.items[5].layer.visible = false
+            name = 3
         } else if (text == 'NRCS ACEP-ALE') {
             grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
-            view2.layerViews.items[0].layer.visible = true
-            view2.layerViews.items[1].layer.visible = false
-            view2.layerViews.items[2].layer.visible = false
-            view2.layerViews.items[3].layer.visible = false
-            view2.layerViews.items[4].layer.visible = false
-            view2.layerViews.items[5].layer.visible = false
+            name = 0
         } else if (text == 'All Layers') {
             grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
             /*} else if (text == 'SALC, Support for infill / risk for conversion') {
                 grantArray = ['BZ', 'RC']
             } else if (text == 'SALC, Other Program Goals') {
                 grantArray = ['FM', 'SC']*/
-            view2.layerViews.items[0].layer.visible = false
-            view2.layerViews.items[1].layer.visible = false
-            view2.layerViews.items[2].layer.visible = false
-            view2.layerViews.items[3].layer.visible = false
-            view2.layerViews.items[4].layer.visible = false
-            view2.layerViews.items[5].layer.visible = true
+            name = 5
         } else if (text == 'Wildlife Conservation Board Grants') {
             grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
-            view2.layerViews.items[0].layer.visible = false
-            view2.layerViews.items[1].layer.visible = false
-            view2.layerViews.items[2].layer.visible = true
-            view2.layerViews.items[3].layer.visible = false
-            view2.layerViews.items[4].layer.visible = false
-            view2.layerViews.items[5].layer.visible = false
+            name = 2
         } else if (text == 'California Coastal Conservancy') {
             grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
-            view2.layerViews.items[0].layer.visible = false
-            view2.layerViews.items[1].layer.visible = true
-            view2.layerViews.items[2].layer.visible = false
-            view2.layerViews.items[3].layer.visible = false
-            view2.layerViews.items[4].layer.visible = false
-            view2.layerViews.items[5].layer.visible = false
+            name = 1
         }
-        switchSliders(grantArray)
+        switchSliders(grantArray, name)
         setRenderer()
     });
 
