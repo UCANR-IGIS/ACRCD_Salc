@@ -637,7 +637,7 @@ require([
             sql += "(FI * " + svFI + ") + "
             fileList.push({
                 fieldName: "FoodInsecurity",
-                label: "FoodInsecurity",
+                label: "Food Insecurity",
                 format: {
                     places: 2,
                     digitSeparator: true
