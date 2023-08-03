@@ -18,7 +18,7 @@
 $(document).ready(function () {
     $('.nav-link').on('click', function (event) {
         var selectedTabName = $(this)[0].id;
-        if (selectedTabName != "hex-tab") {
+        if (selectedTabName != "hex-tab"){// && selectedTabName != "data-tab") {
             $('side').hide()
             $('top').hide()
             $('footer').hide()
@@ -266,15 +266,7 @@ require([
             }
         });
 
-        /*setTimeout(function() {
-            view.layerViews.map(function(item){
-              item.watch('visible', function(visible){
-                console.info(visible, item.layer.title);
-              }, item.layer.title);
-            });
-          }, 500);
-
-        var legend = new Legend({
+        /*var legend = new Legend({
             view: view,
             container: "widget",
         }); */
@@ -397,6 +389,23 @@ require([
         var layerList = new LayerList({
             view: view2
         });
+
+        setTimeout(function() {
+            view2.layerViews.map(function(item){
+              item.watch('visible', function(visible){
+                if (visible == true){
+                    titlevar = item.layer.title
+                    changeSliders(item.layer.title, 'atlas')
+                    $.each(view2.layerViews.items, function(index, element) {
+                        if (element.layer.title != titlevar){
+                            element.layer.visible = false
+                        }
+                    });
+                }
+              }, item.layer.title);
+              
+            });
+        }, 500);
 
         view2.ui.add(layerList, "top-right");
     });
@@ -803,13 +812,13 @@ require([
         return [fileList, string, stringRound, sql]
     }
 
-    function switchSliders(grantArray = [], name) {
+    function switchSliders(grantArray = [], name = '') {
         $("#sliders > li").hide()
 
         $.each(grantArray, function (index, sliderName) {
             slider = $("#li" + sliderName).show()
         });
-
+        if (name!=''){
         view2.layerViews.items[0].layer.visible = false
         view2.layerViews.items[1].layer.visible = false
         view2.layerViews.items[2].layer.visible = false
@@ -817,7 +826,7 @@ require([
         view2.layerViews.items[4].layer.visible = false
         view2.layerViews.items[5].layer.visible = false
 
-        view2.layerViews.items[name].layer.visible = true
+        view2.layerViews.items[name].layer.visible = true}
 
 
     }
@@ -1015,7 +1024,8 @@ require([
     $('.dropdown-menu').on('click', 'a', function () {
         //var text = $(this).html();
         var text = $(this).data('grant');
-        var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
+        changeSliders(text, 'dropdown')
+        /*var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
         $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
 
         if (text == 'Basic Information') {
@@ -1033,7 +1043,7 @@ require([
                 grantArray = ['BZ', 'RC']
             } else if (text == 'SALC, Other Program Goals') {
                 grantArray = ['FM', 'SC']*/
-            name = 5
+        /*    name = 5
         } else if (text == 'Wildlife Conservation Board Grants') {
             grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
             name = 2
@@ -1042,8 +1052,47 @@ require([
             name = 1
         }
         switchSliders(grantArray, name)
-        setRenderer()
+        setRenderer()*/
     });
+
+    function changeSliders(text, source) {
+        //var text = $(this).html();
+        //var text = $(this).data('grant');
+        var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
+        //$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
+        $('#dropdownTitle').html(text);
+
+        if (text == 'Basic Information') {
+            grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
+            name = 4
+        } else if (text == 'SALC Acquisition Grants') {
+            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
+            name = 3
+        } else if (text == 'NRCS - Agricultural Conservation Easement Program (ACEP)') {
+            grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
+            name = 0
+        } else if (text == 'All Layers') {
+            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+            /*} else if (text == 'SALC, Support for infill / risk for conversion') {
+                grantArray = ['BZ', 'RC']
+            } else if (text == 'SALC, Other Program Goals') {
+                grantArray = ['FM', 'SC']*/
+            name = 5
+        } else if (text == 'Wildlife Conservation Board Grants') {
+            grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
+            name = 2
+        } else if (text == 'California Coastal Conservancy') {
+            grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
+            name = 1
+        }
+
+        if (source=='dropdown'){
+            switchSliders(grantArray, name)
+        } else {
+            switchSliders(grantArray)
+        }
+        setRenderer()
+    }
 
 
     /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
