@@ -56,8 +56,10 @@ var svBP = 1,
     svCL = 1,
     svCH = 1,
     svCG = 1,
+    svFI = 1,
     svFM = 1,
     svGL = 1,
+    svHL = 1,
     svLI = 1,
     svPG = 1,
     svPS = 1,
@@ -141,7 +143,7 @@ require([
         async: false
     });
 
-    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_07212023/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
+    $.getJSON("https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_08022023/FeatureServer/0/query?where=1%3D1&outFields=*&returnExceededLimitFeatures=true&sqlFormat=none&f=pjson", function (data) {
         $.each(data.features, function (i, val) {
             parcelArr.push({
                 BP: val.attributes.BasinPriority,
@@ -154,6 +156,7 @@ require([
                 FM: val.attributes.FarmMarkets,
                 FI: val.attributes.FoodInsecurity,
                 GL: val.attributes.GrazingLand,
+                HL: val.attributes.HabitatLinkages,
                 LI: val.attributes.LowIncome,
                 PG: val.attributes.PBAGrowth,
                 PS: val.attributes.PrimeSoil,
@@ -173,7 +176,7 @@ require([
     })
 
     Parcels = new FeatureLayer({
-        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Hexagons_07212023/FeatureServer/",
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Hexagons_08022023/FeatureServer/",
         layerId: 0,
         blendMode: "multiply",
         title: "Planning Units",
@@ -270,7 +273,7 @@ require([
             container: "widget",
             listItemCreatedFunction: (event) => {
                 const item = event.item;
-                if (item.layer.title != "Place Names") {
+                if (item.layer.title != "Places, Roads, and Highways") {
                     item.panel = {
                         content: "legend",
                         open: false
@@ -629,6 +632,18 @@ require([
                 }
             })
         }
+        if (grantArray.includes('FI')) {
+            string += "var FI = ($feature.FoodInsecurity * " + svFI + ");"
+            sql += "(FI * " + svFI + ") + "
+            fileList.push({
+                fieldName: "FoodInsecurity",
+                label: "FoodInsecurity",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
         if (grantArray.includes('FM')) {
             string += "var FM = ($feature.FarmMarkets * " + svFM + ");"
             sql += "(FM * " + svFM + ") + "
@@ -647,6 +662,18 @@ require([
             fileList.push({
                 fieldName: "GrazingLand",
                 label: "Areas with active grazing",
+                format: {
+                    places: 2,
+                    digitSeparator: true
+                }
+            })
+        }
+        if (grantArray.includes('HL')) {
+            string += "var HL = ($feature.HabitatLinkages * " + svHL + ");"
+            sql += "(HL * " + svHL + ") + "
+            fileList.push({
+                fieldName: "HabitatLinkages",
+                label: "Habitat Linkages",
                 format: {
                     places: 2,
                     digitSeparator: true
@@ -871,7 +898,7 @@ require([
     }
 
     // Assuming you have an array of slider names
-    var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+    var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL','HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
     $.each(sliderArr, function (index, sliderName) {
         slider = $("#" + sliderName).val(eval('sv' + sliderName))
         $("#" + sliderName + "Val").html(slider[0].value)
@@ -1036,37 +1063,8 @@ require([
     })
 
     $('.dropdown-menu').on('click', 'a', function () {
-        //var text = $(this).html();
         var text = $(this).data('grant');
         changeSliders(text, 'dropdown')
-        /*var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
-        $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
-
-        if (text == 'Basic Information') {
-            grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
-            name = 4
-        } else if (text == 'SALC Acquisition Grants') {
-            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
-            name = 3
-        } else if (text == 'NRCS ACEP-ALE') {
-            grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
-            name = 0
-        } else if (text == 'All Layers') {
-            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
-            /*} else if (text == 'SALC, Support for infill / risk for conversion') {
-                grantArray = ['BZ', 'RC']
-            } else if (text == 'SALC, Other Program Goals') {
-                grantArray = ['FM', 'SC']*/
-        /*    name = 5
-        } else if (text == 'Wildlife Conservation Board Grants') {
-            grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
-            name = 2
-        } else if (text == 'California Coastal Conservancy') {
-            grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
-            name = 1
-        }
-        switchSliders(grantArray, name)
-        setRenderer()*/
     });
 
     function changeSliders(text, source) {
@@ -1080,23 +1078,23 @@ require([
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
             name = 4
         } else if (text == 'SALC Acquisition Grants') {
-            grantArray = ['FM', 'BZ', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
+            grantArray = ['FM', 'BZ', 'FI', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
             name = 3
         } else if (text == 'NRCS - Agricultural Conservation Easement Program (ACEP)') {
             grantArray = ['BZ', 'CH', 'CL', 'FM', 'GL', 'PS', 'RC', 'SC', 'SR', 'U2']
             name = 0
         } else if (text == 'All Layers') {
-            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FM', 'GL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+            grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL', 'HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
             /*} else if (text == 'SALC, Support for infill / risk for conversion') {
                 grantArray = ['BZ', 'RC']
             } else if (text == 'SALC, Other Program Goals') {
                 grantArray = ['FM', 'SC']*/
             name = 5
         } else if (text == 'Wildlife Conservation Board Grants') {
-            grantArray = ['SR', 'CH', 'WS', 'WL', 'CG', 'GL']
+            grantArray = ['SR', 'CH', 'HL','WS', 'WL', 'CG', 'GL']
             name = 2
         } else if (text == 'California Coastal Conservancy') {
-            grantArray = ['RC', 'SR', 'CH', 'WL', 'CG', 'GL']
+            grantArray = ['RC', 'SR', 'HL','CH', 'WL', 'CG', 'GL']
             name = 1
         }
 
