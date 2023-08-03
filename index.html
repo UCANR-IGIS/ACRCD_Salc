@@ -69,6 +69,7 @@
         </tabs>
         <top class="">
             <div id="widget"></div>
+            <div id="widget1"></div>
             <!--<div class="form-check">
                 <input class="form-check-input" type="radio" name="grant" id="grantSalc" checked />
                 <label class="form-check-label" for="flexRadioDefault1">
@@ -81,7 +82,7 @@
                     Other
                 </label>
             </div>-->
-            <div class="dropdown">
+            <div class="dropdown" id="dropdownContainer">
                 <button class="btn btn-secondary dropdown-toggle text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-display="static" style="width: 100%; white-space: normal;">
                     <span class="dropdown-tooltip" data-bs-toggle="tooltip">
                         <i class="fas fa-info-circle me-2"></i>
@@ -111,7 +112,7 @@
                     <i class="fas fa-info-circle me-2"></i>All Layers</a></li>
                 </ul>
               </div>
-              <div class="fauxSlider">
+              <div class="fauxSlider" id="fauxSliderContainer">
               <div class="center" style="margin-left: 3px;padding-right: 22px; padding-top: 3px; padding-bottom: 3px;border-bottom: solid darkgoldenrod;">
                 <button type="button" class="btn valBtn" id="zeroBtn">
                     Set all values to 0
@@ -125,7 +126,7 @@
             </div>  
         </top>
         <side class="row_spacing scrollbar">
-            <div class="row">
+            <div class="row" id="sliderContainer">
                 <ul id="sliders" style="display: none">
                     <!--</ul> style="display: none">-->
                     <!--<li id="liAB">

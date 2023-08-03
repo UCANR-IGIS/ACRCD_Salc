@@ -18,12 +18,25 @@
 $(document).ready(function () {
     $('.nav-link').on('click', function (event) {
         var selectedTabName = $(this)[0].id;
-        if (selectedTabName != "hex-tab"){// && selectedTabName != "data-tab") {
+        if (selectedTabName != "hex-tab" && selectedTabName != "data-tab") {
             $('side').hide()
             $('top').hide()
             $('footer').hide()
             $('#page').css('grid-template-areas', '"head head" "tabs tabs" "main main" "main main" "main main"');
         } else {
+            if (selectedTabName == "hex-tab"){
+                $('#widget').show()
+                $('#widget1').hide()
+                $('#dropdownContainer').show()
+                $('#sliderContainer').show()
+                $('#fauxSliderContainer').show()
+            } else {
+                $('#widget').hide()
+                $('#widget1').show()
+                $('#dropdownContainer').hide()
+                $('#sliderContainer').hide()
+                $('#fauxSliderContainer').hide()
+            }
             $('side').show()
             $('top').show()
             $('footer').show()
@@ -387,7 +400,8 @@ require([
 
     view2.when(function () {
         var layerList = new LayerList({
-            view: view2
+            view: view2,
+            container: "widget1"
         });
 
         setTimeout(function() {
