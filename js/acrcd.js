@@ -421,7 +421,7 @@ require([
             });
         }, 500);
 
-        view2.ui.add(layerList, "top-right");
+        //view2.ui.add(layerList, "top-right");
     });
 
     function parcelSlider(grantArray = []) {
