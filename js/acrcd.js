@@ -219,7 +219,7 @@ require([
             color: "#ffffff",
             opacity: 0,
             outline: {
-                width: 3,
+                width: 2.25,
                 color: "#000000"
             }
         }
@@ -236,7 +236,19 @@ require([
             id: "ecd94e9ec4de44d680a8343ab467b119"
         },
         title: "Conservation Easements",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            }
+        }
     });
 
     CPAD1 = new FeatureLayer({
@@ -244,7 +256,19 @@ require([
             id: "f4d112babc1a45a9b490f757420814d8"
         },
         title: "Parks and Other Protected Areas",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            }
+        }
     });
 
     CityLimits1 = new FeatureLayer({
@@ -252,7 +276,41 @@ require([
             id: "55cf95d697344793a5c52d3e7d936209"
         },
         title: "City Limits",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "unique-value", // autocasts as new UniqueValueRenderer()
+            legendOptions: {
+              title: ""
+            },
+            defaultSymbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            },
+            defaultLabel: "City Limits",
+            field: "NAME",
+  
+            uniqueValueInfos: [
+              {
+                value: "Alameda County", // code for interstates/freeways
+                type: "simple",
+                symbol: {
+                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                    color: "#664015",
+                    opacity: 0,
+                    outline: {
+                        width: 1,
+                        color: "#999999"
+                    }
+                },
+                label: "Unincorporated Area"
+              }
+            ]
+          }
     });
 
     BufferZones1 = new FeatureLayer({
@@ -260,7 +318,19 @@ require([
             id: "4f2e47273e7c455487a0716737dab153"
         },
         title: "Buffer Zones (outside city limits, inside SOI)",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            }
+        }
     });
 
     PBAGrowth1 = new FeatureLayer({
@@ -268,14 +338,38 @@ require([
             id: "d74d81cfce2a4bc9851858f087b78f49"
         },
         title: "Plan Bay Area 2050 Growth Geographies",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            }
+        }
     });
 
     Williamson1 = new FeatureLayer({
         url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Data/FeatureServer/",
         layerId: 0,
         title: "Alameda Williamson",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#85A439",
+                opacity: 0,
+                outline: {
+                    width: 1,
+                    color: "#267300"
+                }
+            }
+        }
         //listMode: "hide"
     });
 
@@ -284,7 +378,20 @@ require([
             id: "77ee8e7c56214e31b0c8e9f2675a557a"
         },
         title: "Alameda County Urban Ag Sites",
-        visible: false
+        visible: false,
+        renderer: {
+            type: "simple", // autocasts as new SimpleRenderer()
+            symbol: {
+              type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+              style: "circle",
+              size: 6,
+              color: "#85A439",
+              outline: {  // autocasts as new SimpleLineSymbol()
+                color: "#267300",
+                width: "0.5px"
+              }
+            }
+          }
     });
 
     
