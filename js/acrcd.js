@@ -106,8 +106,8 @@ var svBP = 1,
     view
 let db;
 require([
-    "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
-], function (esriConfig, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
+    "esri/config", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
+], function (esriConfig, GroupLayer, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
     //Shapefile
     var portalUrl = "https://www.arcgis.com";
 
@@ -190,6 +190,16 @@ require([
         listMode: "hide"
     });
 
+    StudyArea1 = new FeatureLayer({
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/AlamedaCounty/FeatureServer/",
+        layerId: 1,
+        title: "County Boundary",
+        //listMode: "hide",
+        effect: "drop-shadow(3px, 3px, 2px)",
+        blendMode: "destination-atop",
+        opacity: .5
+    });
+
     StudyArea.renderer = {
         type: "simple",
         symbol: {
@@ -202,11 +212,89 @@ require([
         }
     }
 
+    StudyArea1.renderer = {
+        type: "simple",
+        symbol: {
+            type: "simple-fill", // autocasts as new SimpleFillSymbol()
+            color: "#ffffff",
+            opacity: 0,
+            outline: {
+                width: 3,
+                color: "#000000"
+            }
+        }
+    }
+
     const allData = new WebMap({
         portalItem: { // autocasts as new PortalItem()
-            id: "b80857ac0ba64e978396ff480261c457"
+            id: "78b156cc51ab45fb8938320556997f6d"
         }
     });
+
+    CCED1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "ecd94e9ec4de44d680a8343ab467b119"
+        },
+        title: "Conservation Easements",
+        visible: false
+    });
+
+    CPAD1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "f4d112babc1a45a9b490f757420814d8"
+        },
+        title: "Parks and Other Protected Areas",
+        visible: false
+    });
+
+    CityLimits1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "55cf95d697344793a5c52d3e7d936209"
+        },
+        title: "City Limits",
+        visible: false
+    });
+
+    BufferZones1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "4f2e47273e7c455487a0716737dab153"
+        },
+        title: "Buffer Zones (outside city limits, inside SOI)",
+        visible: false
+    });
+
+    PBAGrowth1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "d74d81cfce2a4bc9851858f087b78f49"
+        },
+        title: "Plan Bay Area 2050 Growth Geographies",
+        visible: false
+    });
+
+    Williamson1 = new FeatureLayer({
+        url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Data/FeatureServer/",
+        layerId: 0,
+        title: "Alameda Williamson",
+        visible: false
+        //listMode: "hide"
+    });
+
+    UrbanAg1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "77ee8e7c56214e31b0c8e9f2675a557a"
+        },
+        title: "Alameda County Urban Ag Sites",
+        visible: false
+    });
+
+    
+    const BasicInfoGroupLayer = new GroupLayer({
+        title: "Basic Info",
+        visible: false,
+        //visibilityMode: "exclusive",
+        layers: [UrbanAg1, Williamson1, PBAGrowth1, BufferZones1, CityLimits1, CPAD1, CCED1, StudyArea1],
+        opacity: 0.75
+      });
 
     var startExtent = new Extent(-122.5177, 37.4323, -121.4326, 37.9301,
         new SpatialReference({
@@ -229,7 +317,7 @@ require([
                 })
             ]
         },
-        layers: [Parcels, StudyArea]
+        layers: [Parcels, BasicInfoGroupLayer]//, StudyArea]
     });
 
     /* Creates a layer from a Portal layer item id
@@ -404,7 +492,18 @@ require([
     view2.when(function () {
         var layerList = new LayerList({
             view: view2,
-            container: "widget1"
+            container: "widget1",
+            listItemCreatedFunction: (event) => {
+                const item = event.item;
+                if (item.layer.title != "All Layers" && item.layer.title != "Basic Information" && item.layer.title != "SALC Acquisition Grants" &&
+                item.layer.title != "Wildlife Conservation Board Grants" && item.layer.title != "California Coastal Conservancy"
+                && item.layer.title != "NRCS - Agricultural Conservation Easement Program (ACEP)") {
+                    item.panel = {
+                        content: "legend",
+                        open: false
+                    };
+                }
+            }
         });
 
         setTimeout(function() {
