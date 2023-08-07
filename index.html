@@ -418,7 +418,38 @@
                 <div id="viewDiv" style="height: 100%"></div>
             </div>
             <div class="tab-pane fade" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="0"
-                style="height: 100%;">
+                style="height: 100%;">                <!-- Shapefile Upload-->
+                <div id="mainWindow2" style="display: none;">
+                    <div>
+                      <div style="padding-left: 4px">
+                        <p>Add a zipped shapefile to the map.</p>
+                        <p>
+                          Visit the
+                          <a
+                            target="_blank"
+                            href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm"
+                            >Shapefiles</a
+                          >
+                          help topic for information and limitations.
+                        </p>
+                        <form enctype="multipart/form-data" method="post" id="uploadForm2">
+                          <div class="field">
+                            <label class="file-upload">
+                              <span><strong>Add File</strong></span>
+                              <input type="file" name="file" id="inFile2" />
+                            </label>
+                          </div>
+                        </form>
+                        <span
+                          class="file-upload-status"
+                          style="opacity: 1"
+                          id="upload-status2"
+                        ></span>
+                        <div id="fileInfo2"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Shapefile Upload-->
                 <div id="viewDiv2" style="height: 100%"></div>
             </div>
             <div class="tab-pane fade" id="docs-tab-pane" role="tabpanel" aria-labelledby="docs-tab" tabindex="0"

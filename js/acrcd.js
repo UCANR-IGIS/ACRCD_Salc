@@ -124,6 +124,20 @@ require([
                     '<p style="color:red">Add shapefile as .zip file</p>';
             }
         });
+
+        document
+        .getElementById("uploadForm2")
+        .addEventListener("change", function (event) {
+            var fileName2 = event.target.value.toLowerCase();
+
+            if (fileName2.indexOf(".zip") !== -1) {
+                //is file a zip - if not notify user
+                generateFeatureCollection2(fileName2);
+            } else {
+                document.getElementById("upload-status2").innerHTML =
+                    '<p style="color:red">Add shapefile as .zip file</p>';
+            }
+        });
     // shapefile end
 
     var identifyTask = new IdentifyTask(),
@@ -677,6 +691,107 @@ require([
     // Add the expand instance to the ui
     
     view2.ui.add(bgExpand2, "top-left");
+
+// Shapefile
+var fileForm2 = document.getElementById("mainWindow2");
+
+var expand2 = new Expand({
+    expandIconClass: "esri-icon-upload",
+    view: view2,
+    content: fileForm2,
+    expandTooltip: "Upload Shapefile",
+    autoCollapse: true
+});
+
+view2.ui.add(expand2, "top-left");
+
+function generateFeatureCollection2(fileName2) {
+    var name = fileName2.split(".");
+    // Chrome and IE add c:\fakepath to the value - we need to remove it
+    // see this link for more info: http://davidwalsh.name/fakepath
+    name = name[0].replace("c:\\fakepath\\", "");
+
+    document.getElementById("upload-status2").innerHTML =
+        "<b>Loading </b>" + name;
+
+    // define the input params for generate see the rest doc for details
+    // https://developers.arcgis.com/rest/users-groups-and-items/generate.htm
+    var params = {
+        name: name,
+        targetSR: view2.spatialReference,
+        maxRecordCount: 1000,
+        enforceInputFileSizeLimit: true,
+        enforceOutputJsonSizeLimit: true,
+    };
+
+    // generalize features to 10 meters for better performance
+    params.generalize = true;
+    params.maxAllowableOffset = 10;
+    params.reducePrecision = true;
+    params.numberOfDigitsAfterDecimal = 0;
+
+    var myContent = {
+        filetype: "shapefile",
+        publishParameters: JSON.stringify(params),
+        f: "json",
+    };
+
+    // use the REST generate operation to generate a feature collection from the zipped shapefile
+    request(portalUrl + "/sharing/rest/content/features/generate", {
+            query: myContent,
+            body: document.getElementById("uploadForm2"),
+            responseType: "json",
+        })
+        .then(function (response) {
+            var layerName =
+                response.data.featureCollection.layers[0].layerDefinition.name;
+            document.getElementById("upload-status2").innerHTML =
+                "<b>Loaded: </b>" + layerName;
+            addShapefileToMap2(response.data.featureCollection);
+        })
+        .catch(errorHandler);
+}
+
+function errorHandler(error) {
+    document.getElementById("upload-status2").innerHTML =
+        "<p style='color:red;max-width: 500px;'>" + error.message + "</p>";
+}
+
+function addShapefileToMap2(featureCollection) {
+    // add the shapefile to the map and zoom to the feature collection extent
+    // if you want to persist the feature collection when you reload browser, you could store the
+    // collection in local storage by serializing the layer using featureLayer.toJson()
+    // see the 'Feature Collection in Local Storage' sample for an example of how to work with local storage
+    var sourceGraphics = [];
+
+    var layers2 = featureCollection.layers.map(function (layer) {
+        var graphics = layer.featureSet.features.map(function (feature) {
+            return Graphic.fromJSON(feature);
+        });
+        sourceGraphics = sourceGraphics.concat(graphics);
+        var featureLayer = new FeatureLayer({
+            title: "Uploaded Shapefile",
+            objectIdField: "FID",
+            source: graphics,
+            fields: layer.layerDefinition.fields.map(function (field) {
+                return Field.fromJSON(field);
+            }),
+        });
+        return featureLayer;
+        // associate the feature with the popup on click to enable highlight and zoom to
+    });
+    map.addMany(layers2);
+    view2.goTo(sourceGraphics).then(function () {
+        view2.zoom = view2.zoom - 2;
+    }).catch(function (error) {
+        if (error.name != "AbortError") {
+            console.error(error);
+        }
+    });
+
+    document.getElementById("upload-status2").innerHTML = "";
+}
+// End Shapefile
 
     function parcelSlider(grantArray = []) {
         $("#loadBody").empty();
