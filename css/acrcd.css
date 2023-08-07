@@ -316,6 +316,16 @@ iframe {
     padding: 0.1em;
   }
 
+  #mainWindow2 {
+    padding: 0.5em;
+    background-color: #fff;
+  }
+  #mainWindow2 p,
+  #uploadForm2 {
+    display: block;
+    padding: 0.1em;
+  }
+
   .valBtn {
     margin-top: 3px;
     margin-bottom: 3px;

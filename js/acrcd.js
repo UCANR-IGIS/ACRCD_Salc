@@ -780,7 +780,7 @@ function addShapefileToMap2(featureCollection) {
         return featureLayer;
         // associate the feature with the popup on click to enable highlight and zoom to
     });
-    map.addMany(layers2);
+    allData.addMany(layers2);
     view2.goTo(sourceGraphics).then(function () {
         view2.zoom = view2.zoom - 2;
     }).catch(function (error) {
@@ -1285,7 +1285,10 @@ function addShapefileToMap2(featureCollection) {
         //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         //switchSliders(grantArray, 4)
         $('#sliders').show();
+        //Shapefile upload
         $('#mainWindow').show();
+        $('#mainWindow2').show();
+        //End shapefile upload
 
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('.dropdown-tooltip'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
