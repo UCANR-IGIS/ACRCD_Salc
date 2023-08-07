@@ -106,8 +106,8 @@ var svBP = 1,
     view
 let db;
 require([
-    "esri/config", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
-], function (esriConfig, GroupLayer, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
+    "esri/config", "esri/widgets/BasemapGallery", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
+], function (esriConfig, BasemapGallery, GroupLayer, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator) {
     //Shapefile
     var portalUrl = "https://www.arcgis.com";
 
@@ -486,6 +486,26 @@ require([
         setRenderer()
     });
 
+    // Create a BasemapGallery widget instance and set
+    // its container to a div element
+
+    const basemapGallery = new BasemapGallery({
+        view: view,
+        container: document.createElement("div")
+    });
+    
+    // Create an Expand instance and set the content
+    // property to the DOM node of the basemap gallery widget
+    
+    const bgExpand = new Expand({
+        view: view,
+        content: basemapGallery
+    });
+    
+    // Add the expand instance to the ui
+    
+    view.ui.add(bgExpand, "top-left");
+
     // Shapefile
     var fileForm = document.getElementById("mainWindow");
 
@@ -596,6 +616,10 @@ require([
         }
     });
 
+    const homeBtn2 = new Home({
+        view: view2
+    });
+
     view2.when(function () {
         var layerList = new LayerList({
             view: view2,
@@ -631,7 +655,28 @@ require([
         }, 500);
 
         //view2.ui.add(layerList, "top-right");
+        view2.ui.add(homeBtn2, "top-left");
     });
+
+    // Create a BasemapGallery widget instance and set
+    // its container to a div element
+
+    const basemapGallery2 = new BasemapGallery({
+        view: view2,
+        container: document.createElement("div")
+    });
+    
+    // Create an Expand instance and set the content
+    // property to the DOM node of the basemap gallery widget
+    
+    const bgExpand2 = new Expand({
+        view: view2,
+        content: basemapGallery2
+    });
+    
+    // Add the expand instance to the ui
+    
+    view2.ui.add(bgExpand2, "top-left");
 
     function parcelSlider(grantArray = []) {
         $("#loadBody").empty();
@@ -1120,7 +1165,7 @@ require([
         $('#data-tab').tab('show');
         $('#loadModal').modal('show');
         $('#loadClose').hide();
-        grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG']
+        grantArray = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL', 'HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
         // 
         //grantArray = ['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
         //switchSliders(grantArray, 4)
@@ -1276,14 +1321,17 @@ require([
     function changeSliders(text, source) {
         //var text = $(this).html();
         //var text = $(this).data('grant');
-        var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
+        if (text != 'Basic Information') {
+            var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
+        //}
         //$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
-        $('#dropdownTitle').html(text);
+            $('#dropdownTitle').html(text);
+        }   
 
-        if (text == 'Basic Information') {
+        /*if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
             name = 4
-        } else if (text == 'SALC Acquisition Grants') {
+        } else */if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'FI', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
             name = 3
         } else if (text == 'NRCS - Agricultural Conservation Easement Program (ACEP)') {
