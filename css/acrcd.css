@@ -11,17 +11,17 @@ body {
     width: 100vw;
     height: 100vh;
     grid-template-areas:
-        "head head"
+        "header header"
         "tabs tabs"
         "top  main"
-        "nav  main"
+        "side  main"
         "foot  main";
     grid-template-rows: auto auto auto 1fr auto;
     grid-template-columns: 25% 75%;
 }
 
 #page>header {
-    grid-area: head;
+    grid-area: header;
     padding-left: 15px;
     padding-top: 15px;
     color: var(--thumbBG);
@@ -39,7 +39,7 @@ body {
 }
 
 #page>side {
-    grid-area: nav;
+    grid-area: side;
     background-color: white;
     color: black;
     overflow-y: auto;

@@ -22,7 +22,7 @@ $(document).ready(function () {
             $('side').hide()
             $('top').hide()
             $('footer').hide()
-            $('#page').css('grid-template-areas', '"head head" "tabs tabs" "main main" "main main" "main main"');
+            $('#page').css('grid-template-areas', '"header header" "tabs tabs" "main main" "main main" "main main"');
         } else {
             if (selectedTabName == "hex-tab"){
                 $('#widget').show()
@@ -40,7 +40,7 @@ $(document).ready(function () {
             $('side').show()
             $('top').show()
             $('footer').show()
-            $('#page').css('grid-template-areas', '"head head" "tabs tabs" "top main" "nav main" "foot main"');
+            $('#page').css('grid-template-areas', '"header header" "tabs tabs" "top main" "side main" "foot main"');
         }
         console.log(selectedTabName);
         // Do something with the selected tab name
@@ -604,6 +604,18 @@ require([
                 fields: layer.layerDefinition.fields.map(function (field) {
                     return Field.fromJSON(field);
                 }),
+                renderer: {
+                    type: "simple",
+                    symbol: {
+                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                        color: "#85A439",
+                        opacity: 0,
+                        outline: {
+                            width: 1,
+                            color: "#267300"
+                        }
+                    }
+                }
             });
             return featureLayer;
             // associate the feature with the popup on click to enable highlight and zoom to
@@ -776,6 +788,18 @@ function addShapefileToMap2(featureCollection) {
             fields: layer.layerDefinition.fields.map(function (field) {
                 return Field.fromJSON(field);
             }),
+            renderer: {
+                type: "simple",
+                symbol: {
+                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                    color: "#85A439",
+                    opacity: 0,
+                    outline: {
+                        width: 1,
+                        color: "#267300"
+                    }
+                }
+            }
         });
         return featureLayer;
         // associate the feature with the popup on click to enable highlight and zoom to
@@ -1444,6 +1468,7 @@ function addShapefileToMap2(featureCollection) {
         //}
         //$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
             $('#dropdownTitle').html(text);
+            $('#dropdownchoice').html(text);
         }   
 
         /*if (text == 'Basic Information') {
