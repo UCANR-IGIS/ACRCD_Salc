@@ -1,0 +1,106 @@
+      .sliderLabel.sliderLabelA {
+        display: block !important;
+      }
+
+      .sliderLabel {
+        display: none !important;
+      }
+
+      .sliderLabelspan {
+        display: none !important;
+      }
+      @media print {
+        #page {
+          display: grid;
+          width: 100vw;
+          height: 100vh;
+          grid-template-areas:
+            "top top"
+            "side side"
+            "main main";
+          grid-template-rows: auto 1fr 100%;
+          grid-template-columns: 25% 75%;
+        }
+
+        /* Hide all input tags */
+        .navHead,
+        tabs,
+        #widget,
+        #dropdownContainer,
+        #zeroBtn,
+        #defaultBtn,
+        #sliders {
+          display: none;
+        }
+
+        /* Show all elements with class 'sliderlabel' */
+        .sliderLabel {
+          display: block !important;
+        }
+
+        .sliderLabelspan {
+          display: block !important;
+        }
+
+        @page {
+          size: letter;
+          margin: 0.5in, 1in;
+        }
+
+        header {
+          height: 70px;
+        }
+
+        .nav-tabs {
+          visibility: visible !important;
+          position: static !important;
+        }
+
+        .nav-item {
+          display: inline-block;
+        }
+
+        .navHeadPrint {
+          display: flex;
+        }
+        .navHeadPrint span {
+          margin-left: 10px;
+        }
+
+        .tab-content {
+          width: 100%;
+        }
+
+        .tab-pane {
+          display: block;
+          page-break-before: always;
+        }
+
+        #lafco,
+        #acrcd {
+          height: 32px;
+        }
+
+        #title {
+          font-size: 12px !important;
+        }
+
+        #printsliders {
+          break-before: always;
+          /*-webkit-column-count: 2;
+          -moz-column-count: 2;
+          column-count: 2;
+          -webkit-column-gap: 0.5em;
+          -moz-column-gap: 0.5em;
+          column-gap: 0.5em;
+          padding-bottom: 2px;
+          font-size: 18px;
+          line-height: 21px;
+          -webkit-perspective: 1;*/
+        }
+
+        #sliders li {
+          display: block;
+          margin-bottom: 1em;
+        }
+      }
