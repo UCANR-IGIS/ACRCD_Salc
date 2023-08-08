@@ -500,6 +500,8 @@ require([
         setRenderer()
     });
 
+    
+
     // Create a BasemapGallery widget instance and set
     // its container to a div element
 
@@ -1246,8 +1248,13 @@ function addShapefileToMap2(featureCollection) {
     function switchSliders(grantArray = [], name = '') {
         $("#sliders > li").hide()
 
+        $('tbody tr').each(function() {
+            $(this).hide()
+          })
+
         $.each(grantArray, function (index, sliderName) {
             slider = $("#li" + sliderName).show()
+            slider = $("#p" + sliderName).show()
         });
         if (name!=''){
         view2.layerViews.items[0].layer.visible = false
