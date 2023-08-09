@@ -1360,51 +1360,51 @@ require([
         introJs().setOptions({
             steps: [{
                 element: document.querySelector('#hex-tab'),
-                intro: 'Web map'
+                intro: 'This tab builds a model specified by the user for land planning purposes or for specific land acquisition grants and identifies high and low priority agricultural areas. '
             },
             {
                 element: document.querySelector('#data-tab'),
-                intro: 'Reference data'
+                intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
             },
             {
                 element: document.querySelector('#docs-tab'),
-                intro: 'Documentation'
+                intro: 'The tab includes background information about the map use and grants, as well as specific information about each data layer.'
             },
             {
                 element: document.querySelector('#feed-tab'),
-                intro: 'Feedback'
+                intro: "Please leave us feedback if anything isn't working as expected or if you have feedback or suggestions about functionality or data."
             },
             {
                 element: document.querySelector('#widget'),
-                intro: 'Layer list'
+                intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
             },
             {
                 element: document.querySelector('.dropdown'),
-                intro: 'Variable selection'
+                intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
             },
             {
                 element: document.querySelector('#zeroBtn'),
-                intro: 'Set sliders to zero'
+                intro: 'This button will turn off all variables in the set.'
             },
             {
                 element: document.querySelector('#defaultBtn'),
-                intro: 'Reset to default values'
+                intro: 'This restores all variables in the model set to the default slider value of 1.'
             },
             {
                 element: document.querySelector('.scrollbar'),
-                intro: 'Silders'
+                intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
             },
             {
                 element: document.querySelector('.esri-icon-upload'),
-                intro: 'Shapefile upload'
+                intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
             },
             {
                 element: document.querySelector('.esri-icon-home'),
-                intro: 'Home extent'
+                intro: 'This button resets the map view to see all of Alameda County.'
             },
             {
                 element: document.querySelector('#tutorialToggle'),
-                intro: 'Launch this tutorial'
+                intro: 'Relaunches this tutorial.'
             }
             ]
         }).start();
