@@ -24,7 +24,7 @@ $(document).ready(function () {
             $('footer').hide()
             $('#page').css('grid-template-areas', '"header header" "tabs tabs" "main main" "main main" "main main"');
         } else {
-            if (selectedTabName == "hex-tab"){
+            if (selectedTabName == "hex-tab") {
                 $('#widget').show()
                 $('#widget1').hide()
                 $('#dropdownContainer').show()
@@ -103,7 +103,9 @@ var svBP = 1,
     rankTotal,
     ckb = $("#top1").is(':checked'),
     map,
-    view
+    view,
+    savedExtent,
+    savedExtent2
 let db;
 require([
     "esri/config", "esri/widgets/BasemapGallery", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
@@ -125,7 +127,7 @@ require([
             }
         });
 
-        document
+    document
         .getElementById("uploadForm2")
         .addEventListener("change", function (event) {
             var fileName2 = event.target.value.toLowerCase();
@@ -294,7 +296,7 @@ require([
         renderer: {
             type: "unique-value", // autocasts as new UniqueValueRenderer()
             legendOptions: {
-              title: ""
+                title: ""
             },
             defaultSymbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
@@ -307,24 +309,24 @@ require([
             },
             defaultLabel: "City Limits",
             field: "NAME",
-  
+
             uniqueValueInfos: [
-              {
-                value: "Alameda County", // code for interstates/freeways
-                type: "simple",
-                symbol: {
-                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                    color: "#664015",
-                    opacity: 0,
-                    outline: {
-                        width: 1,
-                        color: "#999999"
-                    }
-                },
-                label: "Unincorporated Area"
-              }
+                {
+                    value: "Alameda County", // code for interstates/freeways
+                    type: "simple",
+                    symbol: {
+                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                        color: "#664015",
+                        opacity: 0,
+                        outline: {
+                            width: 1,
+                            color: "#999999"
+                        }
+                    },
+                    label: "Unincorporated Area"
+                }
             ]
-          }
+        }
     });
 
     BufferZones1 = new FeatureLayer({
@@ -396,26 +398,26 @@ require([
         renderer: {
             type: "simple", // autocasts as new SimpleRenderer()
             symbol: {
-              type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-              style: "circle",
-              size: 6,
-              color: "#85A439",
-              outline: {  // autocasts as new SimpleLineSymbol()
-                color: "#267300",
-                width: "0.5px"
-              }
+                type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                style: "circle",
+                size: 6,
+                color: "#85A439",
+                outline: {  // autocasts as new SimpleLineSymbol()
+                    color: "#267300",
+                    width: "0.5px"
+                }
             }
-          }
+        }
     });
 
-    
+
     const BasicInfoGroupLayer = new GroupLayer({
         title: "Basic Info",
         visible: false,
         //visibilityMode: "exclusive",
         layers: [UrbanAg1, Williamson1, PBAGrowth1, BufferZones1, CityLimits1, CPAD1, CCED1, StudyArea1],
         opacity: 0.75
-      });
+    });
 
     var startExtent = new Extent(-122.5177, 37.4323, -121.4326, 37.9301,
         new SpatialReference({
@@ -500,7 +502,12 @@ require([
         setRenderer()
     });
 
-    
+    savedExtent = view.extent;
+
+    view.watch("extent", function (newExtent) {
+        savedExtent = newExtent;
+        console.log("Extent changed:", savedExtent);
+    });
 
     // Create a BasemapGallery widget instance and set
     // its container to a div element
@@ -509,17 +516,17 @@ require([
         view: view,
         container: document.createElement("div")
     });
-    
+
     // Create an Expand instance and set the content
     // property to the DOM node of the basemap gallery widget
-    
+
     const bgExpand = new Expand({
         view: view,
         content: basemapGallery
     });
-    
+
     // Add the expand instance to the ui
-    
+
     view.ui.add(bgExpand, "top-left");
 
     // Shapefile
@@ -568,10 +575,10 @@ require([
 
         // use the REST generate operation to generate a feature collection from the zipped shapefile
         request(portalUrl + "/sharing/rest/content/features/generate", {
-                query: myContent,
-                body: document.getElementById("uploadForm"),
-                responseType: "json",
-            })
+            query: myContent,
+            body: document.getElementById("uploadForm"),
+            responseType: "json",
+        })
             .then(function (response) {
                 var layerName =
                     response.data.featureCollection.layers[0].layerDefinition.name;
@@ -655,8 +662,8 @@ require([
             listItemCreatedFunction: (event) => {
                 const item = event.item;
                 if (item.layer.title != "All Layers" && item.layer.title != "Basic Information" && item.layer.title != "SALC Acquisition Grants" &&
-                item.layer.title != "Wildlife Conservation Board Grants" && item.layer.title != "California Coastal Conservancy"
-                && item.layer.title != "NRCS - Agricultural Conservation Easement Program (ACEP)") {
+                    item.layer.title != "Wildlife Conservation Board Grants" && item.layer.title != "California Coastal Conservancy"
+                    && item.layer.title != "NRCS - Agricultural Conservation Easement Program (ACEP)") {
                     item.panel = {
                         content: "legend",
                         open: false
@@ -665,25 +672,32 @@ require([
             }
         });
 
-        setTimeout(function() {
-            view2.layerViews.map(function(item){
-              item.watch('visible', function(visible){
-                if (visible == true){
-                    titlevar = item.layer.title
-                    changeSliders(item.layer.title, 'atlas')
-                    $.each(view2.layerViews.items, function(index, element) {
-                        if (element.layer.title != titlevar){
-                            element.layer.visible = false
-                        }
-                    });
-                }
-              }, item.layer.title);
-              
+        setTimeout(function () {
+            view2.layerViews.map(function (item) {
+                item.watch('visible', function (visible) {
+                    if (visible == true) {
+                        titlevar = item.layer.title
+                        changeSliders(item.layer.title, 'atlas')
+                        $.each(view2.layerViews.items, function (index, element) {
+                            if (element.layer.title != titlevar) {
+                                element.layer.visible = false
+                            }
+                        });
+                    }
+                }, item.layer.title);
+
             });
         }, 500);
 
         //view2.ui.add(layerList, "top-right");
         view2.ui.add(homeBtn2, "top-left");
+    });
+
+    savedExtent2 = view2.extent;
+
+    view2.watch("extent", function (newExtent) {
+        savedExtent2 = newExtent;
+        console.log("Extent changed:", savedExtent2);
     });
 
     // Create a BasemapGallery widget instance and set
@@ -693,131 +707,131 @@ require([
         view: view2,
         container: document.createElement("div")
     });
-    
+
     // Create an Expand instance and set the content
     // property to the DOM node of the basemap gallery widget
-    
+
     const bgExpand2 = new Expand({
         view: view2,
         content: basemapGallery2
     });
-    
+
     // Add the expand instance to the ui
-    
+
     view2.ui.add(bgExpand2, "top-left");
 
-// Shapefile
-var fileForm2 = document.getElementById("mainWindow2");
+    // Shapefile
+    var fileForm2 = document.getElementById("mainWindow2");
 
-var expand2 = new Expand({
-    expandIconClass: "esri-icon-upload",
-    view: view2,
-    content: fileForm2,
-    expandTooltip: "Upload Shapefile",
-    autoCollapse: true
-});
+    var expand2 = new Expand({
+        expandIconClass: "esri-icon-upload",
+        view: view2,
+        content: fileForm2,
+        expandTooltip: "Upload Shapefile",
+        autoCollapse: true
+    });
 
-view2.ui.add(expand2, "top-left");
+    view2.ui.add(expand2, "top-left");
 
-function generateFeatureCollection2(fileName2) {
-    var name = fileName2.split(".");
-    // Chrome and IE add c:\fakepath to the value - we need to remove it
-    // see this link for more info: http://davidwalsh.name/fakepath
-    name = name[0].replace("c:\\fakepath\\", "");
+    function generateFeatureCollection2(fileName2) {
+        var name = fileName2.split(".");
+        // Chrome and IE add c:\fakepath to the value - we need to remove it
+        // see this link for more info: http://davidwalsh.name/fakepath
+        name = name[0].replace("c:\\fakepath\\", "");
 
-    document.getElementById("upload-status2").innerHTML =
-        "<b>Loading </b>" + name;
+        document.getElementById("upload-status2").innerHTML =
+            "<b>Loading </b>" + name;
 
-    // define the input params for generate see the rest doc for details
-    // https://developers.arcgis.com/rest/users-groups-and-items/generate.htm
-    var params = {
-        name: name,
-        targetSR: view2.spatialReference,
-        maxRecordCount: 1000,
-        enforceInputFileSizeLimit: true,
-        enforceOutputJsonSizeLimit: true,
-    };
+        // define the input params for generate see the rest doc for details
+        // https://developers.arcgis.com/rest/users-groups-and-items/generate.htm
+        var params = {
+            name: name,
+            targetSR: view2.spatialReference,
+            maxRecordCount: 1000,
+            enforceInputFileSizeLimit: true,
+            enforceOutputJsonSizeLimit: true,
+        };
 
-    // generalize features to 10 meters for better performance
-    params.generalize = true;
-    params.maxAllowableOffset = 10;
-    params.reducePrecision = true;
-    params.numberOfDigitsAfterDecimal = 0;
+        // generalize features to 10 meters for better performance
+        params.generalize = true;
+        params.maxAllowableOffset = 10;
+        params.reducePrecision = true;
+        params.numberOfDigitsAfterDecimal = 0;
 
-    var myContent = {
-        filetype: "shapefile",
-        publishParameters: JSON.stringify(params),
-        f: "json",
-    };
+        var myContent = {
+            filetype: "shapefile",
+            publishParameters: JSON.stringify(params),
+            f: "json",
+        };
 
-    // use the REST generate operation to generate a feature collection from the zipped shapefile
-    request(portalUrl + "/sharing/rest/content/features/generate", {
+        // use the REST generate operation to generate a feature collection from the zipped shapefile
+        request(portalUrl + "/sharing/rest/content/features/generate", {
             query: myContent,
             body: document.getElementById("uploadForm2"),
             responseType: "json",
         })
-        .then(function (response) {
-            var layerName =
-                response.data.featureCollection.layers[0].layerDefinition.name;
-            document.getElementById("upload-status2").innerHTML =
-                "<b>Loaded: </b>" + layerName;
-            addShapefileToMap2(response.data.featureCollection);
-        })
-        .catch(errorHandler);
-}
+            .then(function (response) {
+                var layerName =
+                    response.data.featureCollection.layers[0].layerDefinition.name;
+                document.getElementById("upload-status2").innerHTML =
+                    "<b>Loaded: </b>" + layerName;
+                addShapefileToMap2(response.data.featureCollection);
+            })
+            .catch(errorHandler);
+    }
 
-function errorHandler(error) {
-    document.getElementById("upload-status2").innerHTML =
-        "<p style='color:red;max-width: 500px;'>" + error.message + "</p>";
-}
+    function errorHandler(error) {
+        document.getElementById("upload-status2").innerHTML =
+            "<p style='color:red;max-width: 500px;'>" + error.message + "</p>";
+    }
 
-function addShapefileToMap2(featureCollection) {
-    // add the shapefile to the map and zoom to the feature collection extent
-    // if you want to persist the feature collection when you reload browser, you could store the
-    // collection in local storage by serializing the layer using featureLayer.toJson()
-    // see the 'Feature Collection in Local Storage' sample for an example of how to work with local storage
-    var sourceGraphics = [];
+    function addShapefileToMap2(featureCollection) {
+        // add the shapefile to the map and zoom to the feature collection extent
+        // if you want to persist the feature collection when you reload browser, you could store the
+        // collection in local storage by serializing the layer using featureLayer.toJson()
+        // see the 'Feature Collection in Local Storage' sample for an example of how to work with local storage
+        var sourceGraphics = [];
 
-    var layers2 = featureCollection.layers.map(function (layer) {
-        var graphics = layer.featureSet.features.map(function (feature) {
-            return Graphic.fromJSON(feature);
-        });
-        sourceGraphics = sourceGraphics.concat(graphics);
-        var featureLayer = new FeatureLayer({
-            title: "Uploaded Shapefile",
-            objectIdField: "FID",
-            source: graphics,
-            fields: layer.layerDefinition.fields.map(function (field) {
-                return Field.fromJSON(field);
-            }),
-            renderer: {
-                type: "simple",
-                symbol: {
-                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                    color: "#85A439",
-                    opacity: 0,
-                    outline: {
-                        width: 1,
-                        color: "#267300"
+        var layers2 = featureCollection.layers.map(function (layer) {
+            var graphics = layer.featureSet.features.map(function (feature) {
+                return Graphic.fromJSON(feature);
+            });
+            sourceGraphics = sourceGraphics.concat(graphics);
+            var featureLayer = new FeatureLayer({
+                title: "Uploaded Shapefile",
+                objectIdField: "FID",
+                source: graphics,
+                fields: layer.layerDefinition.fields.map(function (field) {
+                    return Field.fromJSON(field);
+                }),
+                renderer: {
+                    type: "simple",
+                    symbol: {
+                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                        color: "#85A439",
+                        opacity: 0,
+                        outline: {
+                            width: 1,
+                            color: "#267300"
+                        }
                     }
                 }
+            });
+            return featureLayer;
+            // associate the feature with the popup on click to enable highlight and zoom to
+        });
+        allData.addMany(layers2);
+        view2.goTo(sourceGraphics).then(function () {
+            view2.zoom = view2.zoom - 2;
+        }).catch(function (error) {
+            if (error.name != "AbortError") {
+                console.error(error);
             }
         });
-        return featureLayer;
-        // associate the feature with the popup on click to enable highlight and zoom to
-    });
-    allData.addMany(layers2);
-    view2.goTo(sourceGraphics).then(function () {
-        view2.zoom = view2.zoom - 2;
-    }).catch(function (error) {
-        if (error.name != "AbortError") {
-            console.error(error);
-        }
-    });
 
-    document.getElementById("upload-status2").innerHTML = "";
-}
-// End Shapefile
+        document.getElementById("upload-status2").innerHTML = "";
+    }
+    // End Shapefile
 
     function parcelSlider(grantArray = []) {
         $("#loadBody").empty();
@@ -1248,23 +1262,24 @@ function addShapefileToMap2(featureCollection) {
     function switchSliders(grantArray = [], name = '') {
         $("#sliders > li").hide()
 
-        $('tbody tr').each(function() {
+        $('tbody tr').each(function () {
             $(this).hide()
-          })
+        })
 
         $.each(grantArray, function (index, sliderName) {
             slider = $("#li" + sliderName).show()
             slider = $("#p" + sliderName).show()
         });
-        if (name!=''){
-        view2.layerViews.items[0].layer.visible = false
-        view2.layerViews.items[1].layer.visible = false
-        view2.layerViews.items[2].layer.visible = false
-        view2.layerViews.items[3].layer.visible = false
-        view2.layerViews.items[4].layer.visible = false
-        view2.layerViews.items[5].layer.visible = false
+        if (name != '') {
+            view2.layerViews.items[0].layer.visible = false
+            view2.layerViews.items[1].layer.visible = false
+            view2.layerViews.items[2].layer.visible = false
+            view2.layerViews.items[3].layer.visible = false
+            view2.layerViews.items[4].layer.visible = false
+            view2.layerViews.items[5].layer.visible = false
 
-        view2.layerViews.items[name].layer.visible = true}
+            view2.layerViews.items[name].layer.visible = true
+        }
 
 
     }
@@ -1295,7 +1310,7 @@ function addShapefileToMap2(featureCollection) {
     }
 
     // Assuming you have an array of slider names
-    var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL','HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
+    var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL', 'HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
     $.each(sliderArr, function (index, sliderName) {
         slider = $("#" + sliderName).val(eval('sv' + sliderName))
         $("#" + sliderName + "Val").html(slider[0].value)
@@ -1325,7 +1340,7 @@ function addShapefileToMap2(featureCollection) {
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-        
+
         /*setTimeout(function(){
             console.log("Executed after 1 second");
         }, 10000);*/
@@ -1336,7 +1351,7 @@ function addShapefileToMap2(featureCollection) {
         alert(event.target.className);
     })*/
 
-    $('esri-layer-list__item-container').on("click", function(event){
+    $('esri-layer-list__item-container').on("click", function (event) {
         alert(event.target.className);
     })
 
@@ -1344,53 +1359,53 @@ function addShapefileToMap2(featureCollection) {
         $('#hex-tab').tab('show');
         introJs().setOptions({
             steps: [{
-                    element: document.querySelector('#hex-tab'),
-                    intro: 'Web map'
-                }, 
-                {
-                    element: document.querySelector('#data-tab'),
-                    intro: 'Reference data'
-                }, 
-                {
-                    element: document.querySelector('#docs-tab'),
-                    intro: 'Documentation'
-                }, 
-                {
-                    element: document.querySelector('#feed-tab'),
-                    intro: 'Feedback'
-                },
-                {
-                    element: document.querySelector('#widget'),
-                    intro: 'Layer list'
-                },
-                {
-                    element: document.querySelector('.dropdown'),
-                    intro: 'Variable selection'
-                },
-                {
-                    element: document.querySelector('#zeroBtn'),
-                    intro: 'Set sliders to zero'
-                },
-                {
-                    element: document.querySelector('#defaultBtn'),
-                    intro: 'Reset to default values'
-                },
-                {
-                    element: document.querySelector('.scrollbar'),
-                    intro: 'Silders'
-                },
-                {
-                    element: document.querySelector('.esri-icon-upload'),
-                    intro: 'Shapefile upload'
-                },
-                {
-                    element: document.querySelector('.esri-icon-home'),
-                    intro: 'Home extent'
-                },
-                {
-                    element: document.querySelector('#tutorialToggle'),
-                    intro: 'Launch this tutorial'
-                }
+                element: document.querySelector('#hex-tab'),
+                intro: 'Web map'
+            },
+            {
+                element: document.querySelector('#data-tab'),
+                intro: 'Reference data'
+            },
+            {
+                element: document.querySelector('#docs-tab'),
+                intro: 'Documentation'
+            },
+            {
+                element: document.querySelector('#feed-tab'),
+                intro: 'Feedback'
+            },
+            {
+                element: document.querySelector('#widget'),
+                intro: 'Layer list'
+            },
+            {
+                element: document.querySelector('.dropdown'),
+                intro: 'Variable selection'
+            },
+            {
+                element: document.querySelector('#zeroBtn'),
+                intro: 'Set sliders to zero'
+            },
+            {
+                element: document.querySelector('#defaultBtn'),
+                intro: 'Reset to default values'
+            },
+            {
+                element: document.querySelector('.scrollbar'),
+                intro: 'Silders'
+            },
+            {
+                element: document.querySelector('.esri-icon-upload'),
+                intro: 'Shapefile upload'
+            },
+            {
+                element: document.querySelector('.esri-icon-home'),
+                intro: 'Home extent'
+            },
+            {
+                element: document.querySelector('#tutorialToggle'),
+                intro: 'Launch this tutorial'
+            }
             ]
         }).start();
         $('#hex-tab').tab('show');
@@ -1401,53 +1416,53 @@ function addShapefileToMap2(featureCollection) {
 
         introJs().setOptions({
             steps: [{
-                    element: document.querySelector('#hex-tab'),
-                    intro: 'Web map'
-                }, 
-                {
-                    element: document.querySelector('#data-tab'),
-                    intro: 'Reference data'
-                }, 
-                {
-                    element: document.querySelector('#docs-tab'),
-                    intro: 'Documentation'
-                }, 
-                {
-                    element: document.querySelector('#feed-tab'),
-                    intro: 'Feedback'
-                },
-                {
-                    element: document.querySelector('#widget'),
-                    intro: 'Layer list'
-                },
-                {
-                    element: document.querySelector('.dropdown'),
-                    intro: 'Variable selection'
-                },
-                {
-                    element: document.querySelector('#zeroBtn'),
-                    intro: 'Set sliders to zero'
-                },
-                {
-                    element: document.querySelector('#defaultBtn'),
-                    intro: 'Reset to default values'
-                },
-                {
-                    element: document.querySelector('.scrollbar'),
-                    intro: 'Silders'
-                },
-                {
-                    element: document.querySelector('.esri-icon-upload'),
-                    intro: 'Shapefile upload'
-                },
-                {
-                    element: document.querySelector('.esri-icon-home'),
-                    intro: 'Home extent'
-                },
-                {
-                    element: document.querySelector('#tutorialToggle'),
-                    intro: 'Launch this tutorial'
-                }
+                element: document.querySelector('#hex-tab'),
+                intro: 'Web map'
+            },
+            {
+                element: document.querySelector('#data-tab'),
+                intro: 'Reference data'
+            },
+            {
+                element: document.querySelector('#docs-tab'),
+                intro: 'Documentation'
+            },
+            {
+                element: document.querySelector('#feed-tab'),
+                intro: 'Feedback'
+            },
+            {
+                element: document.querySelector('#widget'),
+                intro: 'Layer list'
+            },
+            {
+                element: document.querySelector('.dropdown'),
+                intro: 'Variable selection'
+            },
+            {
+                element: document.querySelector('#zeroBtn'),
+                intro: 'Set sliders to zero'
+            },
+            {
+                element: document.querySelector('#defaultBtn'),
+                intro: 'Reset to default values'
+            },
+            {
+                element: document.querySelector('.scrollbar'),
+                intro: 'Silders'
+            },
+            {
+                element: document.querySelector('.esri-icon-upload'),
+                intro: 'Shapefile upload'
+            },
+            {
+                element: document.querySelector('.esri-icon-home'),
+                intro: 'Home extent'
+            },
+            {
+                element: document.querySelector('#tutorialToggle'),
+                intro: 'Launch this tutorial'
+            }
             ]
         }).start();
 
@@ -1472,11 +1487,11 @@ function addShapefileToMap2(featureCollection) {
         //var text = $(this).data('grant');
         if (text != 'Basic Information') {
             var htmlText = '<span class="dropdown-tooltip" data-bs-toggle="tooltip"><i class="fas fa-info-circle me-2"></i><span class="tooltip-text">Use the dropdown to change the sliders used in the mapping application.</span></span>' + text + ' <span class="caret"></span>';
-        //}
-        //$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
+            //}
+            //$(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
             $('#dropdownTitle').html(text);
             $('#dropdownchoice').html(text);
-        }   
+        }
 
         /*if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
@@ -1495,14 +1510,14 @@ function addShapefileToMap2(featureCollection) {
                 grantArray = ['FM', 'SC']*/
             name = 5
         } else if (text == 'Wildlife Conservation Board Grants') {
-            grantArray = ['SR', 'CH', 'HL','WS', 'WL', 'CG', 'GL']
+            grantArray = ['SR', 'CH', 'HL', 'WS', 'WL', 'CG', 'GL']
             name = 2
         } else if (text == 'California Coastal Conservancy') {
-            grantArray = ['RC', 'SR', 'HL','CH', 'WL', 'CG', 'GL']
+            grantArray = ['RC', 'SR', 'HL', 'CH', 'WL', 'CG', 'GL']
             name = 1
         }
 
-        if (source=='dropdown'){
+        if (source == 'dropdown') {
             switchSliders(grantArray, name)
         } else {
             switchSliders(grantArray)
