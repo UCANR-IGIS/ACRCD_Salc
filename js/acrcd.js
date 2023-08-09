@@ -506,7 +506,7 @@ require([
 
     view.watch("extent", function (newExtent) {
         savedExtent = newExtent;
-        console.log("Extent changed:", savedExtent);
+        //console.log("Extent changed:", savedExtent);
     });
 
     // Create a BasemapGallery widget instance and set
@@ -697,7 +697,7 @@ require([
 
     view2.watch("extent", function (newExtent) {
         savedExtent2 = newExtent;
-        console.log("Extent changed:", savedExtent2);
+        //console.log("Extent changed:", savedExtent2);
     });
 
     // Create a BasemapGallery widget instance and set
