@@ -613,7 +613,7 @@ require([
               },
               {
                 fieldName: "SITE_SIZE",
-                label: "SIte Size",
+                label: "Site Size",
                 // Autocasts as new FieldInfoFormat()
                 format: {
                   digitSeparator: true,
@@ -1729,9 +1729,6 @@ require([
 
     $('#defaultBtn').on('click', function () {
         sldReset(1);
-        showPrintDialogWithNewExtent()
-        setTimeout(function () {window.print()},1000)
-
     })
 
     $('#printToggle').on('click', function () {
