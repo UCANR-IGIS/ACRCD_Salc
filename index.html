@@ -136,6 +136,9 @@
             <li class="nav-item" role="presentation">
               <i id="tutorialToggle" class="fas fa-info-circle me-2"></i>
             </li>
+            <li class="nav-item" role="presentation">
+              <i id="printToggle" class="fas fa-print me-2"></i>
+            </li>
           </ul>
         </nav>
       </tabs>
@@ -1082,28 +1085,32 @@
       savedextent2
    
       // Function to show browser's print dialog with updated extent
-      /*function showPrintDialogWithNewExtent() {
-        // Define the new extent using xmin, xmax, ymin, ymax coordinates
-        savedextent1 = savedExtent
-        savedextent2 = savedExtent2
-        $("#viewDiv").css("width",$("#viewDiv").height())
-        view.goTo(savedextent1)
-        $("#viewDiv2").css("width",$("#viewDiv2").height())
-        view2.goTo(savedextent2)
-      }
+      // function showPrintDialogWithNewExtent() {
+      //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
+      //   //savedextent1 = savedExtent
+      //   //savedextent2 = savedExtent2
+      //   $("#viewDiv").css("width",$("#viewDiv").height())
+      //   setTimeout(function () {view.goTo(savedextent1)}, 50)
+      //   $("#viewDiv2").css("width",$("#viewDiv2").height())
+      //   setTimeout(function () {view2.goTo(savedextent2)}, 50)
+      // }
 
-      function closePrintDialogWithNewExtent() {
-        // Define the new extent using xmin, xmax, ymin, ymax coordinates
-        //savedextent1 = savedExtent
-        $("#viewDiv").css("width","100%")
-        view.goTo(savedextent1)
-        $("#viewDiv2").css("width","100%")
-        view2.goTo(savedextent2)
-      }
+      // function closePrintDialogWithNewExtent() {
+      //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
+      //   //savedextent1 = savedExtent
+      //   $("#viewDiv").css("width","100%")
+      //   view.goTo(savedextent1)
+      //   $("#viewDiv2").css("width","100%")
+      //   view2.goTo(savedextent2)
+      // }
 
-      // Listen for the beforeprint event to trigger the custom function
-      window.addEventListener("beforeprint", showPrintDialogWithNewExtent);
-      //window.addEventListener("afterprint", closePrintDialogWithNewExtent);
+      // // Listen for the beforeprint event to trigger the custom function
+      // window.addEventListener("beforeprint", event => {
+      //   savedextent1 = savedExtent
+      //   savedextent2 = savedExtent2
+      //   showPrintDialogWithNewExtent();
+      // });
+      // window.addEventListener("afterprint", closePrintDialogWithNewExtent);
 
       // Example: Call the function directly (optional)
       // showPrintDialogWithNewExtent();

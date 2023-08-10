@@ -9,17 +9,18 @@
       .sliderLabelspan {
         display: none !important;
       }
+
       @media print {
         #page {
-          display: grid;
-          width: 100vw;
-          height: 100vh;
+          display: grid !important; 
+          width: 100vw !important;
+          height: 100vh !important;
           grid-template-areas:
             "top top"
             "side side"
-            "main main";
-          grid-template-rows: auto 1fr 100%;
-          grid-template-columns: 25% 75%;
+            "main main" !important;
+          grid-template-rows: auto 1fr 100% !important;
+          grid-template-columns: 25% 75% !important;
         }
 
         /* Hide all input tags */

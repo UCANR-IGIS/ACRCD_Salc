@@ -105,7 +105,10 @@ var svBP = 1,
     map,
     view,
     savedExtent,
-    savedExtent2
+    savedExtent2,
+    savedextent1,
+    savedextent2
+
 let db;
 require([
     "esri/config", "esri/widgets/BasemapGallery", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "dojo/domReady!"
@@ -1395,6 +1398,10 @@ require([
                 intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
             },
             {
+                element: document.querySelector('.esri-icon-basemap'),
+                intro: 'This button allows the user to change the basemap.'
+            },
+            {
                 element: document.querySelector('.esri-icon-upload'),
                 intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
             },
@@ -1405,6 +1412,10 @@ require([
             {
                 element: document.querySelector('#tutorialToggle'),
                 intro: 'Relaunches this tutorial.'
+            },
+            {
+                element: document.querySelector('#printToggle'),
+                intro: 'Print this page'
             }
             ]
         }).start();
@@ -1452,6 +1463,10 @@ require([
                 intro: 'Silders'
             },
             {
+                element: document.querySelector('.esri-icon-basemap'),
+                intro: 'This button allows the user to change the basemap.'
+            },
+            {
                 element: document.querySelector('.esri-icon-upload'),
                 intro: 'Shapefile upload'
             },
@@ -1462,6 +1477,10 @@ require([
             {
                 element: document.querySelector('#tutorialToggle'),
                 intro: 'Launch this tutorial'
+            },
+            {
+                element: document.querySelector('#printToggle'),
+                intro: 'Print this page'
             }
             ]
         }).start();
@@ -1475,7 +1494,17 @@ require([
 
     $('#defaultBtn').on('click', function () {
         sldReset(1);
+        showPrintDialogWithNewExtent()
+        setTimeout(function () {window.print()},1000)
+
     })
+
+    $('#printToggle').on('click', function () {
+        showPrintDialogWithNewExtent()
+        setTimeout(function () {window.print()},1000)
+
+    })
+
 
     $('.dropdown-menu').on('click', 'a', function () {
         var text = $(this).data('grant');
@@ -1524,6 +1553,33 @@ require([
         }
         setRenderer()
     }
+
+    // Function to show browser's print dialog with updated extent
+    function showPrintDialogWithNewExtent() {
+        // Define the new extent using xmin, xmax, ymin, ymax coordinates
+        savedextent1 = savedExtent
+        savedextent2 = savedExtent2
+        $("#viewDiv").css("width",$("#viewDiv").height())
+        setTimeout(function () {view.goTo(savedextent1)}, 50)
+        $("#viewDiv2").css("width",$("#viewDiv2").height())
+        setTimeout(function () {view2.goTo(savedextent2)}, 50)
+      }
+
+      function closePrintDialogWithNewExtent() {
+        // Define the new extent using xmin, xmax, ymin, ymax coordinates
+        //savedextent1 = savedExtent
+        $("#viewDiv").css("width","100%")
+        setTimeout(function () {view.goTo(savedextent1)}, 50)
+        $("#viewDiv2").css("width","100%")
+        setTimeout(function () {view2.goTo(savedextent2)}, 50)
+      }
+
+      // Listen for the beforeprint event to trigger the custom function
+      /* window.addEventListener("beforeprint", event => {
+        
+        showPrintDialogWithNewExtent();
+      }); */
+      window.addEventListener("afterprint", closePrintDialogWithNewExtent);
 
 
     /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
