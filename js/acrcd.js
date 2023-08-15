@@ -760,7 +760,8 @@ require([
 
     const bgExpand = new Expand({
         view: view,
-        content: basemapGallery
+        content: basemapGallery,
+        expandTooltip: "Change Basemap"
     });
 
     // Add the expand instance to the ui
@@ -954,7 +955,8 @@ require([
 
     const bgExpand2 = new Expand({
         view: view2,
-        content: basemapGallery2
+        content: basemapGallery2,
+        expandTooltip: "Change Basemap"
     });
 
     // Add the expand instance to the ui

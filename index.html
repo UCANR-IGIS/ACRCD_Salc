@@ -70,7 +70,7 @@
             /> </a
         ></span>
         <span class="fs-4" id="title"
-          >Beta of Alameda Sustainable Agricultural <br />
+          >Alameda Sustainable Agricultural <br />
           Lands Conservation (SALC) Mapper</span
         >
       </header>
@@ -88,7 +88,7 @@
                 aria-controls="home-tab-pane"
                 aria-selected="true"
               >
-                Interactive Web Map
+              Agricultural Land Prioritization Tool
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -271,13 +271,12 @@
               Set all values to 0
             </button>
             <button type="button" class="btn valBtn" id="defaultBtn">
-              Restore Defaults
+              Restore values to 1
             </button>
           </div>
           <div class="center">
             <p>
-              Slider Values [1 (low) to 5 (high), 0 removes from weighting on
-              map]
+              Slider Values [1 (low priority) to 5 (high priority). 0 removes variable from weighting in the model]
             </p>
           </div>
           <div
@@ -763,9 +762,8 @@
               <p>
                 <strong>Slider Settings</strong> You were working with the
                 '<strong id="dropdownchoice">All Layers</strong>' follow
-                grant/layers from the dropdown on the Interactive Map Tab. Here
-                are the following weights applied to the sliders on the
-                Interactive Map tab.
+                grant/layers from the dropdown on the Agricultural Land Prioritization Tool Tab. Here
+                are the weights you applied to the sliders.
               </p>
             </div>
             <table class="sliderLabelspan">
@@ -776,7 +774,7 @@
                     <tr id="pBP"><td>Areas with sufficient water basins</td><td id="BPVal"></td></tr>
                     <tr id="pBZ"><td>Projected city spread</td><td id="BZVal"></td></tr>
                     <tr id="pCC"><td>Areas near conservation easements</td><td id="CCVal"></td></tr>
-                    <tr id="pCP><td>Areas near parks and other protected areas</td><td id="CPVal"></td></tr>
+                    <tr id="pCP"><td>Areas near parks and other protected areas</td><td id="CPVal"></td></tr>
                     <tr id="pCL"><td>City limits</td><td id="CLVal"></td></tr>
                     <tr id="pCH"><td>Critical wildlife habitat</td><td id="CHVal"></td></tr>
                     <tr id="pCG"><td>Areas with active farming</td><td id="CGVal"></td></tr>
