@@ -907,6 +907,9 @@ require([
                         open: false
                     };
                 }
+                if (item.layer.title == "Alameda County Boundary") {
+                    item.layer.listMode = "hide"
+                }
             }
         });
 
@@ -917,7 +920,7 @@ require([
                         titlevar = item.layer.title
                         changeSliders(item.layer.title, 'atlas')
                         $.each(view2.layerViews.items, function (index, element) {
-                            if (element.layer.title != titlevar) {
+                            if (element.layer.title != titlevar && element.layer.title != "Alameda County Boundary") {
                                 element.layer.visible = false
                             }
                         });
