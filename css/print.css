@@ -2,9 +2,9 @@
         display: block !important;
       }
 
-      .sliderLabel {
+   /*    .sliderLabel {
         display: none !important;
-      }
+      }*/
 
       .sliderLabelspan {
         display: none !important;
@@ -16,10 +16,10 @@
           width: 100vw !important;
           height: 100vh !important;
           grid-template-areas:
-            "top top"
-            "side side"
-            "main main" !important;
-          grid-template-rows: auto 1fr 100% !important;
+            "main main"
+            "top top" 
+            "side side" !important;
+          grid-template-rows: 100% auto 1fr !important;
           grid-template-columns: 25% 75% !important;
         }
 
@@ -44,6 +44,7 @@
         }
 
         @page {
+         /*  size: landscape; */
           size: letter;
           margin: 0.5in, 1in;
         }
@@ -74,7 +75,7 @@
 
         .tab-pane {
           display: block;
-          page-break-before: always;
+          page-break-after: always;
         }
 
         #lafco,
@@ -86,7 +87,7 @@
           font-size: 12px !important;
         }
 
-        #printsliders {
+        #printSliders {
           break-before: always;
           /*-webkit-column-count: 2;
           -moz-column-count: 2;
@@ -105,6 +106,7 @@
           margin-bottom: 1em;
         }
         table {
+            color: black;
             border-collapse: collapse;
             border-spacing: 0;
             width: 100%;
@@ -130,4 +132,4 @@
             text-align: leaft;
             width: 85%;
           }
-      }
+       }

@@ -1738,7 +1738,7 @@ require([
 
     $('#printToggle').on('click', function () {
         showPrintDialogWithNewExtent()
-        setTimeout(function () {window.print()},500)
+        setTimeout(function () {window.print()},800)
 
     })
 

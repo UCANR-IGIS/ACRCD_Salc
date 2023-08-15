@@ -1,1117 +1,694 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>
-      Alameda Sustainable Agricultural Lands Conservation (SALC) Mapper
-    </title>
-    <meta name="description" content="Our first page" />
-    <meta name="keywords" content="html tutorial template" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/intro.js@7.0.1/minified/introjs.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/acrcd.css" />
-    <link rel="stylesheet" href="css/print.css" />
-    <link
-      rel="stylesheet"
-      href="https://js.arcgis.com/4.18/esri/css/main.css"
-    />
-    <link
-      rel="shortcut icon"
-      href="img/acrcd-favicon-32.png"
-      type="image/x-icon"
-    />
-  </head>
-  <!-- Google tag (gtag.js) -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-8FLGBBY2GK"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
 
-    gtag("config", "G-8FLGBBY2GK");
-  </script>
-  <body>
-    <section id="page">
-      <header class="navHead">
-        <a
-          class="navbar-brand"
-          href="https://alamedalafco.org/"
-          target="_blank"
-        >
-          <img
-            src="img/Lafco_logo.png"
-            alt="LafcoLogo"
-            height="62"
-            id="lafco"
-          />
-        </a>
-        <span
-          ><a class="navbar-brand" href="https://acrcd.org/" target="_blank">
-            <img
-              src="https://acrcd.org/wp-content/uploads/2019/02/acrcd-horizontal-logo-regular.png"
-              alt="ACRCDLogo"
-              height="62"
-              id="acrcd"
-            /> </a
-        ></span>
-        <span class="fs-4" id="title"
-          >Alameda Sustainable Agricultural <br />
-          Lands Conservation (SALC) Mapper</span
-        >
-      </header>
-      <tabs>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link active"
-                id="hex-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#hex-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="home-tab-pane"
-                aria-selected="true"
-              >
+<head>
+  <title>
+    Alameda Sustainable Agricultural Lands Conservation (SALC) Mapper
+  </title>
+  <meta name="description" content="Our first page" />
+  <meta name="keywords" content="html tutorial template" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+  <link href="https://cdn.jsdelivr.net/npm/intro.js@7.0.1/minified/introjs.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/acrcd.css" />
+  <link rel="stylesheet" href="css/print.css" />
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css" />
+  <link rel="shortcut icon" href="img/acrcd-favicon-32.png" type="image/x-icon" />
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8FLGBBY2GK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-8FLGBBY2GK");
+</script>
+
+<body>
+  <section id="page">
+    <header class="navHead">
+      <a class="navbar-brand" href="https://alamedalafco.org/" target="_blank">
+        <img src="img/Lafco_logo.png" alt="LafcoLogo" height="62" id="lafco" />
+      </a>
+      <span><a class="navbar-brand" href="https://acrcd.org/" target="_blank">
+          <img src="https://acrcd.org/wp-content/uploads/2019/02/acrcd-horizontal-logo-regular.png" alt="ACRCDLogo"
+            height="62" id="acrcd" /> </a></span>
+      <span class="fs-4" id="title">Alameda Sustainable Agricultural <br />
+        Lands Conservation (SALC) Mapper</span>
+    </header>
+    <tabs>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="hex-tab" data-bs-toggle="tab" data-bs-target="#hex-tab-pane"
+              type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
               Agricultural Land Prioritization Tool
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="data-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#data-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="profile-tab-pane"
-                aria-selected="false"
-              >
-                Data Atlas
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="docs-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#docs-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="contact-tab-pane"
-                aria-selected="false"
-              >
-                Documentation
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="feed-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#feed-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="contact-tab-pane"
-                aria-selected="false"
-              >
-                Feedback
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <i id="tutorialToggle" class="fas fa-info-circle me-2"></i>
-            </li>
-            <li class="nav-item" role="presentation">
-              <i id="printToggle" class="fas fa-print me-2"></i>
-            </li>
-          </ul>
-        </nav>
-      </tabs>
-      <top class="">
-        <div id="widget"></div>
-        <div class="dropdown" id="dropdownContainer">
-          <button
-            class="btn btn-secondary dropdown-toggle text-left"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            data-display="static"
-            style="width: 100%; white-space: normal"
-          >
-            <span class="dropdown-tooltip" data-bs-toggle="tooltip">
-              <i class="fas fa-info-circle me-2"></i>
-              <span class="tooltip-text"
-                >Use the dropdown to change the sliders used in the mapping
-                application.</span
-              > </span
-            ><span id="dropdownTitle">All Layers</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a
-                class="dropdown-item"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-grant="All Layers"
-                title="All Layers"
-              >
-                <i class="fas fa-info-circle me-2"></i>All Layers</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-grant="SALC Acquisition Grants"
-                title="The Sustainable Agricultural Lands Conservation (SALC) Program's Agricultural Conservation Acquisition Grants prioritizes conservation of land via conservation easement or fee title for agricultural use (30 points), to support infill development or reduces risk of conversion to non-agricultural uses (30 points), to advance equity (15 points), and to support other program goals or co-benefits (25 points)."
-              >
-                <i class="fas fa-info-circle me-2"></i>SALC Acquisition
-                Grants</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-grant="Wildlife Conservation Board Grants"
-                title="The Wildlife Conservation Board has several different pots of money through which requests for agricultural land acquisition and conservation easements can be made. Consistent priorities for the organization include protecting biodiversity and priority habitats, promoting resiliency and connectivity, conserving working lands, and enhancing water-related projects."
-              >
-                <i class="fas fa-info-circle me-2"></i>Wildlife Conservation
-                Board Grants</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-grant="California Coastal Conservancy"
-                title="The State of California Coastal Conservancy funds conservation easements and fee title acquisitions. Their priorities include enhancing coastal working lands, making coastal communities more resilient to climate change, protecting natural habitats and corridors, and supporting farmers and ranchers in stewarding the natural resources on their lands."
-              >
-                <i class="fas fa-info-circle me-2"></i>California Coastal
-                Conservancy</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-grant="NRCS - Agricultural Conservation Easement Program (ACEP)"
-                title="Natural Resources Conservation Service (NRCS) - Agricultural Conservation Easement Program (ACEP)"
-              >
-                <i class="fas fa-info-circle me-2"></i>NRCS - Agricultural
-                Conservation Easement Program (ACEP)</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="sliderLabelspan">
-          <div class="navHeadPrint">
-            <a
-              class="navbar-brand"
-              href="https://alamedalafco.org/"
-              target="_blank"
-            >
-              <img
-                src="img/Lafco_logo.png"
-                alt="LafcoLogo"
-                height="62"
-                id="lafco"
-              />
-            </a>
-            <span
-              ><a
-                class="navbar-brand"
-                href="https://acrcd.org/"
-                target="_blank"
-              >
-                <img
-                  src="https://acrcd.org/wp-content/uploads/2019/02/acrcd-horizontal-logo-regular.png"
-                  alt="ACRCDLogo"
-                  height="62"
-                  id="acrcd"
-                /> </a
-            ></span>
-            <span class="fs-4" id="title"
-              >Beta of Alameda Sustainable Agricultural <br />
-              Lands Conservation (SALC) Mapper</span
-            >
-          </div>
-        </div>
-        <div class="fauxSlider" id="fauxSliderContainer">
-          <div
-            class="center"
-            style="
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button"
+              role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+              Data Atlas
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs-tab-pane" type="button"
+              role="tab" aria-controls="contact-tab-pane" aria-selected="false">
+              Documentation
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="feed-tab" data-bs-toggle="tab" data-bs-target="#feed-tab-pane" type="button"
+              role="tab" aria-controls="contact-tab-pane" aria-selected="false">
+              Feedback
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <i id="tutorialToggle" class="fas fa-info-circle me-2"></i>
+          </li>
+          <li class="nav-item" role="presentation">
+            <i id="printToggle" class="fas fa-print me-2"></i>
+          </li>
+        </ul>
+      </nav>
+    </tabs>
+    <top class="">
+      <div id="widget"></div>
+      <div class="dropdown" id="dropdownContainer">
+        <button class="btn btn-secondary dropdown-toggle text-left" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false" data-display="static" style="width: 100%; white-space: normal">
+          <span class="dropdown-tooltip" data-bs-toggle="tooltip">
+            <i class="fas fa-info-circle me-2"></i>
+            <span class="tooltip-text">Use the dropdown to change the sliders used in the mapping
+              application.</span> </span><span id="dropdownTitle">All Layers</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="All Layers" title="All Layers">
+              <i class="fas fa-info-circle me-2"></i>All Layers</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="SALC Acquisition Grants"
+              title="The Sustainable Agricultural Lands Conservation (SALC) Program's Agricultural Conservation Acquisition Grants prioritizes conservation of land via conservation easement or fee title for agricultural use (30 points), to support infill development or reduces risk of conversion to non-agricultural uses (30 points), to advance equity (15 points), and to support other program goals or co-benefits (25 points).">
+              <i class="fas fa-info-circle me-2"></i>SALC Acquisition
+              Grants</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="Wildlife Conservation Board Grants"
+              title="The Wildlife Conservation Board has several different pots of money through which requests for agricultural land acquisition and conservation easements can be made. Consistent priorities for the organization include protecting biodiversity and priority habitats, promoting resiliency and connectivity, conserving working lands, and enhancing water-related projects.">
+              <i class="fas fa-info-circle me-2"></i>Wildlife Conservation
+              Board Grants</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-grant="California Coastal Conservancy"
+              title="The State of California Coastal Conservancy funds conservation easements and fee title acquisitions. Their priorities include enhancing coastal working lands, making coastal communities more resilient to climate change, protecting natural habitats and corridors, and supporting farmers and ranchers in stewarding the natural resources on their lands.">
+              <i class="fas fa-info-circle me-2"></i>California Coastal
+              Conservancy</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="tooltip"
+              data-grant="NRCS - Agricultural Conservation Easement Program (ACEP)"
+              title="Natural Resources Conservation Service (NRCS) - Agricultural Conservation Easement Program (ACEP)">
+              <i class="fas fa-info-circle me-2"></i>NRCS - Agricultural
+              Conservation Easement Program (ACEP)</a>
+          </li>
+        </ul>
+      </div>
+      <div class="fauxSlider" id="fauxSliderContainer">
+        <div class="center" style="
               margin-left: 3px;
               padding-right: 22px;
               padding-top: 3px;
               padding-bottom: 3px;
               border-bottom: solid darkgoldenrod;
-            "
-          >
-            <button type="button" class="btn valBtn" id="zeroBtn">
-              Set all values to 0
-            </button>
-            <button type="button" class="btn valBtn" id="defaultBtn">
-              Restore values to 1
-            </button>
-          </div>
-          <div class="center">
-            <p>
-              Slider Values [1 (low priority) to 5 (high priority). 0 removes variable from weighting in the model]
-            </p>
-          </div>
-          <div
-            class="sliderLabels row_spacing"
-            id="sliderLabels"
-            style="
+            ">
+          <button type="button" class="btn valBtn" id="zeroBtn">
+            Set all values to 0
+          </button>
+          <button type="button" class="btn valBtn" id="defaultBtn">
+            Restore values to 1
+          </button>
+        </div>
+        <div class="center">
+          <p>
+            Slider Values [1 (low priority) to 5 (high priority).<br>0 removes variable from weighting in the model]
+          </p>
+        </div>
+        <div class="sliderLabels row_spacing" id="sliderLabels" style="
               margin-left: 3px;
               padding-right: 22px;
               padding-top: 3px;
               border-bottom: solid darkgoldenrod;
-            "
-          >
-            <span class="sliderLabel selected">0</span
-            ><span class="sliderLabel">1</span><span class="sliderLabel">2</span
-            ><span class="sliderLabel">3</span><span class="sliderLabel">4</span
-            ><span class="sliderLabel">5</span>
-          </div>
+            ">
+          <span class="sliderLabel selected">0</span><span class="sliderLabel">1</span><span
+            class="sliderLabel">2</span><span class="sliderLabel">3</span><span class="sliderLabel">4</span><span
+            class="sliderLabel">5</span>
         </div>
-      </top>
-      <side class="row_spacing scrollbar">
-        <div id="widget1" style="display: none"></div>
-        <div class="row" id="sliderContainer">
-          <ul id="sliders" style="display: none">
-            <li id="liBP">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the agricultural use priority. Areas with sufficient water basins can be better relied upon for irrigated crops"
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas with sufficient
-                water basins</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="BP"
-              /><!--<span class="sliderLabel" id="BPVal"></span>-->
-            </li>
-            <li id="liBZ">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use with the support for infill/ risk for conversion priority. These areas are most likely to experience growth in the future and therefore, any potential or current agricultural areas are at risk of conversion."
-              >
-                <i class="fas fa-info-circle me-2"></i>Projected city spread</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="BZ"
-              /><!--<span class="sliderLabel" id="BZVal"></span>-->
-            </li>
-            <li id="liCC">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="protecting areas near conservation easements may better preserve larger, contiguous spaces"
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas near conservation
-                easements</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="CC"
-              /><!--<span class="sliderLabel" id="CCVal"></span>-->
-            </li>
-            <li id="liCP">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="protecting areas near parks or other protected areas may better preserve larger, contiguous spaces"
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas near parks and
-                other protected areas</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="CP"
-              /><!--<span class="sliderLabel" id="CPVal"></span>-->
-            </li>
-            <li id="liCL">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="protecting areas near city limits may reinforce and protect those limits in the future"
-              >
-                <i class="fas fa-info-circle me-2"></i>City limits</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="CL"
-              /><!--<span class="sliderLabel" id="CLVal"></span>-->
-            </li>
-            <li id="liCH">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Lands that are occupied or could be occupied by threatened or endangered species are prioritized"
-              >
-                <i class="fas fa-info-circle me-2"></i>Critical wildlife
-                habitat</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="CH"
-              /><!--<span class="sliderLabel" id="CHVal"></span>-->
-            </li>
-            <li id="liCG">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the agricultural use priority. Areas with active farming are likely to be suitable for future farming."
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas with active
-                farming</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="CG"
-              /><!--<span class="sliderLabel" id="CGVal"></span>-->
-            </li>
-            <li id="liFI">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title=""
-              >
-                <i class="fas fa-info-circle me-2"></i>Food Insecurity</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="FI"
-              /><!--<span class="sliderLabel" id="FIVal"></span>-->
-            </li>
-            <li id="liFM">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use with other program goals. Areas without nearby farmers markets may be prioritized for urban agriculture that provides food to nearby communities. Alternatively, areas with farmers markets may also be particularly suitable for urban agriculture because of the many possible synergies."
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas within 2 miles of
-                farmers markets</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="FM"
-              /><!--<span class="sliderLabel" id="FMVal"></span>-->
-            </li>
-            <li id="liGL">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the agricultural use priority. Areas with active grazing are likely to be suitable for future grazing."
-              >
-                <i class="fas fa-info-circle me-2"></i>Areas with active
-                grazing</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="GL"
-              /><!--<span class="sliderLabel" id="GLVal"></span>-->
-            </li>
-            <li id="liHL">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title=""
-              >
-                <i class="fas fa-info-circle me-2"></i>Habitat Linkage</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="HL"
-              /><!--<span class="sliderLabel" id="HLVal"></span>-->
-            </li>
-            <li id="liLI">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the Equity priority. Because low median incomes are often correlated with other community disadvantages, these areas should be considered as priority areas for green spaces, including urban farms and gardens."
-              >
-                <i class="fas fa-info-circle me-2"></i>Low income</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="LI"
-              /><!--<span class="sliderLabel" id="LIVal"></span>-->
-            </li>
-            <li id="liPG">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Areas of future growth may not be best suited for conservation of large parcel agriculture but may be areas of opportunity for small-scale urban or community agriculture space."
-              >
-                <i class="fas fa-info-circle me-2"></i>Plan Bay Area growth
-                geographies</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="PG"
-              /><!--<span class="sliderLabel" id="PGVal"></span>-->
-            </li>
-            <li id="liPS">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the agricultural use priority. Soil is suitable for irrigated agriculture"
-              >
-                <i class="fas fa-info-circle me-2"></i>Prime soil</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="PS"
-              /><!--<span class="sliderLabel" id="PSVal"></span>-->
-            </li>
-            <li id="liRC">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use with the support for infill/ risk for conversion priority. These are areas prioritized for conservation by the California Rangeland Conservation Coalition."
-              >
-                <i class="fas fa-info-circle me-2"></i>Rangeland priority
-                conservation areas</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="RC"
-              /><!--<span class="sliderLabel" id="RCVal"></span>-->
-            </li>
-            <li id="liSOI">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Areas outside of city limits but within the sphere of influence of a city are more likely to be developed and thus have a greater risk of conversion to non-agricultural uses."
-              >
-                <i class="fas fa-info-circle me-2"></i>Buffer zone: outside city
-                limits and within sphere of influence</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="SOI"
-              /><!--<span class="sliderLabel" id="SOIVal"></span>-->
-            </li>
-            <li id="liSC">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use with other program goals. Higher predicted carbon stocks contributes to the SALC priorities of contributing to carbon neutrality and building climate resilience."
-              >
-                <i class="fas fa-info-circle me-2"></i>Predicted soil carbon
-                stocks</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="0"
-                class="slider"
-                id="SC"
-              /><!--<span class="sliderLabel" id="SCVal"></span>-->
-            </li>
-            <li id="liSR">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Conserving habitats with greater numbers of native species is prioritized."
-              >
-                <i class="fas fa-info-circle me-2"></i>Terrestrial native
-                wildlife species richness</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="SR"
-              /><!--<span class="sliderLabel" id="SRVal"></span>-->
-            </li>
-            <li id="liTC">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Conserving habitats that serve as cliamte change refugia for native species is prioritized."
-              >
-                <i class="fas fa-info-circle me-2"></i>Terrestrial climate
-                change</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="TC"
-              /><!--<span class="sliderLabelspan">Terrestrial climate
-                change</span><span class="sliderLabel" id="TCVal"></span>-->
-            </li>
-            <li id="liU2">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Conserving habitats that serve as cliamte change refugia for native species is prioritized."
-              >
-                <i class="fas fa-info-circle me-2"></i>Urban areas 2050</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="0"
-                class="slider"
-                id="U2"
-              /><!--<span class="sliderLabel" id="U2Val"></span>-->
-            </li>
-            <li id="liUA">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="TBD"
-              >
-                <i class="fas fa-info-circle me-2"></i>Known urban ag sites
-                within 2 miles</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="UA"
-              /><!--<span class="sliderLabel" id="UAVal"></span>-->
-            </li>
-            <li id="liWS">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="potential use for the agricultural use priority. Higher water storage capacity in the top 150 centimeters of soil makes the soil more suitable for many types of agriculture."
-              >
-                <i class="fas fa-info-circle me-2"></i>Water storage capacity of
-                soil</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="WS"
-              /><!--<span class="sliderLabel" id="WSVal"></span>-->
-            </li>
-            <li id="liWL">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Lands with wetland areas are prioritized both for species biodiversity and as important flood buffers"
-              >
-                <i class="fas fa-info-circle me-2"></i>Wetlands</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="0"
-                class="slider"
-                id="WL"
-              /><!--<span class="sliderLabel" id="WLVal"></span>-->
-            </li>
-            <li id="liWA">
-              <a
-                class="sliderLabel sliderLabelA"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="protecting areas near areas covered by current Williamson Act contracts may better preserve larger, contiguous spaces"
-              >
-                <i class="fas fa-info-circle me-2"></i>Williamson Act</a
-              >
-              <input
-                type="range"
-                min="0"
-                max="5"
-                value="1"
-                class="slider"
-                id="WA"
-              /><!--<span class="sliderLabel" id="WAVal"></span>-->
-            </li>
-          </ul>
-          <div class="printsliders">
-            <div
-              class="sliderLabelspan"
-              style="
+        <div class="printsliders">
+          <div class="sliderLabelspan" style="
+                color: black;
                 margin-left: 3px;
                 padding-right: 22px;
                 padding-top: 3px;
                 border-bottom: solid darkgoldenrod;
-              "
-            >
+              ">
+            <p>
+              <strong>Slider Settings</strong> You were working with the
+              '<strong id="dropdownchoice">All Layers</strong>' follow
+              grant/layers from the dropdown on the Agricultural Land Prioritization Tool Tab. Here
+              are the weights you applied to the sliders.
+            </p>
+          </div>
+          <table class="sliderLabelspan">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="pBP">
+                <td>Areas with sufficient water basins</td>
+                <td id="BPVal"></td>
+              </tr>
+              <tr id="pBZ">
+                <td>Projected city spread</td>
+                <td id="BZVal"></td>
+              </tr>
+              <tr id="pCC">
+                <td>Areas near conservation easements</td>
+                <td id="CCVal"></td>
+              </tr>
+              <tr id="pCP">
+                <td>Areas near parks and other protected areas</td>
+                <td id="CPVal"></td>
+              </tr>
+              <tr id="pCL">
+                <td>City limits</td>
+                <td id="CLVal"></td>
+              </tr>
+              <tr id="pCH">
+                <td>Critical wildlife habitat</td>
+                <td id="CHVal"></td>
+              </tr>
+              <tr id="pCG">
+                <td>Areas with active farming</td>
+                <td id="CGVal"></td>
+              </tr>
+              <tr id="pFI">
+                <td>Food Insecurity</td>
+                <td id="FIVal"></td>
+              </tr>
+              <tr id="pFM">
+                <td>Areas within 2 miles of farmers markets</td>
+                <td id="FMVal"></td>
+              </tr>
+              <tr id="pGL">
+                <td>Areas with active grazing</td>
+                <td id="GLVal"></td>
+              </tr>
+              <tr id="pHL">
+                <td>Habitat Linkage</td>
+                <td id="HLVal"></td>
+              </tr>
+              <tr id="pLI">
+                <td>Low income</td>
+                <td id="LIVal"></td>
+              </tr>
+              <tr id="pPG">
+                <td>Plan Bay Area growth geographies</td>
+                <td id="PGVal"></td>
+              </tr>
+              <tr id="pPS">
+                <td>Prime soil</td>
+                <td id="PSVal"></td>
+              </tr>
+              <tr id="pRC">
+                <td>Rangeland priority conservation areas</td>
+                <td id="RCVal"></td>
+              </tr>
+              <tr id="pSOI">
+                <td>Buffer zone: outside city limits and within sphere of influence</td>
+                <td id="SOIVal"></td>
+              </tr>
+              <tr id="pSC">
+                <td>Predicted soil carbon stocks</td>
+                <td id="SCVal"></td>
+              </tr>
+              <tr id="pSR">
+                <td>Terrestrial native wildlife species richness</td>
+                <td id="SRVal"></td>
+              </tr>
+              <tr id="pTC">
+                <td>Terrestrial climate change</td>
+                <td id="TCVal"></td>
+              </tr>
+              <tr id="pU2">
+                <td>Urban areas 2050</td>
+                <td id="U2Val"></td>
+              </tr>
+              <tr id="pUA">
+                <td>Known urban ag sites within 2 miles</td>
+                <td id="UAVal"></td>
+              </tr>
+              <tr id="pWS">
+                <td>Water storage capacity of soil</td>
+                <td id="WSVal"></td>
+              </tr>
+              <tr id="pWL">
+                <td>Wetlands</td>
+                <td id="WLVal"></td>
+              </tr>
+              <tr id="pWA">
+                <td>Williamson Act</td>
+                <td id="WAVal"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </top>
+    <side class="row_spacing scrollbar">
+      <div id="widget1" style="display: none"></div>
+      <div class="row" id="sliderContainer">
+        <ul id="sliders" style="display: none">
+          <li id="liBP">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the agricultural use priority. Areas with sufficient water basins can be better relied upon for irrigated crops">
+              <i class="fas fa-info-circle me-2"></i>Areas with sufficient
+              water basins</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="BP" />
+            <!--<span class="sliderLabel" id="BPVal"></span>-->
+          </li>
+          <li id="liBZ">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use with the support for infill/ risk for conversion priority. These areas are most likely to experience growth in the future and therefore, any potential or current agricultural areas are at risk of conversion.">
+              <i class="fas fa-info-circle me-2"></i>Projected city spread</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="BZ" />
+            <!--<span class="sliderLabel" id="BZVal"></span>-->
+          </li>
+          <li id="liCC">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="protecting areas near conservation easements may better preserve larger, contiguous spaces">
+              <i class="fas fa-info-circle me-2"></i>Areas near conservation
+              easements</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="CC" />
+            <!--<span class="sliderLabel" id="CCVal"></span>-->
+          </li>
+          <li id="liCP">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="protecting areas near parks or other protected areas may better preserve larger, contiguous spaces">
+              <i class="fas fa-info-circle me-2"></i>Areas near parks and
+              other protected areas</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="CP" />
+            <!--<span class="sliderLabel" id="CPVal"></span>-->
+          </li>
+          <li id="liCL">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="protecting areas near city limits may reinforce and protect those limits in the future">
+              <i class="fas fa-info-circle me-2"></i>City limits</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="CL" />
+            <!--<span class="sliderLabel" id="CLVal"></span>-->
+          </li>
+          <li id="liCH">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Lands that are occupied or could be occupied by threatened or endangered species are prioritized">
+              <i class="fas fa-info-circle me-2"></i>Critical wildlife
+              habitat</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="CH" />
+            <!--<span class="sliderLabel" id="CHVal"></span>-->
+          </li>
+          <li id="liCG">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the agricultural use priority. Areas with active farming are likely to be suitable for future farming.">
+              <i class="fas fa-info-circle me-2"></i>Areas with active
+              farming</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="CG" />
+            <!--<span class="sliderLabel" id="CGVal"></span>-->
+          </li>
+          <li id="liFI">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip" title="">
+              <i class="fas fa-info-circle me-2"></i>Food Insecurity</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="FI" />
+            <!--<span class="sliderLabel" id="FIVal"></span>-->
+          </li>
+          <li id="liFM">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use with other program goals. Areas without nearby farmers markets may be prioritized for urban agriculture that provides food to nearby communities. Alternatively, areas with farmers markets may also be particularly suitable for urban agriculture because of the many possible synergies.">
+              <i class="fas fa-info-circle me-2"></i>Areas within 2 miles of
+              farmers markets</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="FM" />
+            <!--<span class="sliderLabel" id="FMVal"></span>-->
+          </li>
+          <li id="liGL">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the agricultural use priority. Areas with active grazing are likely to be suitable for future grazing.">
+              <i class="fas fa-info-circle me-2"></i>Areas with active
+              grazing</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="GL" />
+            <!--<span class="sliderLabel" id="GLVal"></span>-->
+          </li>
+          <li id="liHL">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip" title="">
+              <i class="fas fa-info-circle me-2"></i>Habitat Linkage</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="HL" />
+            <!--<span class="sliderLabel" id="HLVal"></span>-->
+          </li>
+          <li id="liLI">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the Equity priority. Because low median incomes are often correlated with other community disadvantages, these areas should be considered as priority areas for green spaces, including urban farms and gardens.">
+              <i class="fas fa-info-circle me-2"></i>Low income</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="LI" />
+            <!--<span class="sliderLabel" id="LIVal"></span>-->
+          </li>
+          <li id="liPG">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Areas of future growth may not be best suited for conservation of large parcel agriculture but may be areas of opportunity for small-scale urban or community agriculture space.">
+              <i class="fas fa-info-circle me-2"></i>Plan Bay Area growth
+              geographies</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="PG" />
+            <!--<span class="sliderLabel" id="PGVal"></span>-->
+          </li>
+          <li id="liPS">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the agricultural use priority. Soil is suitable for irrigated agriculture">
+              <i class="fas fa-info-circle me-2"></i>Prime soil</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="PS" />
+            <!--<span class="sliderLabel" id="PSVal"></span>-->
+          </li>
+          <li id="liRC">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use with the support for infill/ risk for conversion priority. These are areas prioritized for conservation by the California Rangeland Conservation Coalition.">
+              <i class="fas fa-info-circle me-2"></i>Rangeland priority
+              conservation areas</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="RC" />
+            <!--<span class="sliderLabel" id="RCVal"></span>-->
+          </li>
+          <li id="liSOI">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Areas outside of city limits but within the sphere of influence of a city are more likely to be developed and thus have a greater risk of conversion to non-agricultural uses.">
+              <i class="fas fa-info-circle me-2"></i>Buffer zone: outside city
+              limits and within sphere of influence</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="SOI" />
+            <!--<span class="sliderLabel" id="SOIVal"></span>-->
+          </li>
+          <li id="liSC">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use with other program goals. Higher predicted carbon stocks contributes to the SALC priorities of contributing to carbon neutrality and building climate resilience.">
+              <i class="fas fa-info-circle me-2"></i>Predicted soil carbon
+              stocks</a>
+            <input type="range" min="0" max="5" value="0" class="slider" id="SC" />
+            <!--<span class="sliderLabel" id="SCVal"></span>-->
+          </li>
+          <li id="liSR">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Conserving habitats with greater numbers of native species is prioritized.">
+              <i class="fas fa-info-circle me-2"></i>Terrestrial native
+              wildlife species richness</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="SR" />
+            <!--<span class="sliderLabel" id="SRVal"></span>-->
+          </li>
+          <li id="liTC">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Conserving habitats that serve as cliamte change refugia for native species is prioritized.">
+              <i class="fas fa-info-circle me-2"></i>Terrestrial climate
+              change</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="TC" />
+            <!--<span class="sliderLabelspan">Terrestrial climate
+                change</span><span class="sliderLabel" id="TCVal"></span>-->
+          </li>
+          <li id="liU2">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Conserving habitats that serve as cliamte change refugia for native species is prioritized.">
+              <i class="fas fa-info-circle me-2"></i>Urban areas 2050</a>
+            <input type="range" min="0" max="5" value="0" class="slider" id="U2" />
+            <!--<span class="sliderLabel" id="U2Val"></span>-->
+          </li>
+          <li id="liUA">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip" title="TBD">
+              <i class="fas fa-info-circle me-2"></i>Known urban ag sites
+              within 2 miles</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="UA" />
+            <!--<span class="sliderLabel" id="UAVal"></span>-->
+          </li>
+          <li id="liWS">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="potential use for the agricultural use priority. Higher water storage capacity in the top 150 centimeters of soil makes the soil more suitable for many types of agriculture.">
+              <i class="fas fa-info-circle me-2"></i>Water storage capacity of
+              soil</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="WS" />
+            <!--<span class="sliderLabel" id="WSVal"></span>-->
+          </li>
+          <li id="liWL">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="Lands with wetland areas are prioritized both for species biodiversity and as important flood buffers">
+              <i class="fas fa-info-circle me-2"></i>Wetlands</a>
+            <input type="range" min="0" max="5" value="0" class="slider" id="WL" />
+            <!--<span class="sliderLabel" id="WLVal"></span>-->
+          </li>
+          <li id="liWA">
+            <a class="sliderLabel sliderLabelA" href="#" data-bs-toggle="tooltip"
+              title="protecting areas near areas covered by current Williamson Act contracts may better preserve larger, contiguous spaces">
+              <i class="fas fa-info-circle me-2"></i>Williamson Act</a>
+            <input type="range" min="0" max="5" value="1" class="slider" id="WA" />
+            <!--<span class="sliderLabel" id="WAVal"></span>-->
+          </li>
+        </ul>
+        
+      </div>
+      
+    </side>
+    <main class="tab-content" id="myTabContent">
+      <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exportModalLabel">
+                Export Data/Report
+              </h5>
+            </div>
+            <div id="exportBody" class="modal-body"></div>
+            <div id="exportFoot" class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="CSVBtn" data-bs-dismiss="modal">
+                Export to CSV
+              </button>
+              <button type="button" class="btn btn-secondary" id="reportBtn" data-bs-dismiss="modal">
+                Generate Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="loadModal" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loadModalLabel"></h5>
+            </div>
+            <div id="loadBody" class="modal-body">
+              Loading Data...
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+              </div>
+            </div>
+            <div id="loadFoot" class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="loadClose" data-bs-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="saveModalLabel">
+                Save Current Weights
+              </h5>
+            </div>
+            <div class="modal-body">
+              <label for="scenarioName">Scenario Name:</label>
+              <input type="text" id="scenarioName" name="scenario" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="saveState" data-bs-dismiss="modal">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">
+                Delete Saved Weights
+              </h5>
+            </div>
+            <div class="modal-body">Confirm Delete</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="deleteState" data-bs-dismiss="modal">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade show active" id="hex-tab-pane" role="tabpanel" aria-labelledby="hex-tab" tabindex="0"
+        style="height: 100%">
+        <!-- Shapefile Upload-->
+        <div id="mainWindow" style="display: none">
+          <div>
+            <div style="padding-left: 4px">
+              <p>Add a zipped shapefile to the map.</p>
               <p>
-                <strong>Slider Settings</strong> You were working with the
-                '<strong id="dropdownchoice">All Layers</strong>' follow
-                grant/layers from the dropdown on the Agricultural Land Prioritization Tool Tab. Here
-                are the weights you applied to the sliders.
+                Visit the
+                <a target="_blank"
+                  href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm">Shapefiles</a>
+                help topic for information and limitations.
               </p>
-            </div>
-            <table class="sliderLabelspan">
-                <thead>
-                    <tr ><th>Layer</th><th>Weight</th></tr>
-                </thead>
-                <tbody>
-                    <tr id="pBP"><td>Areas with sufficient water basins</td><td id="BPVal"></td></tr>
-                    <tr id="pBZ"><td>Projected city spread</td><td id="BZVal"></td></tr>
-                    <tr id="pCC"><td>Areas near conservation easements</td><td id="CCVal"></td></tr>
-                    <tr id="pCP"><td>Areas near parks and other protected areas</td><td id="CPVal"></td></tr>
-                    <tr id="pCL"><td>City limits</td><td id="CLVal"></td></tr>
-                    <tr id="pCH"><td>Critical wildlife habitat</td><td id="CHVal"></td></tr>
-                    <tr id="pCG"><td>Areas with active farming</td><td id="CGVal"></td></tr>
-                    <tr id="pFI"><td>Food Insecurity</td><td id="FIVal"></td></tr>
-                    <tr id="pFM"><td>Areas within 2 miles of farmers markets</td><td id="FMVal"></td></tr>
-                    <tr id="pGL"><td>Areas with active grazing</td><td id="GLVal"></td></tr>
-                    <tr id="pHL"><td>Habitat Linkage</td><td id="HLVal"></td></tr>
-                    <tr id="pLI"><td>Low income</td><td id="LIVal"></td></tr>
-                    <tr id="pPG"><td>Plan Bay Area growth geographies</td><td id="PGVal"></td></tr>
-                    <tr id="pPS"><td>Prime soil</td><td id="PSVal"></td></tr>
-                    <tr id="pRC"><td>Rangeland priority conservation areas</td><td id="RCVal"></td></tr>
-                    <tr id="pSOI"><td>Buffer zone: outside city limits and within sphere of influence</td><td id="SOIVal"></td></tr>
-                    <tr id="pSC"><td>Predicted soil carbon stocks</td><td id="SCVal"></td></tr>
-                    <tr id="pSR"><td>Terrestrial native wildlife species richness</td><td id="SRVal"></td></tr>
-                    <tr id="pTC"><td>Terrestrial climate change</td><td id="TCVal"></td></tr>
-                    <tr id="pU2"><td>Urban areas 2050</td><td id="U2Val"></td></tr>
-                    <tr id="pUA"><td>Known urban ag sites within 2 miles</td><td id="UAVal"></td></tr>
-                    <tr id="pWS"><td>Water storage capacity of soil</td><td id="WSVal"></td></tr>
-                    <tr id="pWL"><td>Wetlands</td><td id="WLVal"></td></tr>
-                    <tr id="pWA"><td>Williamson Act</td><td id="WAVal"></td></tr>
-                </tbody>
-            </table>
-          </div>
-        </div>
-      </side>
-      <main class="tab-content" id="myTabContent">
-        <div
-          class="modal fade"
-          id="exportModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exportModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exportModalLabel">
-                  Export Data/Report
-                </h5>
-              </div>
-              <div id="exportBody" class="modal-body"></div>
-              <div id="exportFoot" class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="CSVBtn"
-                  data-bs-dismiss="modal"
-                >
-                  Export to CSV
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="reportBtn"
-                  data-bs-dismiss="modal"
-                >
-                  Generate Report
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="modal fade"
-          id="loadModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="loadModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="loadModalLabel"></h5>
-              </div>
-              <div id="loadBody" class="modal-body">
-                Loading Data...
-                <div class="progress">
-                  <div
-                    class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar"
-                    aria-valuenow="0"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    style="width: 100%"
-                  ></div>
+              <form enctype="multipart/form-data" method="post" id="uploadForm">
+                <div class="field">
+                  <label class="file-upload">
+                    <span><strong>Add File</strong></span>
+                    <input type="file" name="file" id="inFile" />
+                  </label>
                 </div>
-              </div>
-              <div id="loadFoot" class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="loadClose"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
+              </form>
+              <span class="file-upload-status" style="opacity: 1" id="upload-status"></span>
+              <div id="fileInfo"></div>
             </div>
           </div>
         </div>
-        <div
-          class="modal fade"
-          id="saveModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="saveModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="saveModalLabel">
-                  Save Current Weights
-                </h5>
-              </div>
-              <div class="modal-body">
-                <label for="scenarioName">Scenario Name:</label>
-                <input type="text" id="scenarioName" name="scenario" />
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="saveState"
-                  data-bs-dismiss="modal"
-                >
-                  Save
-                </button>
-              </div>
+        <!-- End Shapefile Upload-->
+        <div class="sliderLabelspan">
+          <div class="navHeadPrint">
+            <a class="navbar-brand" href="https://alamedalafco.org/" target="_blank">
+              <img src="img/Lafco_logo.png" alt="LafcoLogo" height="62" id="lafco" />
+            </a>
+            <span><a class="navbar-brand" href="https://acrcd.org/" target="_blank">
+                <img src="https://acrcd.org/wp-content/uploads/2019/02/acrcd-horizontal-logo-regular.png" alt="ACRCDLogo"
+                  height="62" id="acrcd" /> </a></span>
+            <span class="fs-4" id="title">Alameda Sustainable Agricultural <br />
+              Lands Conservation (SALC) Mapper</span>
+          </div>
+        </div>
+        <div id="viewDiv" style="height: 100%"></div>
+      </div>
+      <div class="tab-pane fade" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="0"
+        style="height: 100%">
+        <!-- Shapefile Upload-->
+        <div id="mainWindow2" style="display: none">
+          <div>
+            <div style="padding-left: 4px">
+              <p>Add a zipped shapefile to the map.</p>
+              <p>
+                Visit the
+                <a target="_blank"
+                  href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm">Shapefiles</a>
+                help topic for information and limitations.
+              </p>
+              <form enctype="multipart/form-data" method="post" id="uploadForm2">
+                <div class="field">
+                  <label class="file-upload">
+                    <span><strong>Add File</strong></span>
+                    <input type="file" name="file" id="inFile2" />
+                  </label>
+                </div>
+              </form>
+              <span class="file-upload-status" style="opacity: 1" id="upload-status2"></span>
+              <div id="fileInfo2"></div>
             </div>
           </div>
         </div>
-        <div
-          class="modal fade"
-          id="deleteModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="deleteModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">
-                  Delete Saved Weights
-                </h5>
-              </div>
-              <div class="modal-body">Confirm Delete</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="deleteState"
-                  data-bs-dismiss="modal"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+        <!-- End Shapefile Upload-->
+        <div class="sliderLabelspan">
+          <div class="navHeadPrint">
+            <a class="navbar-brand" href="https://alamedalafco.org/" target="_blank">
+              <img src="img/Lafco_logo.png" alt="LafcoLogo" height="62" id="lafco" />
+            </a>
+            <span><a class="navbar-brand" href="https://acrcd.org/" target="_blank">
+                <img src="https://acrcd.org/wp-content/uploads/2019/02/acrcd-horizontal-logo-regular.png" alt="ACRCDLogo"
+                  height="62" id="acrcd" /> </a></span>
+            <span class="fs-4" id="title">Alameda Sustainable Agricultural <br />
+              Lands Conservation (SALC) Mapper</span>
           </div>
         </div>
-        <div
-          class="tab-pane fade show active"
-          id="hex-tab-pane"
-          role="tabpanel"
-          aria-labelledby="hex-tab"
-          tabindex="0"
-          style="height: 100%"
-        >
-          <!-- Shapefile Upload-->
-          <div id="mainWindow" style="display: none">
-            <div>
-              <div style="padding-left: 4px">
-                <p>Add a zipped shapefile to the map.</p>
-                <p>
-                  Visit the
-                  <a
-                    target="_blank"
-                    href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm"
-                    >Shapefiles</a
-                  >
-                  help topic for information and limitations.
-                </p>
-                <form
-                  enctype="multipart/form-data"
-                  method="post"
-                  id="uploadForm"
-                >
-                  <div class="field">
-                    <label class="file-upload">
-                      <span><strong>Add File</strong></span>
-                      <input type="file" name="file" id="inFile" />
-                    </label>
-                  </div>
-                </form>
-                <span
-                  class="file-upload-status"
-                  style="opacity: 1"
-                  id="upload-status"
-                ></span>
-                <div id="fileInfo"></div>
-              </div>
-            </div>
-          </div>
-          <!-- End Shapefile Upload-->
-          <div id="viewDiv" style="height: 100%"></div>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="data-tab-pane"
-          role="tabpanel"
-          aria-labelledby="data-tab"
-          tabindex="0"
-          style="height: 100%"
-        >
-          <!-- Shapefile Upload-->
-          <div id="mainWindow2" style="display: none">
-            <div>
-              <div style="padding-left: 4px">
-                <p>Add a zipped shapefile to the map.</p>
-                <p>
-                  Visit the
-                  <a
-                    target="_blank"
-                    href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm"
-                    >Shapefiles</a
-                  >
-                  help topic for information and limitations.
-                </p>
-                <form
-                  enctype="multipart/form-data"
-                  method="post"
-                  id="uploadForm2"
-                >
-                  <div class="field">
-                    <label class="file-upload">
-                      <span><strong>Add File</strong></span>
-                      <input type="file" name="file" id="inFile2" />
-                    </label>
-                  </div>
-                </form>
-                <span
-                  class="file-upload-status"
-                  style="opacity: 1"
-                  id="upload-status2"
-                ></span>
-                <div id="fileInfo2"></div>
-              </div>
-            </div>
-          </div>
-          <!-- End Shapefile Upload-->
-          <div id="viewDiv2" style="height: 100%"></div>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="docs-tab-pane"
-          role="tabpanel"
-          aria-labelledby="docs-tab"
-          tabindex="0"
-          style="height: 100%"
-        >
-          <iframe
-            src="https://docs.google.com/document/d/10uMYOoZVdqKugZOQUbtcMzSnnv_nmWmEZvPI-0FGVhg/preview"
-          ></iframe>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="feed-tab-pane"
-          role="tabpanel"
-          aria-labelledby="feed-tab"
-          tabindex="0"
-          style="height: 100%"
-        >
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdQ1XWGBKrb4PQ0sny790u7tPhmeUtOBO4xKSho4ZJZIo45nw/viewform"
-          ></iframe>
-        </div>
-      </main>
-      <footer class="row_spacing"></footer>
-    </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alasql@0.5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/intro.js@7.0.1/intro.min.js"></script>
-    <script src="https://js.arcgis.com/4.18/"></script>
-    <script src="js/acrcd.js"></script>
-    <script>
-      var savedextent1,
+        <div id="viewDiv2" style="height: 100%"></div>
+      </div>
+      <div class="tab-pane fade" id="docs-tab-pane" role="tabpanel" aria-labelledby="docs-tab" tabindex="0"
+        style="height: 100%">
+        <iframe src="https://docs.google.com/document/d/10uMYOoZVdqKugZOQUbtcMzSnnv_nmWmEZvPI-0FGVhg/preview"></iframe>
+      </div>
+      <div class="tab-pane fade" id="feed-tab-pane" role="tabpanel" aria-labelledby="feed-tab" tabindex="0"
+        style="height: 100%">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdQ1XWGBKrb4PQ0sny790u7tPhmeUtOBO4xKSho4ZJZIo45nw/viewform"></iframe>
+      </div>
+    </main>
+    <footer class="row_spacing"></footer>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alasql@0.5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@7.0.1/intro.min.js"></script>
+  <script src="https://js.arcgis.com/4.18/"></script>
+  <script src="js/acrcd.js"></script>
+  <script>
+    var savedextent1,
       savedextent2
-   
-      // Function to show browser's print dialog with updated extent
-      // function showPrintDialogWithNewExtent() {
-      //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
-      //   //savedextent1 = savedExtent
-      //   //savedextent2 = savedExtent2
-      //   $("#viewDiv").css("width",$("#viewDiv").height())
-      //   setTimeout(function () {view.goTo(savedextent1)}, 50)
-      //   $("#viewDiv2").css("width",$("#viewDiv2").height())
-      //   setTimeout(function () {view2.goTo(savedextent2)}, 50)
-      // }
 
-      // function closePrintDialogWithNewExtent() {
-      //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
-      //   //savedextent1 = savedExtent
-      //   $("#viewDiv").css("width","100%")
-      //   view.goTo(savedextent1)
-      //   $("#viewDiv2").css("width","100%")
-      //   view2.goTo(savedextent2)
-      // }
+    // Function to show browser's print dialog with updated extent
+    // function showPrintDialogWithNewExtent() {
+    //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
+    //   //savedextent1 = savedExtent
+    //   //savedextent2 = savedExtent2
+    //   $("#viewDiv").css("width",$("#viewDiv").height())
+    //   setTimeout(function () {view.goTo(savedextent1)}, 50)
+    //   $("#viewDiv2").css("width",$("#viewDiv2").height())
+    //   setTimeout(function () {view2.goTo(savedextent2)}, 50)
+    // }
 
-      // // Listen for the beforeprint event to trigger the custom function
-      // window.addEventListener("beforeprint", event => {
-      //   savedextent1 = savedExtent
-      //   savedextent2 = savedExtent2
-      //   showPrintDialogWithNewExtent();
-      // });
-      // window.addEventListener("afterprint", closePrintDialogWithNewExtent);
+    // function closePrintDialogWithNewExtent() {
+    //   // Define the new extent using xmin, xmax, ymin, ymax coordinates
+    //   //savedextent1 = savedExtent
+    //   $("#viewDiv").css("width","100%")
+    //   view.goTo(savedextent1)
+    //   $("#viewDiv2").css("width","100%")
+    //   view2.goTo(savedextent2)
+    // }
 
-      // Example: Call the function directly (optional)
-      // showPrintDialogWithNewExtent();
-     </script>
-  </body>
+    // // Listen for the beforeprint event to trigger the custom function
+    // window.addEventListener("beforeprint", event => {
+    //   savedextent1 = savedExtent
+    //   savedextent2 = savedExtent2
+    //   showPrintDialogWithNewExtent();
+    // });
+    // window.addEventListener("afterprint", closePrintDialogWithNewExtent);
+
+    // Example: Call the function directly (optional)
+    // showPrintDialogWithNewExtent();
+  </script>
+</body>
+
 </html>
