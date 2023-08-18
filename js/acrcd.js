@@ -246,7 +246,7 @@ require([
 
     const allData = new WebMap({
         portalItem: { // autocasts as new PortalItem()
-            id: "78b156cc51ab45fb8938320556997f6d"
+            id: "6b075c5f69814d8581418c69d08d79f1"
         }
     });
 
