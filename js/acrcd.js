@@ -260,11 +260,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#85A439",
-                opacity: 0,
+                color: "#D7B890",
+                opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#267300"
+                    color: "#D7B890"
                 }
             }
         },
@@ -337,11 +337,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#85A439",
-                opacity: 0,
+                color: "#FFAA00",
+                opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#267300"
+                    color: "#A87000"
                 }
             }
         },
@@ -401,7 +401,7 @@ require([
             defaultSymbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
                 color: "#85A439",
-                opacity: 0,
+                opacity: 0.5,
                 outline: {
                     width: 1,
                     color: "#267300"
@@ -417,7 +417,7 @@ require([
                     symbol: {
                         type: "simple-fill", // autocasts as new SimpleFillSymbol()
                         color: "#664015",
-                        opacity: 0,
+                        opacity: 0.65,
                         outline: {
                             width: 1,
                             color: "#999999"
@@ -455,11 +455,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#85A439",
-                opacity: 0,
+                color: "#87B2AB",
+                opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#267300"
+                    color: "#48615D"
                 }
             }
         },
@@ -499,11 +499,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#85A439",
-                opacity: 0,
+                color: "#A900E6",
+                opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#267300"
+                    color: "#8400A8"
                 }
             }
         },
@@ -549,11 +549,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#85A439",
-                opacity: 0,
+                color: "#005CE6",
+                opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#267300"
+                    color: "#002673"
                 }
             }
         },
