@@ -213,10 +213,10 @@ require([
         url: "https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/AlamedaCounty/FeatureServer/",
         layerId: 1,
         title: "County Boundary",
-        //listMode: "hide",
-        effect: "drop-shadow(3px, 3px, 2px)",
-        blendMode: "destination-atop",
-        opacity: .5
+        listMode: "hide",
+        //effect: "drop-shadow(3px, 3px, 2px)",
+        blendMode: "destination-in",
+        opacity: .65
     });
 
     StudyArea.renderer = {
@@ -246,7 +246,7 @@ require([
 
     const allData = new WebMap({
         portalItem: { // autocasts as new PortalItem()
-            id: "849d0e2da59a495cb140d11472ed45c4"
+            id: "b54d4c6a3b2641deb70d62c0d9555fc4"
         }
     });
 
@@ -260,11 +260,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#D7B890",
-                opacity: 0.75,
+                color: "#d7b890",
+                opacity: 1,
                 outline: {
                     width: 1,
-                    color: "#D7B890"
+                    color: "#de9535"
                 }
             }
         },
@@ -337,11 +337,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#FFAA00",
+                color: "#85a439",
                 opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#A87000"
+                    color: "#267300"
                 }
             }
         },
@@ -401,7 +401,7 @@ require([
             defaultSymbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
                 color: "#85A439",
-                opacity: 0.5,
+                opacity: 0.45,
                 outline: {
                     width: 1,
                     color: "#267300"
@@ -499,11 +499,11 @@ require([
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#A900E6",
+                color: "#85a439",
                 opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#8400A8"
+                    color: "#267300"
                 }
             }
         },
@@ -543,17 +543,17 @@ require([
     Williamson1 = new FeatureLayer({
         url: "https://services.arcgis.com/0xnwbwUttaTjns4i/ArcGIS/rest/services/ACRCD_Data/FeatureServer/",
         layerId: 0,
-        title: "Alameda Williamson",
+        title: "Alameda Williamson Act",
         visible: false,
         renderer: {
             type: "simple",
             symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#005CE6",
+                color: "#87b2ab",
                 opacity: 0.75,
                 outline: {
                     width: 1,
-                    color: "#002673"
+                    color: "#426660"
                 }
             }
         },
