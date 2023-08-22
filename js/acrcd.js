@@ -1598,7 +1598,7 @@ require([
             if (this.id != "tutorialToggle" && this.id != "printToggle" && this.className != "ddIcon") {
                 selectObject = getObject(this.parentElement.parentElement.id)
                 $('#dataModalLabel').html(selectObject.title);
-                $('#dataBody').html(selectObject.description + "<br>Year: " + selectObject.year + "<br>Grant(s): " + selectObject.grants + "<br><a href='" + selectObject.sourceURL +"'>Source</a>");
+                $('#dataBody').html("<b>Description:</b> " + selectObject.description + "<br><b>Year:</b> " + selectObject.year + "<br><b>Grant(s):</b> " + selectObject.grants + "<br><a href='" + selectObject.sourceURL +"' target='_blank'>Source</a>");
                 $('#dataModal').modal('show');
             }
         });
