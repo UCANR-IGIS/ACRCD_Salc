@@ -111,7 +111,7 @@ var svBP = 1,
 
 let db;
 require([
-    "esri/config", "esri/widgets/BasemapGallery", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color","esri/PopupTemplate", "dojo/domReady!"
+    "esri/config", "esri/widgets/BasemapGallery", "esri/layers/GroupLayer", "esri/Map", "esri/views/MapView", "esri/widgets/Expand", "esri/request", "esri/layers/support/Field", "esri/Map", "esri/Graphic", "esri/views/MapView", "esri/WebMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer", "esri/layers/VectorTileLayer", "esri/layers/TileLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/widgets/Legend", "esri/widgets/Search", "esri/widgets/LayerList", "esri/widgets/Home", "esri/layers/Layer", "esri/geometry/SpatialReference", "esri/core/Error", "esri/smartMapping/renderers/color", "esri/PopupTemplate", "dojo/domReady!"
 ], function (esriConfig, BasemapGallery, GroupLayer, Map, MapView, Expand, request, Field, Map, Graphic, MapView, WebMap, Extent, FeatureLayer, GraphicsLayer, VectorTileLayer, TileLayer, QueryTask, Query, IdentifyTask, IdentifyParameters, Legend, Search, LayerList, Home, Layer, SpatialReference, Error, colorRendererCreator, PopupTemplate) {
     //Shapefile
     var portalUrl = "https://www.arcgis.com";
@@ -271,60 +271,61 @@ require([
         popupTemplate: {
             title: "{sitename}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "sitename",
-                label: "Site Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "esmthldr",
-                label: "Easement Holder",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "eholdtyp",
-                label: "Easement Type",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "duration",
-                label: "Duration",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "year_est",
-                label: "Year Established",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false,
-                  places: 0
-                }
-              },
-              {
-                fieldName: "gis_acres",
-                label: "Acres",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: true,
-                  places: 2
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "sitename",
+                        label: "Site Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "esmthldr",
+                        label: "Easement Holder",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "eholdtyp",
+                        label: "Easement Type",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "duration",
+                        label: "Duration",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "year_est",
+                        label: "Year Established",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false,
+                            places: 0
+                        }
+                    },
+                    {
+                        fieldName: "gis_acres",
+                        label: "Acres",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: true,
+                            places: 2
+                        }
+                    }
+                ]
             }]
-          }
+        }
     });
 
     CPAD1 = new FeatureLayer({
@@ -348,43 +349,44 @@ require([
         popupTemplate: {
             title: "{UNIT_NAME}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "UNIT_NAME",
-                label: "Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "AGNCY_NAME",
-                label: "Agency Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "CITY",
-                label: "City",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "ACRES",
-                label: "Acres",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: true,
-                  places: 2
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "UNIT_NAME",
+                        label: "Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "AGNCY_NAME",
+                        label: "Agency Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "CITY",
+                        label: "City",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "ACRES",
+                        label: "Acres",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: true,
+                            places: 2
+                        }
+                    }
+                ]
             }]
-          }
+        }
     });
 
     CityLimits1 = new FeatureLayer({
@@ -410,39 +412,37 @@ require([
             defaultLabel: "City Limits",
             field: "NAME",
 
-            uniqueValueInfos: [
-                {
-                    value: "Alameda County", // code for interstates/freeways
-                    type: "simple",
-                    symbol: {
-                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                        color: "#664015",
-                        opacity: 0.65,
-                        outline: {
-                            width: 1,
-                            color: "#999999"
-                        }
-                    },
-                    label: "Unincorporated Area"
-                }
-            ]
+            uniqueValueInfos: [{
+                value: "Alameda County", // code for interstates/freeways
+                type: "simple",
+                symbol: {
+                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                    color: "#664015",
+                    opacity: 0.65,
+                    outline: {
+                        width: 1,
+                        color: "#999999"
+                    }
+                },
+                label: "Unincorporated Area"
+            }]
         },
         popupTemplate: {
             title: "{NAME}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "Acres",
-                label: "Acres",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: true,
-                  places: 2
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                    fieldName: "Acres",
+                    label: "Acres",
+                    // Autocasts as new FieldInfoFormat()
+                    format: {
+                        digitSeparator: true,
+                        places: 2
+                    }
+                }]
             }]
-          }
+        }
     });
 
     BufferZones1 = new FeatureLayer({
@@ -466,27 +466,28 @@ require([
         popupTemplate: {
             title: "{NAME_1}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "NAME_1",
-                label: "Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "Acres",
-                label: "Acres",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: true,
-                  places: 2
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "NAME_1",
+                        label: "Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "Acres",
+                        label: "Acres",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: true,
+                            places: 2
+                        }
+                    }
+                ]
             }]
-          }
+        }
     });
 
     PBAGrowth1 = new FeatureLayer({
@@ -510,34 +511,35 @@ require([
         popupTemplate: {
             title: "{area_name}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "area_name",
-                label: "Area Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "jurisdicti",
-                label: "Jurisdiction",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "designatio",
-                label: "PBA Designation",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "area_name",
+                        label: "Area Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "jurisdicti",
+                        label: "Jurisdiction",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "designatio",
+                        label: "PBA Designation",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    }
+                ]
             }]
-          }
+        }
     });
 
     Williamson1 = new FeatureLayer({
@@ -559,7 +561,7 @@ require([
         },
         popupTemplate: {
             title: "Williamson Act Alameda County Land"
-          }
+        }
         //listMode: "hide"
     });
 
@@ -576,7 +578,7 @@ require([
                 style: "circle",
                 size: 6,
                 color: "#85A439",
-                outline: {  // autocasts as new SimpleLineSymbol()
+                outline: { // autocasts as new SimpleLineSymbol()
                     color: "#267300",
                     width: "0.5px"
                 }
@@ -585,67 +587,68 @@ require([
         popupTemplate: {
             title: "{SITE_NAME}",
             content: [{
-              type: "fields", // Autocasts as new FieldsContent()
-              // Autocasts as new FieldInfo[]
-              fieldInfos: [{
-                fieldName: "ORG_NAME",
-                label: "Organization Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "SITE_NAME",
-                label: "Site Name",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "SITE_TYPE",
-                label: "Site Type",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "SITE_SIZE",
-                label: "Site Size",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: true,
-                  places: 2
-                }
-              },
-              {
-                fieldName: "PRODUCE_GROWN",
-                label: "Produce Grown",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "ADDRESS_FULL",
-                label: "Address",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              },
-              {
-                fieldName: "ACTIVE_CONTACT_EMAIL",
-                label: "Active Contact Email",
-                // Autocasts as new FieldInfoFormat()
-                format: {
-                  digitSeparator: false
-                }
-              }]
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "ORG_NAME",
+                        label: "Organization Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "SITE_NAME",
+                        label: "Site Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "SITE_TYPE",
+                        label: "Site Type",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "SITE_SIZE",
+                        label: "Site Size",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: true,
+                            places: 2
+                        }
+                    },
+                    {
+                        fieldName: "PRODUCE_GROWN",
+                        label: "Produce Grown",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "ADDRESS_FULL",
+                        label: "Address",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "ACTIVE_CONTACT_EMAIL",
+                        label: "Active Contact Email",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    }
+                ]
             }]
-          }
+        }
     });
 
 
@@ -678,7 +681,7 @@ require([
                 })
             ]
         },
-        layers: [Parcels, BasicInfoGroupLayer]//, StudyArea]
+        layers: [Parcels, BasicInfoGroupLayer] //, StudyArea]
     });
 
     /* Creates a layer from a Portal layer item id
@@ -814,10 +817,10 @@ require([
 
         // use the REST generate operation to generate a feature collection from the zipped shapefile
         request(portalUrl + "/sharing/rest/content/features/generate", {
-            query: myContent,
-            body: document.getElementById("uploadForm"),
-            responseType: "json",
-        })
+                query: myContent,
+                body: document.getElementById("uploadForm"),
+                responseType: "json",
+            })
             .then(function (response) {
                 var layerName =
                     response.data.featureCollection.layers[0].layerDefinition.name;
@@ -901,8 +904,8 @@ require([
             listItemCreatedFunction: (event) => {
                 const item = event.item;
                 if (item.layer.title != "All Layers" && item.layer.title != "Basic Information" && item.layer.title != "SALC Acquisition Grants" &&
-                    item.layer.title != "Wildlife Conservation Board Grants" && item.layer.title != "California Coastal Conservancy"
-                    && item.layer.title != "NRCS - Agricultural Conservation Easement Program (ACEP)") {
+                    item.layer.title != "Wildlife Conservation Board Grants" && item.layer.title != "California Coastal Conservancy" &&
+                    item.layer.title != "NRCS - Agricultural Conservation Easement Program (ACEP)") {
                     item.panel = {
                         content: "legend",
                         open: false
@@ -1009,10 +1012,10 @@ require([
 
         // use the REST generate operation to generate a feature collection from the zipped shapefile
         request(portalUrl + "/sharing/rest/content/features/generate", {
-            query: myContent,
-            body: document.getElementById("uploadForm2"),
-            responseType: "json",
-        })
+                query: myContent,
+                body: document.getElementById("uploadForm2"),
+                responseType: "json",
+            })
             .then(function (response) {
                 var layerName =
                     response.data.featureCollection.layers[0].layerDefinition.name;
@@ -1152,40 +1155,33 @@ require([
                     color: "#ffffff"
                 }
             }, // autocasts as new SimpleFillSymbol()
-            visualVariables: [
-                {
-                    type: "color",
-                    //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
-                    valueExpression: expression[1],
-                    valueExpressionTitle: "Grant Priority",
-                    stops: [
-                        {
-                            value: 0.2,
-                            color: "#664015",
-                            label: "< 0.2 (Low)"
-                        }
-                        , {
-                            value: 0.4,
-                            color: "#AC9A58",
-                            label: "0.4"
-                        }
-                        , {
-                            value: 0.6,
-                            color: "#F0F2C6",
-                            label: "0.6"
-                        }
-                        , {
-                            value: 0.8,
-                            color: "#BDCB76",
-                            label: "0.8"
-                        }, {
-                            value: 0.8,
-                            color: "#85A439",
-                            label: "1.0 (High)"
-                        }
-                    ]
-                }
-            ]
+            visualVariables: [{
+                type: "color",
+                //valueExpression: strengthArcade2(svAB, svBP, svBZ, svCC, svCP, svCL, svCH, svCG, svFM, svLI, svPG, svPP, svRC, svSOI, svSC, svSQ, svSR, svTC, svU2, svUA, svUC, svWS, svWL, svWA),
+                valueExpression: expression[1],
+                valueExpressionTitle: "Grant Priority",
+                stops: [{
+                    value: 0.2,
+                    color: "#664015",
+                    label: "< 0.2 (Low)"
+                }, {
+                    value: 0.4,
+                    color: "#AC9A58",
+                    label: "0.4"
+                }, {
+                    value: 0.6,
+                    color: "#F0F2C6",
+                    label: "0.6"
+                }, {
+                    value: 0.8,
+                    color: "#BDCB76",
+                    label: "0.8"
+                }, {
+                    value: 0.8,
+                    color: "#85A439",
+                    label: "1.0 (High)"
+                }]
+            }]
         };
         Parcels.renderer = renderer2;
         Parcels.labelingInfo = [labelClass]
@@ -1552,18 +1548,18 @@ require([
         })
     }
 
-    function getObject(n, array=dataArray) {
+    function getObject(n, array = dataArray) {
         const targetName = n; // The value you want to search for
 
         const selectedObject = dataArray.find(item => item.id === targetName);
 
         return selectedObject
-        
-/*         if (selectedObject) {
-          console.log("Selected object:", selectedObject);
-        } else {
-          console.log("Object not found.");
-        } */
+
+        /*         if (selectedObject) {
+                  console.log("Selected object:", selectedObject);
+                } else {
+                  console.log("Object not found.");
+                } */
     }
 
     // Assuming you have an array of slider names
@@ -1598,12 +1594,14 @@ require([
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
 
-        $('i').on("click", function() {
-            selectObject = getObject(this.parentElement.parentElement.id)
-            $('#dataModalLabel').html(this.parentElement.parentElement.id);
-            $('#dataBody').html(selectObject);
-            $('#dataModal').modal('show');
-          } );
+        $('i').on("click", function () {
+            if (this.id != "tutorialToggle" && this.id != "printToggle" && this.className != "ddIcon") {
+                selectObject = getObject(this.parentElement.parentElement.id)
+                $('#dataModalLabel').html(selectObject.title);
+                $('#dataBody').html(selectObject.description + "<br>Year: " + selectObject.year + "<br>Grant(s): " + selectObject.grants + "<br><a href='" + selectObject.sourceURL +"'>Source</a>");
+                $('#dataModal').modal('show');
+            }
+        });
 
         /*setTimeout(function(){
             console.log("Executed after 1 second");
@@ -1623,61 +1621,61 @@ require([
         $('#hex-tab').tab('show');
         introJs().setOptions({
             steps: [{
-                element: document.querySelector('#hex-tab'),
-                intro: 'This tab builds a model specified by the user for land planning purposes or for specific land acquisition grants and identifies high and low priority agricultural areas. '
-            },
-            {
-                element: document.querySelector('#data-tab'),
-                intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
-            },
-            {
-                element: document.querySelector('#docs-tab'),
-                intro: 'The tab includes background information about the map use and grants, as well as specific information about each data layer.'
-            },
-            {
-                element: document.querySelector('#feed-tab'),
-                intro: "Please leave us feedback if anything isn't working as expected or if you have feedback or suggestions about functionality or data."
-            },
-            {
-                element: document.querySelector('#widget'),
-                intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
-            },
-            {
-                element: document.querySelector('.dropdown'),
-                intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
-            },
-            {
-                element: document.querySelector('#zeroBtn'),
-                intro: 'This button will turn off all variables in the set.'
-            },
-            {
-                element: document.querySelector('#defaultBtn'),
-                intro: 'This restores all variables in the model set to the default slider value of 1.'
-            },
-            {
-                element: document.querySelector('.scrollbar'),
-                intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
-            },
-            {
-                element: document.querySelector('.esri-icon-basemap'),
-                intro: 'This button allows the user to change the basemap.'
-            },
-            {
-                element: document.querySelector('.esri-icon-upload'),
-                intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
-            },
-            {
-                element: document.querySelector('.esri-icon-home'),
-                intro: 'This button resets the map view to see all of Alameda County.'
-            },
-            {
-                element: document.querySelector('#tutorialToggle'),
-                intro: 'Relaunches this tutorial.'
-            },
-            {
-                element: document.querySelector('#printToggle'),
-                intro: 'Print this page'
-            }
+                    element: document.querySelector('#hex-tab'),
+                    intro: 'This tab builds a model specified by the user for land planning purposes or for specific land acquisition grants and identifies high and low priority agricultural areas. '
+                },
+                {
+                    element: document.querySelector('#data-tab'),
+                    intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
+                },
+                {
+                    element: document.querySelector('#docs-tab'),
+                    intro: 'The tab includes background information about the map use and grants, as well as specific information about each data layer.'
+                },
+                {
+                    element: document.querySelector('#feed-tab'),
+                    intro: "Please leave us feedback if anything isn't working as expected or if you have feedback or suggestions about functionality or data."
+                },
+                {
+                    element: document.querySelector('#widget'),
+                    intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
+                },
+                {
+                    element: document.querySelector('.dropdown'),
+                    intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
+                },
+                {
+                    element: document.querySelector('#zeroBtn'),
+                    intro: 'This button will turn off all variables in the set.'
+                },
+                {
+                    element: document.querySelector('#defaultBtn'),
+                    intro: 'This restores all variables in the model set to the default slider value of 1.'
+                },
+                {
+                    element: document.querySelector('.scrollbar'),
+                    intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-basemap'),
+                    intro: 'This button allows the user to change the basemap.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-upload'),
+                    intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-home'),
+                    intro: 'This button resets the map view to see all of Alameda County.'
+                },
+                {
+                    element: document.querySelector('#tutorialToggle'),
+                    intro: 'Relaunches this tutorial.'
+                },
+                {
+                    element: document.querySelector('#printToggle'),
+                    intro: 'Print this page'
+                }
             ]
         }).start();
         $('#hex-tab').tab('show');
@@ -1688,61 +1686,61 @@ require([
 
         introJs().setOptions({
             steps: [{
-                element: document.querySelector('#hex-tab'),
-                intro: 'This tab builds a model specified by the user for land planning purposes or for specific land acquisition grants and identifies high and low priority agricultural areas. '
-            },
-            {
-                element: document.querySelector('#data-tab'),
-                intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
-            },
-            {
-                element: document.querySelector('#docs-tab'),
-                intro: 'The tab includes background information about the map use and grants, as well as specific information about each data layer.'
-            },
-            {
-                element: document.querySelector('#feed-tab'),
-                intro: "Please leave us feedback if anything isn't working as expected or if you have feedback or suggestions about functionality or data."
-            },
-            {
-                element: document.querySelector('#widget'),
-                intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
-            },
-            {
-                element: document.querySelector('.dropdown'),
-                intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
-            },
-            {
-                element: document.querySelector('#zeroBtn'),
-                intro: 'This button will turn off all variables in the set.'
-            },
-            {
-                element: document.querySelector('#defaultBtn'),
-                intro: 'This restores all variables in the model set to the default slider value of 1.'
-            },
-            {
-                element: document.querySelector('.scrollbar'),
-                intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
-            },
-            {
-                element: document.querySelector('.esri-icon-basemap'),
-                intro: 'This button allows the user to change the basemap.'
-            },
-            {
-                element: document.querySelector('.esri-icon-upload'),
-                intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
-            },
-            {
-                element: document.querySelector('.esri-icon-home'),
-                intro: 'This button resets the map view to see all of Alameda County.'
-            },
-            {
-                element: document.querySelector('#tutorialToggle'),
-                intro: 'Relaunches this tutorial.'
-            },
-            {
-                element: document.querySelector('#printToggle'),
-                intro: 'Print this page'
-            }
+                    element: document.querySelector('#hex-tab'),
+                    intro: 'This tab builds a model specified by the user for land planning purposes or for specific land acquisition grants and identifies high and low priority agricultural areas. '
+                },
+                {
+                    element: document.querySelector('#data-tab'),
+                    intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
+                },
+                {
+                    element: document.querySelector('#docs-tab'),
+                    intro: 'The tab includes background information about the map use and grants, as well as specific information about each data layer.'
+                },
+                {
+                    element: document.querySelector('#feed-tab'),
+                    intro: "Please leave us feedback if anything isn't working as expected or if you have feedback or suggestions about functionality or data."
+                },
+                {
+                    element: document.querySelector('#widget'),
+                    intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
+                },
+                {
+                    element: document.querySelector('.dropdown'),
+                    intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
+                },
+                {
+                    element: document.querySelector('#zeroBtn'),
+                    intro: 'This button will turn off all variables in the set.'
+                },
+                {
+                    element: document.querySelector('#defaultBtn'),
+                    intro: 'This restores all variables in the model set to the default slider value of 1.'
+                },
+                {
+                    element: document.querySelector('.scrollbar'),
+                    intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-basemap'),
+                    intro: 'This button allows the user to change the basemap.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-upload'),
+                    intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                },
+                {
+                    element: document.querySelector('.esri-icon-home'),
+                    intro: 'This button resets the map view to see all of Alameda County.'
+                },
+                {
+                    element: document.querySelector('#tutorialToggle'),
+                    intro: 'Relaunches this tutorial.'
+                },
+                {
+                    element: document.querySelector('#printToggle'),
+                    intro: 'Print this page'
+                }
             ]
         }).start();
 
@@ -1759,7 +1757,9 @@ require([
 
     $('#printToggle').on('click', function () {
         showPrintDialogWithNewExtent()
-        setTimeout(function () {window.print()},800)
+        setTimeout(function () {
+            window.print()
+        }, 800)
 
     })
 
@@ -1783,7 +1783,8 @@ require([
         /*if (text == 'Basic Information') {
             grantArray = ['CL', 'UA', 'SOI', 'WA', 'CP', 'CC', 'PG'] //['BP','BZ','CC','CP','CL','CH','CG','FM','GL','LI','PG','PS','RC','SOI','SC','SR','TC','U2','UA','WS','WL','WA']
             name = 4
-        } else */if (text == 'SALC Acquisition Grants') {
+        } else */
+        if (text == 'SALC Acquisition Grants') {
             grantArray = ['FM', 'BZ', 'FI', 'LI', 'PS', 'CG', 'GL', 'WA', 'BP', 'RC', 'SC', 'WS', 'UA', 'SOI', 'CH', 'SR', 'TC', 'PG', 'U2']
             name = 3
         } else if (text == 'NRCS - Agricultural Conservation Easement Program (ACEP)') {
@@ -1817,27 +1818,35 @@ require([
         // Define the new extent using xmin, xmax, ymin, ymax coordinates
         savedextent1 = savedExtent
         savedextent2 = savedExtent2
-        $("#viewDiv").css("width",$("#viewDiv").height())
-        setTimeout(function () {view.goTo(savedextent1)}, 50)
-        $("#viewDiv2").css("width",$("#viewDiv2").height())
-        setTimeout(function () {view2.goTo(savedextent2)}, 50)
-      }
+        $("#viewDiv").css("width", $("#viewDiv").height())
+        setTimeout(function () {
+            view.goTo(savedextent1)
+        }, 50)
+        $("#viewDiv2").css("width", $("#viewDiv2").height())
+        setTimeout(function () {
+            view2.goTo(savedextent2)
+        }, 50)
+    }
 
-      function closePrintDialogWithNewExtent() {
+    function closePrintDialogWithNewExtent() {
         // Define the new extent using xmin, xmax, ymin, ymax coordinates
         //savedextent1 = savedExtent
-        $("#viewDiv").css("width","100%")
-        setTimeout(function () {view.goTo(savedextent1)}, 50)
-        $("#viewDiv2").css("width","100%")
-        setTimeout(function () {view2.goTo(savedextent2)}, 50)
-      }
+        $("#viewDiv").css("width", "100%")
+        setTimeout(function () {
+            view.goTo(savedextent1)
+        }, 50)
+        $("#viewDiv2").css("width", "100%")
+        setTimeout(function () {
+            view2.goTo(savedextent2)
+        }, 50)
+    }
 
-      // Listen for the beforeprint event to trigger the custom function
-      /* window.addEventListener("beforeprint", event => {
-        
-        showPrintDialogWithNewExtent();
-      }); */
-      window.addEventListener("afterprint", closePrintDialogWithNewExtent);
+    // Listen for the beforeprint event to trigger the custom function
+    /* window.addEventListener("beforeprint", event => {
+      
+      showPrintDialogWithNewExtent();
+    }); */
+    window.addEventListener("afterprint", closePrintDialogWithNewExtent);
 
 
     /*$(document).on('change', 'input:radio[id^="grant"]', function (event) {
