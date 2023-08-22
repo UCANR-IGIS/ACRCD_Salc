@@ -532,24 +532,24 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+      <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="deleteModalLabel">
+              <h5 class="modal-title" id="dataModalLabel">
                 Delete Saved Weights
               </h5>
             </div>
-            <div class="modal-body">Confirm Delete</div>
-            <div class="modal-footer">
+            <div class="modal-body" id="dataBody"></div>
+            <!-- <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close
               </button>
               <button type="button" class="btn btn-primary" id="deleteState" data-bs-dismiss="modal">
                 Delete
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -654,6 +654,7 @@
   <script src="https://cdn.jsdelivr.net/npm/intro.js@7.0.1/intro.min.js"></script>
   <script src="https://js.arcgis.com/4.18/"></script>
   <script src="js/acrcd.js"></script>
+  <script src="js/datasets.js"></script>
   <script>
     var savedextent1,
       savedextent2

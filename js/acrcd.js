@@ -1552,6 +1552,20 @@ require([
         })
     }
 
+    function getObject(n, array=dataArray) {
+        const targetName = n; // The value you want to search for
+
+        const selectedObject = dataArray.find(item => item.id === targetName);
+
+        return selectedObject
+        
+/*         if (selectedObject) {
+          console.log("Selected object:", selectedObject);
+        } else {
+          console.log("Object not found.");
+        } */
+    }
+
     // Assuming you have an array of slider names
     var sliderArr = ['BP', 'BZ', 'CC', 'CP', 'CL', 'CH', 'CG', 'FI', 'FM', 'GL', 'HL', 'LI', 'PG', 'PS', 'RC', 'SOI', 'SC', 'SR', 'TC', 'U2', 'UA', 'WS', 'WL', 'WA']
     $.each(sliderArr, function (index, sliderName) {
@@ -1583,6 +1597,13 @@ require([
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
+
+        $('i').on("click", function() {
+            selectObject = getObject(this.parentElement.parentElement.id)
+            $('#dataModalLabel').html(this.parentElement.parentElement.id);
+            $('#dataBody').html(selectObject);
+            $('#dataModal').modal('show');
+          } );
 
         /*setTimeout(function(){
             console.log("Executed after 1 second");
