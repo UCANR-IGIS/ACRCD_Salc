@@ -226,7 +226,7 @@ require([
             color: [0, 0, 0, 0],
             outline: {
                 width: 2,
-                color: "#49722D"
+                color: "#000000"
             }
         }
     }
@@ -681,7 +681,7 @@ require([
                 })
             ]
         },
-        layers: [Parcels, BasicInfoGroupLayer] //, StudyArea]
+        layers: [Parcels, BasicInfoGroupLayer, StudyArea]
     });
 
     /* Creates a layer from a Portal layer item id
