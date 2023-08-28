@@ -1645,7 +1645,7 @@ require([
                 },
                 {
                     element: document.querySelector('#data-tab'),
-                    intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can the turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
+                    intro: 'A map that includes all the raw variables used to generate models available in the interactive web map tab. Variables can be turned on and off by pressing the eye icons next to the variable. The transparency of the layer can be adjusted with the slider when the layer is turned on.'
                 },
                 {
                     element: document.querySelector('#docs-tab'),
@@ -1661,7 +1661,7 @@ require([
                 },
                 {
                     element: document.querySelector('.dropdown'),
-                    intro: 'Using the caret, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
+                    intro: 'Using the down arrow, the user can navigate between different variable sets that were created based on grant RFPs or create their variable set using the "All Layers" tab.'
                 },
                 {
                     element: document.querySelector('#zeroBtn'),
