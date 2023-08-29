@@ -53,7 +53,7 @@ var dataArray = [{
     sourceURL:"https://www.healthyalamedacounty.org/indexsuite/index/view?alias=foodinsecurity&localeType=4&parentLocale=238&locale=47811",
     year: 2022,
     grants:"SALC",
-    description: "A layer using data from Healthy Alameda County’s Food Insecurity Index. The index grades each zip code or census tract based on the amount of need necessary to address food insecurity. A score of 1 corresponds to least food insecure areas (and less need) and a score of 5 corresponds to most food insecure areas (and more need). The index uses data from 2022."
+    description: "A layer using data from Healthy Alameda County's Food Insecurity Index. The index grades each zip code or census tract based on the amount of need necessary to address food insecurity. A score of 1 corresponds to least food insecure areas (and less need) and a score of 5 corresponds to most food insecure areas (and more need). The index uses data from 2022."
 }, {
     id: "liFM",
     title: "Farmers Markets Locations",
@@ -74,7 +74,7 @@ var dataArray = [{
     sourceURL:"http://www.scwildlands.org/",
     year: 2014,
     grants:"WCB, CCC",
-    description: "A layer published by Science & Collaboration for Connected Wildlands that identifies lands that are deemed essential to promote functional connectivity among wildlands and their associated species and ecological processes. The “landscape blocks”, as they are referred to in the layer’s metadata, are landscapes of significant ecological importance that form crucial wildlife movement connections."
+    description: "A layer published by Science & Collaboration for Connected Wildlands that identifies lands that are deemed essential to promote functional connectivity among wildlands and their associated species and ecological processes. The “landscape blocks”, as they are referred to in the layer's metadata, are landscapes of significant ecological importance that form crucial wildlife movement connections."
 }, {
     id: "liLI",
     title: "Census Tracts with Households Making Below 80% of Median Household Income",
@@ -109,14 +109,14 @@ var dataArray = [{
     sourceURL:"https://services.arcgis.com/0xnwbwUttaTjns4i/arcgis/rest/services/ACRCD_Data/FeatureServer/3",
     year: 2022,
     grants:"SALC, Basic Info",
-    description: "A layer created by IGIS depicting the areas outside of Alameda County limits but within each city’s Sphere of Influence"
+    description: "A layer created by IGIS depicting the areas outside of Alameda County limits but within each city's Sphere of Influence"
 }, {
     id: "liSC",
     title: "Soil Organic Carbon",
     sourceURL:"https://www.fs.usda.gov/ccrc/tool/usgs-landcarbon-visualization-tools",
     year: 2018,
     grants:"SALC, NRCS-AEP",
-    description: "A data layer published by the United States Geological Survey (USGS) and UC Berkeley’s Geospatial Innovation Facility (GIF) detailing predicted organic soil carbon stocks for the year 2023. The predictions (ranging from 2006-2050) were based on carbon and land-use data at a 1km scale collected by USGS between 1992 and 2005. The units for these predictions are tons per hectare (T ha-1). "
+    description: "A data layer published by the United States Geological Survey (USGS) and UC Berkeley's Geospatial Innovation Facility (GIF) detailing predicted organic soil carbon stocks for the year 2023. The predictions (ranging from 2006-2050) were based on carbon and land-use data at a 1km scale collected by USGS between 1992 and 2005. The units for these predictions are tons per hectare (T ha-1). "
 }, {
     id: "liSR",
     title: "Terrestrial Native Wildlife Species Wildlife Richness",
@@ -151,7 +151,7 @@ var dataArray = [{
     sourceURL:"https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo",
     year: 2023,
     grants:"SALC, WCB",
-    description: "A data layer published by the Natural Resources Conservation Service displaying the amount of water the top 150 cm of soil can store and become available to plants. In this layer, available water storage (AWS) was calculated from the difference between soil water content at field capacity and the stable wilting point adjusted for fragments and salinity. This dataset, which has AWS information for the entire United States, was developed to create water budgets, protect water resources, assess a soil’s capacity to support crops, among many other uses."
+    description: "A data layer published by the Natural Resources Conservation Service displaying the amount of water the top 150 cm of soil can store and become available to plants. In this layer, available water storage (AWS) was calculated from the difference between soil water content at field capacity and the stable wilting point adjusted for fragments and salinity. This dataset, which has AWS information for the entire United States, was developed to create water budgets, protect water resources, assess a soil's capacity to support crops, among many other uses."
 }, {
     id: "liWS",
     title: "San Francisco Estuary Institute (SFEI) Wetlands",
