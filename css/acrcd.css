@@ -413,3 +413,5 @@ iframe {
          padding: 4px;
          margin: 0;
 }
+
+tr {display:block !important;}
