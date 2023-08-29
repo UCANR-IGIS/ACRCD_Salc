@@ -414,4 +414,4 @@ iframe {
          margin: 0;
 }
 
-tr {display:block !important;}
+tr {display: table-row !important;}
