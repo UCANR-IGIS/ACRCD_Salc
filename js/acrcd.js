@@ -809,7 +809,7 @@ require([
                 if (item.layer.title != "Places, Roads, and Highways" && item.layer.title != "Basic Info") {
                     item.panel = {
                         content: "legend",
-                        open: true
+                        open: false
                     };
                 }
             }
