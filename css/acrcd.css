@@ -370,3 +370,46 @@ iframe {
   #myBtn:hover {
     background-color: #555; /* Add a dark-grey background on hover */
   }
+
+         .title{
+         color: darkblue;
+         font-weight: bold;
+         margin-top: 1em;
+         margin-bottom: 1em;
+         }
+         .underline{
+        text-decoration: underline;
+         }
+         .maintitle{
+         color: black;
+         font-weight: bold;
+         font-size: 125%;
+         margin-top: 1em;
+         }
+         .datatitle{
+         color: black;
+         font-weight: bold;
+         margin-top: 1em;
+         }
+         .detail{
+         color: black;
+         font-weight: bold;
+         font-style:italic;
+         }
+         .container > p{
+            margin-top: 1em;
+         }
+         details > summary {
+         padding: 4px;
+         width: 125px;
+         background-color: #f6f6f6;
+         border: none;
+         box-shadow: 1px 1px 2px #bbbbbb;
+         cursor: pointer;
+         }
+
+         details > p {
+         background-color: #eeeeee;
+         padding: 4px;
+         margin: 0;
+}
