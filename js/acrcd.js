@@ -347,6 +347,68 @@ require([
         }
     });
 
+    PBAGCons1 = new FeatureLayer({
+        portalItem: { // autocasts as new PortalItem()
+            id: "0caad8916a3c48329fb458bbfea6ace4"
+        },
+        title: "Plan Bay Area 2050 Priority Conservation Areas",
+        visible: false,
+        renderer: {
+            type: "simple",
+            symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#c785a9",
+                opacity: 0.75,
+                outline: {
+                    width: 1,
+                    color: "#704d61"
+                }
+            }
+        },
+        popupTemplate: {
+            title: "PCA Name: {name}",
+            content: [{
+                type: "fields", // Autocasts as new FieldsContent()
+                // Autocasts as new FieldInfo[]
+                fieldInfos: [{
+                        fieldName: "name",
+                        label: "Name",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "lead",
+                        label: "Lead Org",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    },
+                    {
+                        fieldName: "acres",
+                        label: "Acres",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: true,
+                            places: 2
+                        }
+                    },
+                    {
+                        fieldName: "adopted",
+                        label: "Adopted",
+                        // Autocasts as new FieldInfoFormat()
+                        format: {
+                            digitSeparator: false
+                        }
+                    }
+                ]
+            }]
+        }
+    });
+
+
     CPAD1 = new FeatureLayer({
         portalItem: { // autocasts as new PortalItem()
             id: "f4d112babc1a45a9b490f757420814d8"
@@ -675,7 +737,7 @@ require([
         title: "Basic Info",
         visible: false,
         //visibilityMode: "exclusive",
-        layers: [UrbanAg1, Williamson1, PBAGrowth1, BufferZones1, CityLimits1, CPAD1, CCED1, StudyArea1],
+        layers: [UrbanAg1, Williamson1, PBAGrowth1, BufferZones1, CityLimits1, CPAD1, PBAGCons1, CCED1, StudyArea1],
         opacity: 0.75
     });
 
@@ -744,10 +806,10 @@ require([
             container: "widget",
             listItemCreatedFunction: (event) => {
                 const item = event.item;
-                if (item.layer.title != "Places, Roads, and Highways") {
+                if (item.layer.title != "Places, Roads, and Highways" && item.layer.title != "Basic Info") {
                     item.panel = {
                         content: "legend",
-                        open: false
+                        open: true
                     };
                 }
             }
@@ -1657,7 +1719,7 @@ require([
                 },
                 {
                     element: document.querySelector('#widget'),
-                    intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
+                    intro: 'Here you can turn off the places, roads or highway names as well as the basic info layers and planning units by clicking on the eye icon. The arrow to the left of the basic info layer will show the sublayers in the group which can also be turned on or off with the corresponding eye icons. Under the planning units section you can see the legend indicating high and low model priority.'
                 },
                 {
                     element: document.querySelector('.dropdown'),
@@ -1681,7 +1743,7 @@ require([
                 },
                 {
                     element: document.querySelector('.esri-icon-upload'),
-                    intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question—for a grant or other purpose—and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
                 },
                 {
                     element: document.querySelector('.esri-icon-home'),
@@ -1722,7 +1784,7 @@ require([
                 },
                 {
                     element: document.querySelector('#widget'),
-                    intro: 'Here you can turn off the places, roads or highway names by clicking on the eye icon. Under the planning units section you can see the legend indicating high and low model priority.'
+                    intro: 'Here you can turn off the places, roads or highway names as well as the basic info layers and planning units by clicking on the eye icon. The arrow to the left of the basic info layer will show the sublayers in the group which can also be turned on or off with the corresponding eye icons. Under the planning units section you can see the legend indicating high and low model priority.'
                 },
                 {
                     element: document.querySelector('.dropdown'),
@@ -1746,7 +1808,7 @@ require([
                 },
                 {
                     element: document.querySelector('.esri-icon-upload'),
-                    intro: 'This button allows the user to upload their own zipped shapefile. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question—for a grant or other purpose—and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
                 },
                 {
                     element: document.querySelector('.esri-icon-home'),
