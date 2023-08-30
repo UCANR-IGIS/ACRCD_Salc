@@ -245,7 +245,7 @@
                 <td id="SRVal"></td>
               </tr>
               <tr id="pTC">
-                <td>Terrestrial climate change</td>
+                <td>Terrestrial climate change resilience</td>
                 <td id="TCVal"></td>
               </tr>
               <tr id="pU2">
@@ -906,7 +906,7 @@
       <details>
          <summary class="detail">More Details<p><span class="detail"></span></summary>Each polygon in this data layer represents a sphere of influence (SOI) for municipalities within Alameda County. For this layer, we utilized the Distance Allocation tool in ArcGIS Pro to create a distance raster. Smaller distance values represented closer proximity to the SOIs and larger values represented farther proximity to the city SOIs, with the Alameda County boundary as the extent. Next, we ran the Zonal Statistics tool, with the Alameda County Hexagons layer as the Feature Zone parameter, to summarize these distance values by the hexagons. Because each cell from the distance raster was smaller than each of the individual hexagons, we decided to take the mean value of the raster cells within a given hexagon and attribute them to each hexagon. At this point, each hexagon had a mean distance value, where smaller mean distance values represented closer proximities to SOIs and larger mean distance values represented farther proximities to SOIs. The ultimate goal of this layer was to give higher values to areas near SOIs because these protections may reinforce and protect those limits in the future. To prioritize SOI proximity we needed areas within and nearby SOIs to have linear normalized values moving towards 1 and areas increasingly further away from SOI boundaries to have linear normalized values moving towards 0. To achieve this result we took the mean distance assigned to each hexagon, divided it by the maximum of all mean values, subtracted that value by 1 and then took the absolute value so that we wouldn't have any negative numbers. In the final result of this layer, hexagons within the SOIs were given scores of 1, hexagons moving away from the boundaries were given scores linearly decreasing from 1, and the furthest hexagon from all SOI boundaries in Alameda County was given a score of 0. </p></details>
       <p><span class='datatitle'>Terrestrial Climate Change Resilience (<a href="https://www.californianature.ca.gov/datasets/CAnature::terrestrial-climate-change-resilience-ace/about"  target="_blank">California Department of Fish and Wildlife</a>)
-         In Prioritization Tool: Terrestrial Climate Change</span><br>
+         In Prioritization Tool: Terrestrial Climate Change Resilience</span><br>
          <span class="badge bg-warning">2021</span><span class="badge bg-success">SALC grants</span><br>
          A layer, published by the California Department of Fish and Wildlife through their Areas of Conservation Emphasis Project (ACE). It details the probability that an area within California may serve as refugia from climate change, summarized by hexagonal land units, similar to those in our web app. According to CDFW, these refugia are buffered from the effects of climate change, have conditions that may stay suitable for plants and wildlife, and possess the potential to keep ecological processes relatively intact. 
          Hexagons were then given a score, ranging from 1 to 5 (and 0 for areas with no data), based on the level of resiliency determined in their analysis. The layer was last updated in December of 2021.
