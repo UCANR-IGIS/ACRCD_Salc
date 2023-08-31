@@ -74,7 +74,7 @@ var dataArray = [{
     sourceURL:"http://www.scwildlands.org/",
     year: 2014,
     grants:"WCB, CCC",
-    description: "A layer published by Science & Collaboration for Connected Wildlands that identifies lands that are deemed essential to promote functional connectivity among wildlands and their associated species and ecological processes. The “landscape blocks”, as they are referred to in the layer's metadata, are landscapes of significant ecological importance that form crucial wildlife movement connections."
+    description: "A layer published by Science & Collaboration for Connected Wildlands that identifies lands that are deemed essential to promote functional connectivity among wildlands and their associated species and ecological processes. The 'landscape blocks', as they are referred to in the layer's metadata, are landscapes of significant ecological importance that form crucial wildlife movement connections."
 }, {
     id: "liLI",
     title: "Census Tracts with Households Making Below 80% of Median Household Income",
