@@ -376,6 +376,7 @@ iframe {
          font-weight: bold;
          margin-top: 1em;
          margin-bottom: 1em;
+         font-size: 1.5em;
          }
          .underline{
         text-decoration: underline;
@@ -397,7 +398,7 @@ iframe {
          font-style:italic;
          }
          .container > p{
-            margin-top: 1em;
+            margin-top: 5em;
          }
          details > summary {
          padding: 4px;
@@ -412,6 +413,23 @@ iframe {
          background-color: #eeeeee;
          padding: 4px;
          margin: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Center the image container horizontally */
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px; /* Adjust this value for vertical spacing */
+  margin-left: -10px; /* Negative margin to counteract the image spacing */
+}
+.image-container img {
+  padding: 15px; /* Adjust this value for padding around each image */
+  max-width: 100%;
 }
 
 tr {display: table-row !important;}
