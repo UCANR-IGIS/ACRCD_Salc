@@ -1679,7 +1679,7 @@ require([
             if (this.id != "tutorialToggle" && this.id != "printToggle" && this.className != "ddIcon") {
                 selectObject = getObject(this.parentElement.parentElement.id)
                 $('#dataModalLabel').html(selectObject.title);
-                $('#dataBody').html("<b>Description:</b> " + selectObject.description + "<br><b>Year:</b> " + selectObject.year + "<br><b>Grant(s):</b> " + selectObject.grants + "<br><a href='" + selectObject.sourceURL +"' target='_blank'>Source</a>");
+                $('#dataBody').html("<b>Description:</b> " + selectObject.description + "<br><b>Year:</b> " + selectObject.year + "<br><b>Grant(s):</b> " + selectObject.grants + "<br><b>In Basic Info? </b> " + selectObject.basicinfo + "<br><a href='" + selectObject.sourceURL +"' target='_blank'>Source</a>");
                 $('#dataModal').modal('show');
             }
         });
@@ -1735,7 +1735,7 @@ require([
                 },
                 {
                     element: document.querySelector('.scrollbar'),
-                    intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
+                    intro: 'The relative importance of each variable in a grant set can be changed by the user. Choosing "0" removes the variable from the model. Hovering over the "i" icon will bring up information about the relationship the varaible has to agricultural value and/or grant priority. Clicking the "i" icon will bring up a description of the underlying data source.'
                 },
                 {
                     element: document.querySelector('.esri-icon-basemap'),
@@ -1800,7 +1800,7 @@ require([
                 },
                 {
                     element: document.querySelector('.scrollbar'),
-                    intro: 'The relative importance of each variable in a variable set can be changed by the user. A "0" removes the variable from the model.'
+                    intro: 'The relative importance of each variable in a grant set can be changed by the user. Choosing "0" removes the variable from the model. Hovering over the "i" icon will bring up information about the relationship the varaible has to agricultural value and/or grant priority. Clicking the "i" icon will bring up a description of the underlying data source.'
                 },
                 {
                     element: document.querySelector('.esri-icon-basemap'),
