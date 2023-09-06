@@ -387,9 +387,16 @@ iframe {
          font-size: 125%;
          margin-top: 1em;
          }
+         .maindatatitle{
+          color: black;
+          font-weight: bold;
+          font-size: 1.1em;
+          margin-top: 1em;
+          }
          .datatitle{
          color: black;
          font-weight: bold;
+         font-size: 1em;
          margin-top: 1em;
          }
          .detail{
