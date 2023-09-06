@@ -863,7 +863,7 @@ require([
         autoCollapse: true
     });
 
-    view.ui.add(expand, "top-left");
+    view.ui.add(expand, "bottom-left");
 
     function generateFeatureCollection(fileName) {
         var name = fileName.split(".");
@@ -1058,7 +1058,7 @@ require([
         autoCollapse: true
     });
 
-    view2.ui.add(expand2, "top-left");
+    view2.ui.add(expand2, "bottom-left");
 
     function generateFeatureCollection2(fileName2) {
         var name = fileName2.split(".");
@@ -1743,7 +1743,8 @@ require([
                 },
                 {
                     element: document.querySelector('.esri-icon-upload'),
-                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question-for a grant or other purpose-and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question-for a grant or other purpose-and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.',
+                    position: 'auto'
                 },
                 {
                     element: document.querySelector('.esri-icon-home'),
@@ -1808,7 +1809,8 @@ require([
                 },
                 {
                     element: document.querySelector('.esri-icon-upload'),
-                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question-for a grant or other purpose-and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.'
+                    intro: 'This button allows the user to upload their own zipped shapefile. This function was created specifically to allow for land trusts and other conserving bodies to be able to view and weigh variables of interests in a parcel of land in question-for a grant or other purpose-and preserve the general privacy of landholders in Alameda County. Also available on the Data Alas map. More information on how to upload can be found in the Documentation tab.',
+                    position: 'auto'
                 },
                 {
                     element: document.querySelector('.esri-icon-home'),
